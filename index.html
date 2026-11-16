@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Semanal — Manual SimuFab & NIT UNIUBE</title>
+
+  <!-- Bootstrap 5.3 + Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Tipografia (Mesma identidade do SimuFab) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --simu-primary: #b91c1c;
+      --simu-primary-dark: #991b1b;
+      --simu-dark: #090e17;
+      --simu-slate: #1e293b;
+      --simu-gold: #d4af37;
+      --simu-bg: #f8fafc;
+      --simu-border: #e2e8f0;
+      --davi-color: #0284c7;
+      --sofia-color: #7c3aed;
+      --conjunto-color: #059669;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--simu-bg);
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Navbar Topo */
+    .topbar {
+      background: linear-gradient(135deg, var(--simu-dark) 0%, #111827 100%);
+      border-bottom: 3px solid var(--simu-primary);
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+    }
+
+    /* Alerta NIT UNIUBE */
+    .nit-banner {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid #fcd34d;
+      border-left: 5px solid #d97706;
+      border-radius: 1rem;
+    }
+
+    /* KPI Cards */
+    .kpi-box {
+      background: #ffffff;
+      border: 1px solid var(--simu-border);
+      border-radius: 1rem;
+      padding: 1rem 1.15rem;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+      height: 100%;
+    }
+
+    /* Badges de Responsável */
+    .badge-davi {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge-sofia {
+      background-color: #ede9fe;
+      color: #6d28d9;
+      border: 1px solid #ddd6fe;
+    }
+
+    .badge-conjunto {
+      background-color: #d1fae5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .badge-nit {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    /* Cards das Semanas */
+    .week-card {
+      border: 1px solid var(--simu-border);
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .week-card.week-completed {
+      border-color: #86efac;
+    }
+
+    .week-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--simu-border);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+    }
+
+    .week-header:hover {
+      background-color: #f8fafc;
+    }
+
+    .week-number-pill {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      background: var(--simu-dark);
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .week-completed .week-number-pill {
+      background: #16a34a;
+    }
+
+    /* Item de Tarefa */
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    .task-item:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .task-item.done {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .task-item.done .task-text {
+      text-decoration: line-through;
+      color: #64748b;
+    }
+
+    .task-checkbox {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-top: 0.12rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .task-checkbox:checked {
+      background-color: #16a34a;
+      border-color: #16a34a;
+    }
+
+    .deliverable-box {
+      background: #f1f5f9;
+      border-left: 4px solid var(--simu-primary);
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .notes-area {
+      font-size: 0.84rem;
+      resize: vertical;
+    }
+
+    .filter-btn.active {
+      font-weight: 700;
+    }
+
+    .chevron-icon {
+      transition: transform 0.2s ease;
+    }
+
+    .week-header[aria-expanded="true"] .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Impressão */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .collapse {
+        display: block !important;
+        height: auto !important;
+      }
+      .week-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        margin-bottom: 1rem !important;
+      }
+      body {
+        background: #ffffff !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR -->
+  <header class="topbar text-white py-3 shadow-sm no-print">
+    <div class="container-fluid px-3 px-lg-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-gear-wide-connected text-danger fs-4"></i>
+        <div>
+          <h5 class="mb-0 fw-bold">SimuFab — Roteiro do Manual de Uso</h5>
+          <small class="text-white-50">Cronograma de 10 Semanas &bull; Equipe: Davi &amp; Sofia</small>
+        </div>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#modalTemplate">
+          <i class="bi bi-file-earmark-text me-1"></i> Modelo de Página
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-warning rounded-pill px-3" onclick="exportarProgresso()">
+          <i class="bi bi-download me-1"></i> Exportar JSON
+        </button>
+        <label class="btn btn-sm btn-outline-info rounded-pill px-3 mb-0" style="cursor:pointer;">
+          <i class="bi bi-upload me-1"></i> Importar JSON
+          <input type="file" id="inputImportJson" accept=".json" class="d-none" onchange="importarProgresso(event)">
+        </label>
+        <button type="button" class="btn btn-sm btn-light rounded-pill px-3 fw-semibold" onclick="window.print()">
+          <i class="bi bi-printer me-1"></i> Imprimir / PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-fluid px-3 px-lg-4 py-4 flex-grow-1" style="max-width: 1380px;">
+
+    <!-- BANNER PRIORITÁRIO: ENVIO AO NIT UNIUBE -->
+    <div class="nit-banner p-3 p-md-4 mb-4 shadow-sm">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div class="d-flex align-items-start gap-3">
+          <div class="bg-warning text-dark rounded-circle p-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style="width:46px;height:46px;">
+            <i class="bi bi-bank2 fs-4"></i>
+          </div>
+          <div>
+            <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+              <span class="badge bg-dark text-warning rounded-pill px-2.5 py-1">PRIORIDADE SEMANA 1</span>
+              <h6 class="fw-bold text-dark mb-0">Lembrete Oficial: Envio do Projeto para a UNIUBE pelo NIT</h6>
+            </div>
+            <p class="small text-dark mb-1">
+              O envio para o <strong>NIT (Núcleo de Inovação Tecnológica da UNIUBE)</strong> <u>não precisa do Manual pronto</u>.
+              Basta preencher o formulário de <strong>Comunicação de Software / Comunicação da Criação</strong> no portal do NIT/UNIUBE e enviar antes de divulgar qualquer material publicamente.
+            </p>
+            <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
+              <span class="badge bg-white text-dark border mono px-2.5 py-1.5">
+                <i class="bi bi-envelope-fill text-danger me-1"></i> nituniube@uniube.br
+              </span>
+              <button type="button" class="btn btn-sm btn-dark rounded-pill px-3 no-print" onclick="copiarEmailNit(this)">
+                <i class="bi bi-clipboard me-1"></i> Copiar e-mail do NIT
+              </button>
+              <span id="badgeNitStatus" class="badge bg-danger rounded-pill px-3 py-1.5">Pendente de envio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL DE PROGRESSO (GERAL, DAVI, SOFIA, SEMANAS) -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-md-4">
+        <div class="kpi-box border-start border-4 border-danger">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="small fw-bold text-muted">PROGRESSO GERAL DO ROTEIRO</span>
+            <span class="badge bg-danger-subtle text-danger rounded-pill mono" id="kpiGeralPct">0%</span>
+          </div>
+          <h4 class="fw-bold mb-2 mono" id="kpiGeralContagem">0 / 0 tarefas</h4>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-danger" id="barGeral" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="kpi-box border-start border-4 border-info">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="small fw-bold text-muted">TAREFAS DO DAVI</span>
+            <span class="badge badge-davi rounded-pill mono" id="kpiDaviPct">0%</span>
+          </div>
+          <h4 class="fw-bold text-info mb-2 mono" id="kpiDaviContagem">0 / 0 tarefas</h4>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-info" id="barDavi" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="kpi-box border-start border-4" style="border-left-color: var(--sofia-color) !important;">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="small fw-bold text-muted">TAREFAS DA SOFIA</span>
+            <span class="badge badge-sofia rounded-pill mono" id="kpiSofiaPct">0%</span>
+          </div>
+          <h4 class="fw-bold mb-2 mono" style="color: var(--sofia-color);" id="kpiSofiaContagem">0 / 0 tarefas</h4>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar" id="barSofia" style="width: 0%; background-color: var(--sofia-color);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRA DE FILTROS E CONTROLES -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 no-print">
+      <div class="card-body p-3">
+        <div class="row g-2 align-items-center">
+          <div class="col-12 col-lg-5">
+            <div class="d-flex flex-wrap gap-1" id="filtroPessoaGroup">
+              <button type="button" class="btn btn-sm btn-dark rounded-pill filter-btn active" data-person="todos">Todos</button>
+              <button type="button" class="btn btn-sm btn-outline-info rounded-pill filter-btn" data-person="Davi">Davi</button>
+              <button type="button" class="btn btn-sm btn-outline-primary rounded-pill filter-btn" data-person="Sofia" style="border-color:#7c3aed;color:#7c3aed;">Sofia</button>
+              <button type="button" class="btn btn-sm btn-outline-success rounded-pill filter-btn" data-person="Conjunto">Em Conjunto</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <select id="filtroStatus" class="form-select form-select-sm rounded-pill">
+              <option value="todos">Mostrar: Todas as tarefas</option>
+              <option value="pendentes">Mostrar: Somente pendentes</option>
+              <option value="concluidas">Mostrar: Somente concluídas</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-light border-end-0 rounded-start-pill"><i class="bi bi-search"></i></span>
+              <input type="text" id="campoBusca" class="form-control border-start-0 rounded-end-pill" placeholder="Buscar módulo, tela ou regra (ex: NIT, MRP, DRE)...">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center mt-2 pt-2 border-top gap-2">
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill px-3 py-1" onclick="expandirOuRecolherTodas(true)">
+              <i class="bi bi-arrows-expand me-1"></i> Expandir todas
+            </button>
+            <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill px-3 py-1" onclick="expandirOuRecolherTodas(false)">
+              <i class="bi bi-arrows-collapse me-1"></i> Recolher todas
+            </button>
+          </div>
+          <button type="button" class="btn btn-xs btn-outline-danger rounded-pill px-3 py-1" onclick="resetarProgresso()">
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpar marcações
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTA DAS 10 SEMANAS -->
+    <div id="listaSemanas" class="d-flex flex-column gap-3"></div>
+
+  </main>
+
+  <footer class="bg-dark text-white-50 text-center py-3 mt-4 border-top border-danger border-3 no-print">
+    <small>SimuFab &bull; Polo Industrial de Fertilizantes (Uberaba/MG) &bull; Checklist salvo localmente no navegador</small>
+  </footer>
+
+  <!-- MODAL: MODELO DE PÁGINA DO MANUAL -->
+  <div class="modal fade" id="modalTemplate" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header bg-dark text-white border-0">
+          <h6 class="modal-title fw-bold"><i class="bi bi-file-earmark-text text-warning me-2"></i>Modelo Padrão de Capítulo para o Manual</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <p class="small text-muted mb-2">Davi e Sofia devem copiar esta estrutura para cada módulo documentado, garantindo padrão visual e clareza em todo o manual:</p>
+          <pre id="textoTemplate" class="p-3 bg-light border rounded-3 small mono mb-0" style="white-space: pre-wrap;">MÓDULO / SETOR: [Ex.: 7. Logística & Expedição]
+QUEM ACESSA: [Ex.: Gerente de Logística (Cargo 7)]
+OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
+
+1. O que você encontra nesta tela:
+   - [Lista dos cartões, abas ou indicadores principais]
+
+2. Passo a passo para operar:
+   - Passo 1: ...
+   - Passo 2: ...
+   - Passo 3: ...
+
+3. Regras e travas importantes do sistema:
+   - [Ex.: A data de envio é calculada automaticamente e travada pelo sistema.]
+   - [Ex.: Se o modal atingir o limite de viagens do polo, o despacho é bloqueado.]
+
+4. Prints e Destaques:
+   - [Inserir print legível com setas numeradas apontando para os botões principais]</pre>
+        </div>
+        <div class="modal-footer bg-light border-0">
+          <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary rounded-pill px-4 fw-bold" onclick="copiarTemplate(this)">
+            <i class="bi bi-clipboard me-1"></i> Copiar Modelo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const STORAGE_KEY = 'simufab_checklist_manual_v1';
+
+    // DADOS COMPLETOS DAS 10 SEMANAS
+    const SEMANAS_DATA = [
+      {
+        id: 1,
+        titulo: 'Semana 1 — Envio ao NIT (UNIUBE) + Acesso e Navegação Geral',
+        objetivo: 'Protocolar o projeto no NIT da UNIUBE sem esperar o manual e estruturar o Capítulo 1 do manual.',
+        entregavel: 'Comprovante de envio do projeto ao NIT/UNIUBE + Capítulo 1 (Introdução, Acesso e Ferramentas Comuns).',
+        abertaPorPadrao: true,
+        tarefas: [
+          {
+            id: 's1_t1',
+            responsavel: 'Conjunto',
+            isNit: true,
+            texto: 'Baixar o formulário de Comunicação de Software / Comunicação da Criação no portal do NIT da UNIUBE, preencher com a lista de autores e resumo do sistema e enviar para nituniube@uniube.br (sem depender do manual).'
+          },
+          {
+            id: 's1_t2',
+            responsavel: 'Davi',
+            texto: 'Documentar a tela de Login (login.php), regras de sessão e timeout de inatividade (30 minutos).'
+          },
+          {
+            id: 's1_t3',
+            responsavel: 'Davi',
+            texto: 'Documentar a Tela de Espera / Motor em Andamento (aguardando_rodada.php), explicando a trava quando a rodada está fechada e a atualização automática ao abrir.'
+          },
+          {
+            id: 's1_t4',
+            responsavel: 'Davi',
+            texto: 'Documentar o Live Sync (atualização em tempo real entre colegas) e o indicador de Status Operacional / Ping no rodapé (footer.php).'
+          },
+          {
+            id: 's1_t5',
+            responsavel: 'Sofia',
+            texto: 'Escrever a Apresentação do Cenário (Polo Industrial de Fertilizantes de Uberaba/MG) e a divisão entre Instrutor Master e 8 Cargos dos Alunos.'
+          },
+          {
+            id: 's1_t6',
+            responsavel: 'Sofia',
+            texto: 'Documentar a Barra Superior (header.php): troca de sala (instrutor), empresa, rodada (R#X), menus por cargo e botão Sair.'
+          },
+          {
+            id: 's1_t7',
+            responsavel: 'Sofia',
+            texto: 'Documentar a Central de Comunicados / Chamados e o Copiloto de Setor (SimuBot) no canto inferior direito.'
+          }
+        ]
+      },
+      {
+        id: 2,
+        titulo: 'Semana 2 — Guia do Instrutor (Parte 1): Setup da Turma em 4 Passos',
+        objetivo: 'Documentar como o instrutor cria a turma do zero.',
+        entregavel: 'Capítulo 2 (Setup da Turma — Passos 1 a 4).',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's2_t1',
+            responsavel: 'Davi',
+            texto: 'Passo 1: Criar Sala / Jogo (/jogo/criar e /jogo/listar) — abertura automática da Rodada #1 e alternância de salas.'
+          },
+          {
+            id: 's2_t2',
+            responsavel: 'Davi',
+            texto: 'Passo 2: Criar Equipes (/equipe/criar, /equipe/listar, /equipe/perfil) — estoque inicial automático (~1.150t de MP e ~660t de PA) e reparo de estoque.'
+          },
+          {
+            id: 's2_t3',
+            responsavel: 'Sofia',
+            texto: 'Passo 3: Criar Empresas (/empresa/criar, /empresa/listar) — caixa inicial fixo de R$ 15.000.000,00 e instalação das 4 máquinas padrão (Misturador, Granulador, Secador e Ensacadora).'
+          },
+          {
+            id: 's2_t4',
+            responsavel: 'Sofia',
+            texto: 'Passo 4: Matricular Alunos & Cargos (/usuario/criar, /usuario/listar, sucesso.php) — explicando a Regra dos 8 Cargos Obrigatórios.'
+          },
+          {
+            id: 's2_t5',
+            responsavel: 'Conjunto',
+            isNit: true,
+            texto: 'Check semanal NIT/UNIUBE: confirmar se houve retorno ou pedido de ajuste do NIT referente ao e-mail enviado na Semana 1.'
+          }
+        ]
+      },
+      {
+        id: 3,
+        titulo: 'Semana 3 — Guia do Instrutor (Parte 2): Controle de Rodadas e Catálogos',
+        objetivo: 'Documentar o avanço das rodadas e os catálogos técnicos do sistema.',
+        entregavel: 'Capítulo 3 (Ciclo de Rodadas e Catálogos Industriais).',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's3_t1',
+            responsavel: 'Davi',
+            texto: 'Documentar o Painel de Controle de Rodadas (controle.php e historico.php): linha do tempo, limite de rodadas (1 a 24, padrão 6), Encerrar Rodada e Iniciar Próxima Rodada.'
+          },
+          {
+            id: 's3_t2',
+            responsavel: 'Davi',
+            texto: 'Documentar as ações de controle e emergência das rodadas: Destravar Rodada, Encerrar Partida Antecipadamente e Reiniciar Turma (Zerar — cria edição -V2, preserva histórico, restaura R$ 15M e máquinas novas).'
+          },
+          {
+            id: 's3_t3',
+            responsavel: 'Sofia',
+            texto: 'Documentar Produtos Acabados (22 NPKs), Matérias-Primas (23 insumos) e Receitas / BOM (balanço de 1,000 t MP / t PA).'
+          },
+          {
+            id: 's3_t4',
+            responsavel: 'Sofia',
+            texto: 'Documentar Fornecedores (92 homologados), Vinculação MP × Fornecedor e Clientes (22 compradores B2B), deixando claro quais telas são bloqueadas/protegidas pela IA.'
+          }
+        ]
+      },
+      {
+        id: 4,
+        titulo: 'Semana 4 — Guia do Instrutor (Parte 3): Gazeta, Empecilhos IA e Mercado B2B',
+        objetivo: 'Documentar incidentes, penalidades e rodadas comerciais.',
+        entregavel: 'Capítulo 4 (Eventos, Penalidades e Mercado B2B).',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's4_t1',
+            responsavel: 'Davi',
+            texto: 'Documentar Gazeta & Incidentes (evento/gerenciar.php): cenários sugeridos pela IA e agendamento com aviso prévio vs impacto imediato.'
+          },
+          {
+            id: 's4_t2',
+            responsavel: 'Davi',
+            texto: 'Documentar todos os tipos de alvo (rodovia, maquina_tipo, desumidificacao, materia_prima, modalidade_frete, cliente, global) e auditoria/cobrança de penalidades.'
+          },
+          {
+            id: 's4_t3',
+            responsavel: 'Sofia',
+            texto: 'Documentar o Painel do Administrador (admin.php): seleção de equipe, KPIs, mapa sinótico da fábrica, alunos, máquinas e eventos.'
+          },
+          {
+            id: 's4_t4',
+            responsavel: 'Sofia',
+            texto: 'Documentar os botões do Mercado B2B no Painel Admin: Gerar Demandas de Clientes (trava de 1x por rodada) e Apurar Vendas via IA.'
+          }
+        ]
+      },
+      {
+        id: 5,
+        titulo: 'Semana 5 — Manual dos Alunos (Bloco 1): Diretor Industrial & Financeiro',
+        objetivo: 'Documentar decisões executivas, CAPEX e gestão financeira.',
+        entregavel: 'Capítulos 5 e 6 (Diretoria Industrial e Financeiro).',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's5_t1',
+            responsavel: 'Davi',
+            texto: 'Cargo 1 — Diretor Industrial (executivo.php): KPIs executivos e CAPEX (máquinas proporcionais a t/h e até 730,001h, frota própria e ampliação de armazéns).'
+          },
+          {
+            id: 's5_t2',
+            responsavel: 'Davi',
+            texto: 'Documentar Fila de Aprovações (aprovacoes.php: RNCs, Compras, Manutenções), Espionagem (espionagem.php: Níveis 1 a 4) e Gazeta do Triângulo.'
+          },
+          {
+            id: 's5_t3',
+            responsavel: 'Sofia',
+            texto: 'Cargo 8 — Controladoria & Finanças (financeiro.php): DRE Industrial (Sintética, Comparativo, Entradas/Saídas) e Folha CLT com 68% de encargos.'
+          },
+          {
+            id: 's5_t4',
+            responsavel: 'Sofia',
+            texto: 'Documentar Contas a Pagar (desconto por antecipação), Contas a Receber (bloqueio até entrega física pela Logística), Empréstimos & Rating (AAA a D), Penalidades e Veto Financeiro.'
+          }
+        ]
+      },
+      {
+        id: 6,
+        titulo: 'Semana 6 — Manual dos Alunos (Bloco 2): PCP & Programação da Produção',
+        objetivo: 'Documentar planejamento de demanda, materiais, capacidade e sequenciamento.',
+        entregavel: 'Capítulo 7 (Manual do Gerente de PCP).',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's6_t1',
+            responsavel: 'Davi',
+            texto: 'Cargo 2 — PCP (previsao.php e mps.php): 1. Previsão de Demanda e 2. MPS (equação e geração automática das Ordens de Produção em 4 etapas).'
+          },
+          {
+            id: 's6_t2',
+            responsavel: 'Davi',
+            texto: 'Cargo 2 — PCP (mrp.php e capacidade.php): 3. MRP (explosão BOM + 10% margem) e 4. Capacidade CRP (730,001h/mês e alertas de gargalo).'
+          },
+          {
+            id: 's6_t3',
+            responsavel: 'Sofia',
+            texto: 'Programação da Produção (programacao.php): criação manual de OP, compatibilidade etapa × máquina, campo de horas travado pelo sistema e efeito do Turno Extra (-50% tempo).'
+          },
+          {
+            id: 's6_t4',
+            responsavel: 'Sofia',
+            texto: 'Reordenação de fila, trava de exclusão após início e uso do botão Liberar Etapa no Painel MES do PCP (pcp.php) para o chão de fábrica.'
+          }
+        ]
+      },
+      {
+        id: 7,
+        titulo: 'Semana 7 — Manual dos Alunos (Bloco 3): Produção & Qualidade',
+        objetivo: 'Documentar execução na fábrica e controle laboratorial.',
+        entregavel: 'Capítulos 8 e 9 (Produção e Qualidade).',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's7_t1',
+            responsavel: 'Davi',
+            texto: 'Cargo 5 — Produção Fabril (producao.php): execução das 4 etapas MES (1. Mistura → 2. Granulação → 3. Secagem → 4. Ensacamento), baixa FEFO de MP na Etapa 1 e entrada em PA na Etapa 4 (com trava do galpão).'
+          },
+          {
+            id: 's7_t2',
+            responsavel: 'Davi',
+            texto: 'Documentar impacto do Turno Extra na produção (desgaste 3x) e gestão de Manutenção (preditiva, preventiva, corretiva e corretiva acelerada + risco de quebra >= 75%).'
+          },
+          {
+            id: 's7_t3',
+            responsavel: 'Sofia',
+            texto: 'Cargo 6 — Qualidade QA/QC (qualidade.php): indicadores (FPY, Retrabalho, Refugo, COPQ) e Quarentena MP (umidade ≤ 1,50%, pureza ≥ 98%, granulometria ≥ 90%).'
+          },
+          {
+            id: 's7_t4',
+            responsavel: 'Sofia',
+            texto: 'Documentar Liberação PA (umidade ≤ 1,00%, liberada apenas após conclusão da Etapa 4), fluxo de RNCs para decisão do Diretor e Pareto de Defeitos.'
+          }
+        ]
+      },
+      {
+        id: 8,
+        titulo: 'Semana 8 — Manual dos Alunos (Bloco 4): Compras, Estoque e Logística',
+        objetivo: 'Documentar suprimentos, armazenagem e expedição.',
+        entregavel: 'Capítulos 10, 11 e 12 (Compras/Vendas, Estoque e Logística).',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's8_t1',
+            responsavel: 'Davi',
+            texto: 'Cargo 3 — Compras & Mercado B2B (compras.php, historico.php): compra de MP via ROP/MRP/Catálogo com trava física dos silos (2.500t + 60% CAPEX), ofertas nos cards (preço, "usar no limite" e desconto) e bloqueio por atraso logístico.'
+          },
+          {
+            id: 's8_t2',
+            responsavel: 'Davi',
+            texto: 'Cargo 4 — Estoque & Almoxarifado (estoque.php): parâmetros ROP, Notificar Compras, Silos MP (2.500t base) e Galpão PA (1.800t base), FEFO/FIFO, desumidificação, Curva ABC, Calculadora LEC/EOQ, Baixa/Descarte e Kardex.'
+          },
+          {
+            id: 's8_t3',
+            responsavel: 'Sofia',
+            texto: 'Cargo 7 — Logística & Expedição (logistica.php): carteira de pedidos, prioridade de atrasados (multas de 10% e 18%), concorrência de viagens no polo entre equipes e fracionamento de cargas.'
+          },
+          {
+            id: 's8_t4',
+            responsavel: 'Sofia',
+            texto: 'Documentar simulação de frete/pedágio/desvios, data de saída travada no calendário do jogo, emissão de CT-e e liberação de recebimento no Financeiro.'
+          }
+        ]
+      },
+      {
+        id: 9,
+        titulo: 'Semana 9 — Bastidores da IA, Ranking e Revisão Cruzada',
+        objetivo: 'Explicar a lógica do jogo para o usuário e revisar o texto completo.',
+        entregavel: 'Minuta completa do Manual do SimuFab revisada.',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's9_t1',
+            responsavel: 'Davi',
+            texto: 'Escrever a seção Como o Mercado Funciona (Visão do Usuário): flutuação de preços pelo MotorDemandaOferta / OraculoIA e funcionamento do leilão B2B com a concorrente Trading Brasil.'
+          },
+          {
+            id: 's9_t2',
+            responsavel: 'Davi',
+            texto: 'Fazer a revisão técnica de todos os capítulos escritos pela Sofia.'
+          },
+          {
+            id: 's9_t3',
+            responsavel: 'Sofia',
+            texto: 'Documentar Ranking Geral (ranking/index.php com sigilo industrial) e Dossiê Executivo Final / RH (relatorio_final.php).'
+          },
+          {
+            id: 's9_t4',
+            responsavel: 'Sofia',
+            texto: 'Montar o Glossário Rápido (OEE, OTIF, MRP, MPS, ROP, LEC/EOQ, FEFO/FIFO, COPQ, CAPEX/OPEX, DRE, EBITDA, CT-e, RNC) e revisar ortografia, sumário e prints dos capítulos do Davi.'
+          }
+        ]
+      },
+      {
+        id: 10,
+        titulo: 'Semana 10 — Teste Prático e Entrega Final do Manual',
+        objetivo: 'Validar o manual rodando uma simulação real e entregar a versão final.',
+        entregavel: 'Manual de Uso do SimuFab (PDF Final) + Confirmação do andamento do protocolo no NIT/UNIUBE.',
+        abertaPorPadrao: false,
+        tarefas: [
+          {
+            id: 's10_t1',
+            responsavel: 'Conjunto',
+            texto: 'Teste guiado: executar uma rodada completa seguindo exclusivamente o manual para confirmar que não falta nenhum botão, regra ou aviso.'
+          },
+          {
+            id: 's10_t2',
+            responsavel: 'Conjunto',
+            texto: 'Finalização: gerar o PDF final do Manual de Uso do SimuFab (com capa, versão Motor v3.0, sumário clicável e prints padronizados).'
+          },
+          {
+            id: 's10_t3',
+            responsavel: 'Conjunto',
+            isNit: true,
+            texto: 'Check final do NIT: confirmar com o orientador o andamento do protocolo enviado ao NIT/UNIUBE na Semana 1 (assinaturas ou termos complementares, se houver).'
+          }
+        ]
+      }
+    ];
+
+    // Estado persistido
+    let estado = {
+      checks: {},
+      notas: {}
+    };
+
+    function carregarEstado() {
+      try {
+        const salvo = localStorage.getItem(STORAGE_KEY);
+        if (salvo) {
+          const parsed = JSON.parse(salvo);
+          estado.checks = parsed.checks || {};
+          estado.notas = parsed.notas || {};
+        }
+      } catch (e) {
+        console.warn('Falha ao ler localStorage:', e);
+      }
+    }
+
+    function salvarEstado() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+      } catch (e) {
+        console.warn('Falha ao salvar localStorage:', e);
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function badgeResponsavel(resp, isNit) {
+      const cls = resp === 'Davi' ? 'badge-davi' : (resp === 'Sofia' ? 'badge-sofia' : 'badge-conjunto');
+      const icon = resp === 'Conjunto' ? 'bi-people-fill' : 'bi-person-fill';
+      let html = `<span class="badge ${cls} rounded-pill px-2.5 py-1 fw-semibold"><i class="bi ${icon} me-1"></i>${escapeHtml(resp)}</span>`;
+      if (isNit) {
+        html += ` <span class="badge badge-nit rounded-pill px-2.5 py-1 fw-bold"><i class="bi bi-bank2 me-1"></i>NIT / UNIUBE</span>`;
+      }
+      return html;
+    }
+
+    function renderizarSemanas() {
+      const container = document.getElementById('listaSemanas');
+      const filtroPessoa = document.querySelector('#filtroPessoaGroup .filter-btn.active')?.dataset.person || 'todos';
+      const filtroStatus = document.getElementById('filtroStatus').value;
+      const termoBusca = document.getElementById('campoBusca').value.trim().toLowerCase();
+
+      container.innerHTML = '';
+
+      SEMANAS_DATA.forEach(sem => {
+        const tarefasFiltradas = sem.tarefas.filter(t => {
+          const concluida = !!estado.checks[t.id];
+          if (filtroPessoa !== 'todos' && t.responsavel !== filtroPessoa) return false;
+          if (filtroStatus === 'pendentes' && concluida) return false;
+          if (filtroStatus === 'concluidas' && !concluida) return false;
+          if (termoBusca) {
+            const alvo = (sem.titulo + ' ' + sem.objetivo + ' ' + t.texto + ' ' + t.responsavel).toLowerCase();
+            if (!alvo.includes(termoBusca)) return false;
+          }
+          return true;
+        });
+
+        // Se houver filtro ativo e nenhuma tarefa daquela semana bater, oculta a semana
+        if (tarefasFiltradas.length === 0 && (filtroPessoa !== 'todos' || filtroStatus !== 'todos' || termoBusca !== '')) {
+          return;
+        }
+
+        const totalSem = sem.tarefas.length;
+        const feitasSem = sem.tarefas.filter(t => !!estado.checks[t.id]).length;
+        const pctSem = totalSem > 0 ? Math.round((feitasSem / totalSem) * 100) : 0;
+        const semCompleta = feitasSem === totalSem;
+        const deveAbrir = sem.abertaPorPadrao || filtroPessoa !== 'todos' || filtroStatus !== 'todos' || termoBusca !== '';
+
+        const card = document.createElement('div');
+        card.className = `week-card ${semCompleta ? 'week-completed' : ''}`;
+
+        let tasksHtml = '';
+        tarefasFiltradas.forEach(t => {
+          const checked = !!estado.checks[t.id];
+          tasksHtml += `
+            <label class="task-item ${checked ? 'done' : ''}" for="chk_${t.id}">
+              <input class="form-check-input task-checkbox" type="checkbox" id="chk_${t.id}"
+                     ${checked ? 'checked' : ''} onchange="alternarTarefa('${t.id}', this.checked)">
+              <div class="flex-grow-1">
+                <div class="d-flex flex-wrap align-items-center gap-1 mb-1">
+                  ${badgeResponsavel(t.responsavel, !!t.isNit)}
+                </div>
+                <div class="task-text small fw-medium text-dark" style="line-height: 1.45;">
+                  ${escapeHtml(t.texto)}
+                </div>
+              </div>
+            </label>
+          `;
+        });
+
+        const notaAtual = estado.notas['sem_' + sem.id] || '';
+
+        card.innerHTML = `
+          <div class="week-header p-3 p-md-4 d-flex flex-wrap justify-content-between align-items-center gap-3"
+               data-bs-toggle="collapse" data-bs-target="#collapseSem${sem.id}"
+               aria-expanded="${deveAbrir ? 'true' : 'false'}">
+            <div class="d-flex align-items-center gap-3">
+              <div class="week-number-pill">${semCompleta ? '<i class="bi bi-check-lg"></i>' : 'S' + sem.id}</div>
+              <div>
+                <h6 class="fw-bold text-dark mb-1">${escapeHtml(sem.titulo)}</h6>
+                <div class="small text-muted">${escapeHtml(sem.objetivo)}</div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 ms-auto">
+              <div class="text-end" style="min-width: 110px;">
+                <div class="small fw-bold mono ${semCompleta ? 'text-success' : 'text-dark'}">${feitasSem} / ${totalSem} (${pctSem}%)</div>
+                <div class="progress mt-1" style="height: 6px;">
+                  <div class="progress-bar ${semCompleta ? 'bg-success' : 'bg-primary'}" style="width: ${pctSem}%;"></div>
+                </div>
+              </div>
+              <i class="bi bi-chevron-down fs-5 text-muted chevron-icon no-print"></i>
+            </div>
+          </div>
+
+          <div id="collapseSem${sem.id}" class="collapse ${deveAbrir ? 'show' : ''}">
+            <div class="p-3 p-md-4 pt-3 border-top bg-light bg-opacity-25">
+              <div class="d-flex flex-column gap-2 mb-3">
+                ${tasksHtml}
+              </div>
+
+              <div class="deliverable-box mb-3">
+                <strong class="text-dark"><i class="bi bi-flag-fill text-danger me-1"></i> Entregável da semana:</strong>
+                <span class="text-secondary">${escapeHtml(sem.entregavel)}</span>
+              </div>
+
+              <div class="no-print">
+                <label class="form-label small fw-bold text-muted mb-1">
+                  <i class="bi bi-journal-text me-1"></i>Anotações / Links dos rascunhos e prints (Semana ${sem.id}):
+                </label>
+                <textarea class="form-control notes-area" rows="2"
+                  placeholder="Ex.: Link do Google Docs, pasta dos prints ou protocolo do NIT..."
+                  oninput="salvarNota(${sem.id}, this.value)">${escapeHtml(notaAtual)}</textarea>
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      if (container.innerHTML === '') {
+        container.innerHTML = `
+          <div class="alert alert-light border text-center py-5 rounded-4">
+            <i class="bi bi-search fs-1 text-muted d-block mb-2"></i>
+            <h6 class="fw-bold">Nenhuma tarefa encontrada para este filtro.</h6>
+            <span class="small text-muted">Tente limpar a busca ou selecionar "Todos".</span>
+          </div>
+        `;
+      }
+
+      atualizarKpis();
+    }
+
+    function alternarTarefa(taskId, checked) {
+      estado.checks[taskId] = checked;
+      salvarEstado();
+      renderizarSemanas();
+    }
+
+    function salvarNota(semId, texto) {
+      estado.notas['sem_' + semId] = texto;
+      salvarEstado();
+    }
+
+    function atualizarKpis() {
+      let totalGeral = 0, feitasGeral = 0;
+      let totalDavi = 0, feitasDavi = 0;
+      let totalSofia = 0, feitasSofia = 0;
+
+      SEMANAS_DATA.forEach(sem => {
+        sem.tarefas.forEach(t => {
+          const ok = !!estado.checks[t.id];
+          totalGeral++;
+          if (ok) feitasGeral++;
+
+          if (t.responsavel === 'Davi') {
+            totalDavi++;
+            if (ok) feitasDavi++;
+          } else if (t.responsavel === 'Sofia') {
+            totalSofia++;
+            if (ok) feitasSofia++;
+          }
+        });
+      });
+
+      const pctGeral = totalGeral ? Math.round((feitasGeral / totalGeral) * 100) : 0;
+      const pctDavi  = totalDavi  ? Math.round((feitasDavi / totalDavi) * 100) : 0;
+      const pctSofia = totalSofia ? Math.round((feitasSofia / totalSofia) * 100) : 0;
+
+      document.getElementById('kpiGeralPct').innerText = pctGeral + '%';
+      document.getElementById('kpiGeralContagem').innerText = `${feitasGeral} / ${totalGeral} tarefas`;
+      document.getElementById('barGeral').style.width = pctGeral + '%';
+
+      document.getElementById('kpiDaviPct').innerText = pctDavi + '%';
+      document.getElementById('kpiDaviContagem').innerText = `${feitasDavi} / ${totalDavi} tarefas`;
+      document.getElementById('barDavi').style.width = pctDavi + '%';
+
+      document.getElementById('kpiSofiaPct').innerText = pctSofia + '%';
+      document.getElementById('kpiSofiaContagem').innerText = `${feitasSofia} / ${totalSofia} tarefas`;
+      document.getElementById('barSofia').style.width = pctSofia + '%';
+
+      // Atualiza status do banner do NIT com base na tarefa s1_t1
+      const badgeNit = document.getElementById('badgeNitStatus');
+      if (estado.checks['s1_t1']) {
+        badgeNit.className = 'badge bg-success rounded-pill px-3 py-1.5';
+        badgeNit.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>Enviado ao NIT/UNIUBE';
+      } else {
+        badgeNit.className = 'badge bg-danger rounded-pill px-3 py-1.5';
+        badgeNit.innerHTML = '<i class="bi bi-exclamation-circle-fill me-1"></i>Pendente de envio';
+      }
+    }
+
+    function expandirOuRecolherTodas(abrir) {
+      document.querySelectorAll('#listaSemanas .collapse').forEach(el => {
+        const inst = bootstrap.Collapse.getOrCreateInstance(el, { toggle: false });
+        if (abrir) inst.show();
+        else inst.hide();
+      });
+    }
+
+    function resetarProgresso() {
+      if (!confirm('Tem certeza que deseja limpar todas as tarefas marcadas e anotações?')) return;
+      estado = { checks: {}, notas: {} };
+      salvarEstado();
+      renderizarSemanas();
+    }
+
+    function copiarEmailNit(btn) {
+      navigator.clipboard.writeText('nituniube@uniube.br').then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Copiado!';
+        setTimeout(() => { btn.innerHTML = orig; }, 1800);
+      });
+    }
+
+    function copiarTemplate(btn) {
+      const txt = document.getElementById('textoTemplate').innerText;
+      navigator.clipboard.writeText(txt).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Modelo Copiado!';
+        setTimeout(() => { btn.innerHTML = orig; }, 1800);
+      });
+    }
+
+    function exportarProgresso() {
+      const blob = new Blob([JSON.stringify(estado, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'progresso_manual_simufab.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importarProgresso(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const dados = JSON.parse(e.target.result);
+          if (dados && typeof dados === 'object') {
+            estado.checks = dados.checks || {};
+            estado.notas  = dados.notas || {};
+            salvarEstado();
+            renderizarSemanas();
+            alert('Progresso importado com sucesso!');
+          }
+        } catch (err) {
+          alert('Arquivo JSON inválido.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Eventos dos filtros
+    document.addEventListener('DOMContentLoaded', () => {
+      carregarEstado();
+      renderizarSemanas();
+
+      document.querySelectorAll('#filtroPessoaGroup .filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('#filtroPessoaGroup .filter-btn').forEach(b => b.classList.remove('active', 'btn-dark'));
+          this.classList.add('active');
+          renderizarSemanas();
+        });
+      });
+
+      document.getElementById('filtroStatus').addEventListener('change', renderizarSemanas);
+      document.getElementById('campoBusca').addEventListener('input', renderizarSemanas);
+    });
+  </script>
+</body>
+</html>
