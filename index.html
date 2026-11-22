@@ -9,7 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
-  <!-- Tipografia (Mesma identidade do SimuFab) -->
+  <!-- Tipografia -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -37,11 +37,8 @@
       flex-direction: column;
     }
 
-    .mono {
-      font-family: 'JetBrains Mono', monospace;
-    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Navbar Topo */
     .topbar {
       background: linear-gradient(135deg, var(--simu-dark) 0%, #111827 100%);
       border-bottom: 3px solid var(--simu-primary);
@@ -50,7 +47,6 @@
       z-index: 1030;
     }
 
-    /* Alerta NIT UNIUBE */
     .nit-banner {
       background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
       border: 1px solid #fcd34d;
@@ -58,7 +54,6 @@
       border-radius: 1rem;
     }
 
-    /* KPI Cards */
     .kpi-box {
       background: #ffffff;
       border: 1px solid var(--simu-border);
@@ -68,32 +63,11 @@
       height: 100%;
     }
 
-    /* Badges de Responsável */
-    .badge-davi {
-      background-color: #e0f2fe;
-      color: #0369a1;
-      border: 1px solid #bae6fd;
-    }
+    .badge-davi   { background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+    .badge-sofia  { background-color: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe; }
+    .badge-conjunto { background-color: #d1fae5; color: #047857; border: 1px solid #a7f3d0; }
+    .badge-nit    { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
 
-    .badge-sofia {
-      background-color: #ede9fe;
-      color: #6d28d9;
-      border: 1px solid #ddd6fe;
-    }
-
-    .badge-conjunto {
-      background-color: #d1fae5;
-      color: #047857;
-      border: 1px solid #a7f3d0;
-    }
-
-    .badge-nit {
-      background-color: #fef3c7;
-      color: #92400e;
-      border: 1px solid #fde68a;
-    }
-
-    /* Cards das Semanas */
     .week-card {
       border: 1px solid var(--simu-border);
       border-radius: 1rem;
@@ -103,9 +77,7 @@
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .week-card.week-completed {
-      border-color: #86efac;
-    }
+    .week-card.week-completed { border-color: #86efac; }
 
     .week-header {
       background: #ffffff;
@@ -115,9 +87,7 @@
       transition: background-color 0.15s ease;
     }
 
-    .week-header:hover {
-      background-color: #f8fafc;
-    }
+    .week-header:hover { background-color: #f8fafc; }
 
     .week-number-pill {
       width: 42px;
@@ -133,11 +103,8 @@
       flex-shrink: 0;
     }
 
-    .week-completed .week-number-pill {
-      background: #16a34a;
-    }
+    .week-completed .week-number-pill { background: #16a34a; }
 
-    /* Item de Tarefa */
     .task-item {
       display: flex;
       align-items: flex-start;
@@ -150,20 +117,9 @@
       cursor: pointer;
     }
 
-    .task-item:hover {
-      border-color: #cbd5e1;
-      background: #f8fafc;
-    }
-
-    .task-item.done {
-      background: #f0fdf4;
-      border-color: #bbf7d0;
-    }
-
-    .task-item.done .task-text {
-      text-decoration: line-through;
-      color: #64748b;
-    }
+    .task-item:hover { border-color: #cbd5e1; background: #f8fafc; }
+    .task-item.done { background: #f0fdf4; border-color: #bbf7d0; }
+    .task-item.done .task-text { text-decoration: line-through; color: #64748b; }
 
     .task-checkbox {
       width: 1.25rem;
@@ -173,10 +129,7 @@
       flex-shrink: 0;
     }
 
-    .task-checkbox:checked {
-      background-color: #16a34a;
-      border-color: #16a34a;
-    }
+    .task-checkbox:checked { background-color: #16a34a; border-color: #16a34a; }
 
     .deliverable-box {
       background: #f1f5f9;
@@ -186,40 +139,181 @@
       font-size: 0.85rem;
     }
 
-    .notes-area {
-      font-size: 0.84rem;
-      resize: vertical;
+    .notes-area { font-size: 0.84rem; resize: vertical; }
+    .filter-btn.active { font-weight: 700; }
+
+    .chevron-icon { transition: transform 0.2s ease; }
+    .week-header[aria-expanded="true"] .chevron-icon { transform: rotate(180deg); }
+
+    /* ============ NOVO: Galeria de imagens dentro de cada semana ============ */
+    .week-images-section {
+      background: #ffffff;
+      border: 1px solid var(--simu-border);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .filter-btn.active {
+    .images-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      border-bottom: 1px dashed var(--simu-border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .person-group { margin-bottom: 1rem; }
+    .person-group:last-child { margin-bottom: 0; }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.4rem;
+    }
+
+    .image-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      background: #f8fafc;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-card:hover {
+      border-color: var(--simu-primary);
+      box-shadow: 0 3px 10px rgba(185, 28, 28, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .image-thumb {
+      height: 95px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      font-size: 1.5rem;
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .image-thumb::after {
+      content: "\F52A"; /* bi-zoom-in */
+      font-family: "bootstrap-icons";
+      position: absolute;
+      bottom: 4px; right: 4px;
+      font-size: 0.75rem;
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      padding: 1px 5px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .image-thumb:hover::after { opacity: 1; }
+
+    .image-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.2s;
+    }
+
+    .image-thumb:hover img { transform: scale(1.04); }
+
+    .image-thumb.img-error {
+      background: #1e293b;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .image-info { padding: 0.5rem; display: flex; flex-direction: column; flex: 1; }
+
+    .fig-ref {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
       font-weight: 700;
+      color: var(--simu-primary);
+      margin-bottom: 0.15rem;
     }
 
-    .chevron-icon {
-      transition: transform 0.2s ease;
+    .fig-title {
+      font-size: 0.74rem;
+      color: #334155;
+      line-height: 1.3;
+      margin-bottom: 0.45rem;
+      min-height: 2.5em;
+      flex: 1;
     }
 
-    .week-header[aria-expanded="true"] .chevron-icon {
-      transform: rotate(180deg);
+    .btn-copy-path {
+      font-size: 0.66rem;
+      padding: 0.25rem 0.5rem;
+      background: #e2e8f0;
+      border: none;
+      border-radius: 999px;
+      color: #475569;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      transition: all 0.15s ease;
     }
 
-    /* Impressão */
+    .btn-copy-path:hover {
+      background: var(--simu-primary);
+      color: #ffffff;
+    }
+
+    .btn-copy-path.copiado {
+      background: #16a34a;
+      color: #ffffff;
+    }
+
+    .missing-warning {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-left: 4px solid #d97706;
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+    }
+
+    .missing-warning ul { margin: 0.35rem 0 0 0; padding-left: 1.1rem; }
+    .missing-warning code { background: #fef3c7; padding: 1px 5px; border-radius: 4px; color: #92400e; }
+
+    .alert-info-images {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #93c5fd;
+      border-left: 5px solid #2563eb;
+      border-radius: 1rem;
+    }
+
+    .week-img-count {
+      background: #ffffff;
+      border: 1px solid var(--simu-border);
+      color: #475569;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
     @media print {
-      .no-print {
-        display: none !important;
-      }
-      .collapse {
-        display: block !important;
-        height: auto !important;
-      }
-      .week-card {
-        break-inside: avoid;
-        box-shadow: none !important;
-        margin-bottom: 1rem !important;
-      }
-      body {
-        background: #ffffff !important;
-      }
+      .no-print { display: none !important; }
+      .collapse { display: block !important; height: auto !important; }
+      .week-card { break-inside: avoid; box-shadow: none !important; margin-bottom: 1rem !important; }
+      body { background: #ffffff !important; }
+      .image-thumb { height: 70px; }
     }
   </style>
 </head>
@@ -286,7 +380,30 @@
       </div>
     </div>
 
-    <!-- PAINEL DE PROGRESSO (GERAL, DAVI, SOFIA, SEMANAS) -->
+    <!-- BANNER INFORMATIVO: ACERVO DE IMAGENS -->
+    <div class="alert-info-images p-3 mb-4 shadow-sm">
+      <div class="d-flex align-items-start gap-3">
+        <div class="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width:42px;height:42px;">
+          <i class="bi bi-images fs-5"></i>
+        </div>
+        <div class="flex-grow-1">
+          <h6 class="fw-bold text-dark mb-1">
+            <i class="bi bi-camera-fill text-primary me-1"></i>
+            Acervo Visual do Manual — 123 figuras catalogadas (246 arquivos: Desktop + Mobile)
+          </h6>
+          <p class="small text-dark mb-1">
+            Cada semana abaixo já exibe os <strong>prints correspondentes às suas tarefas</strong>, separados por responsável (Davi / Sofia) com referência de figura, título e caminho relativo (botão de copiar). Clique na miniatura para abrir o print em nova aba.
+          </p>
+          <div class="d-flex flex-wrap gap-2 small">
+            <span class="badge badge-davi rounded-pill px-2.5 py-1"><i class="bi bi-person-fill me-1"></i>Davi: 58 figuras</span>
+            <span class="badge badge-sofia rounded-pill px-2.5 py-1"><i class="bi bi-person-fill me-1"></i>Sofia: 65 figuras</span>
+            <span class="badge bg-warning text-dark rounded-pill px-2.5 py-1"><i class="bi bi-exclamation-triangle-fill me-1"></i>4 prints pendentes de captura</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL DE PROGRESSO -->
     <div class="row g-3 mb-4">
       <div class="col-12 col-md-4">
         <div class="kpi-box border-start border-4 border-danger">
@@ -328,7 +445,7 @@
       </div>
     </div>
 
-    <!-- BARRA DE FILTROS E CONTROLES -->
+    <!-- BARRA DE FILTROS -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 no-print">
       <div class="card-body p-3">
         <div class="row g-2 align-items-center">
@@ -427,7 +544,208 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
   <script>
     const STORAGE_KEY = 'simufab_checklist_manual_v1';
 
-    // DADOS COMPLETOS DAS 10 SEMANAS
+    /* ============================================================
+       CATÁLOGO DE IMAGENS POR SEMANA (Desktop)
+       Baseado no acervo de 123 figuras (58 Davi + 65 Sofia).
+       ============================================================ */
+    const IMAGENS_POR_SEMANA = {
+      1: {
+        davi: [
+          { fig: 'Fig. 0.1', path: 'Desktop/Cap_00_Acesso_e_Navegacao/01_Tela_Login.png', titulo: 'Tela de Login (login.php)' },
+          { fig: 'Fig. 0.2', path: 'Desktop/Cap_00_Acesso_e_Navegacao/02_Alerta_Credenciais_Invalidas.png', titulo: 'Alerta de Credenciais Inválidas' },
+          { fig: 'Fig. 0.3', path: 'Desktop/Cap_00_Acesso_e_Navegacao/03_Pagina_Erro_404.png', titulo: 'Página de Erro 404' },
+          { fig: 'Fig. 2.1', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/01_Modal_Telemetria_e_Ping_Sistema.png', titulo: 'Telemetria / Ping do Sistema (footer.php)' }
+        ],
+        sofia: [
+          { fig: 'Fig. 1.2', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/02_Menu_Setup_da_Turma.png', titulo: 'Menu Superior — Setup da Turma' },
+          { fig: 'Fig. 1.3', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/03_Menu_Cadastros_Industriais.png', titulo: 'Menu Superior — Cadastros Industriais' },
+          { fig: 'Fig. 1.4', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/04_Menu_Seletor_de_Sala_Ativa.png', titulo: 'Menu Superior — Seletor de Sala/Turma' },
+          { fig: 'Fig. 2.4', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/02_Modal_Abrir_Chamado_Entre_Setores.png', titulo: 'Modal — Abrir Chamado entre Setores' },
+          { fig: 'Fig. 2.2', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/03_Copiloto_SimuBot_Instrutor.png', titulo: 'Copiloto SimuBot — Instrutor' },
+          { fig: 'Fig. 2.5', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/04_Copiloto_SimuBot_Diretor.png', titulo: 'Copiloto SimuBot — Diretor' },
+          { fig: 'Fig. 2.7', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/05_Copiloto_SimuBot_PCP.png', titulo: 'Copiloto SimuBot — PCP' },
+          { fig: 'Fig. 2.9', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/06_Copiloto_SimuBot_Compras.png', titulo: 'Copiloto SimuBot — Compras' },
+          { fig: 'Fig. 2.10', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/07_Copiloto_SimuBot_Estoque.png', titulo: 'Copiloto SimuBot — Estoque' },
+          { fig: 'Fig. 2.11', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/08_Copiloto_SimuBot_Producao.png', titulo: 'Copiloto SimuBot — Produção' },
+          { fig: 'Fig. 2.12', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/09_Copiloto_SimuBot_Qualidade.png', titulo: 'Copiloto SimuBot — Qualidade' },
+          { fig: 'Fig. 2.13', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/10_Copiloto_SimuBot_Logistica.png', titulo: 'Copiloto SimuBot — Logística' },
+          { fig: 'Fig. 2.14', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/11_Copiloto_SimuBot_Financeiro.png', titulo: 'Copiloto SimuBot — Financeiro' },
+          { fig: 'Fig. 2.3', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/12_Tutorial_Interativo_Instrutor.png', titulo: 'Tutorial Interativo — Instrutor' },
+          { fig: 'Fig. 2.6', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/13_Tutorial_Interativo_Diretor.png', titulo: 'Tutorial Interativo — Diretor' },
+          { fig: 'Fig. 2.8', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/14_Tutorial_Interativo_PCP.png', titulo: 'Tutorial Interativo — PCP' }
+        ],
+        faltando: [
+          { responsavel: 'Davi', fig: 'Sem figura', arquivo: 'aguardando_rodada.php (Tela de Espera / Motor em Andamento)', motivo: 'Só aparece quando a rodada está encerrada/em processamento — capturar manualmente.' }
+        ]
+      },
+      2: {
+        davi: [
+          { fig: 'Fig. 1.5', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/01_Passo_1_Listar_Salas_e_Fluxo_Setup.png', titulo: 'Passo 1 — Listar Salas e Fluxo' },
+          { fig: 'Fig. 1.6', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/02_Passo_1_Criar_Nova_Sala.png', titulo: 'Passo 1 — Criar Nova Sala / Jogo' },
+          { fig: 'Fig. 1.7', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/03_Passo_2_Listar_Equipes.png', titulo: 'Passo 2 — Listar Equipes' },
+          { fig: 'Fig. 1.8', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/04_Passo_2_Perfil_Organograma_8_Cargos.png', titulo: 'Passo 2 — Organograma dos 8 Cargos' },
+          { fig: 'Fig. 1.9', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/05_Passo_2_Criar_Nova_Equipe.png', titulo: 'Passo 2 — Criar Nova Equipe' }
+        ],
+        sofia: [
+          { fig: 'Fig. 1.10', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/06_Passo_3_Listar_Empresas.png', titulo: 'Passo 3 — Listar Empresas' },
+          { fig: 'Fig. 1.11', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/07_Passo_3_Criar_Empresa.png', titulo: 'Passo 3 — Criar Empresa' },
+          { fig: 'Fig. 1.12', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/08_Passo_4_Listar_Alunos_Matriculados.png', titulo: 'Passo 4 — Listar Alunos Matriculados' },
+          { fig: 'Fig. 1.13', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/09_Passo_4_Matricular_Aluno_Vazio.png', titulo: 'Passo 4 — Formulário de Matrícula' },
+          { fig: 'Fig. 1.14', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/10_Passo_4_Alunos_Acumulo_Multiplos_Cargos.png', titulo: 'Passo 4 — Aluno com Múltiplos Cargos' }
+        ],
+        faltando: [
+          { responsavel: 'Sofia', fig: 'Sem figura', arquivo: 'sucesso.php (Tela de Sucesso após cadastro de aluno)', motivo: 'Aparece apenas logo após concluir o cadastro — capturar manualmente.' }
+        ]
+      },
+      3: {
+        davi: [
+          { fig: 'Fig. 1.15', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/01_Painel_Controle_Rodadas_e_Linha_do_Tempo.png', titulo: 'Painel de Controle de Rodadas' },
+          { fig: 'Fig. 1.16', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/02_Modal_Configurar_Limite_Rodadas.png', titulo: 'Modal — Configurar Limite de Rodadas' },
+          { fig: 'Fig. 1.17', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/03_Modal_Confirmar_Encerramento_Rodada.png', titulo: 'Modal — Confirmar Encerramento de Rodada' },
+          { fig: 'Fig. 1.18', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/04_Modal_Reiniciar_Turma_Nova_Edicao.png', titulo: 'Modal — Reiniciar Turma (Nova Edição)' },
+          { fig: 'Fig. 1.19', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/05_Modal_Encerrar_Partida_Antecipado.png', titulo: 'Modal — Encerrar Partida Antecipadamente' },
+          { fig: 'Fig. 1.20', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/06_Historico_Cronologico_Rodadas.png', titulo: 'Histórico Cronológico de Rodadas' }
+        ],
+        sofia: [
+          { fig: 'Fig. 1.24', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/01_Catalogo_Produtos_Acabados_NPK.png', titulo: 'Catálogo de Produtos Acabados (NPK)' },
+          { fig: 'Fig. 1.25', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/02_Catalogo_Materias_Primas_Quimicas.png', titulo: 'Catálogo de Matérias-Primas' },
+          { fig: 'Fig. 1.26', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/03_Matriz_Receitas_BOM_Estequiometria.png', titulo: 'Matriz de Receitas (BOM)' },
+          { fig: 'Fig. 1.27', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/04_Fornecedores_Homologados.png', titulo: 'Fornecedores Homologados' },
+          { fig: 'Fig. 1.28', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/05_Vinculacao_Materia_Prima_Fornecedor.png', titulo: 'Vinculação MP × Fornecedor' },
+          { fig: 'Fig. 1.29', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/06_Carteira_de_Clientes_B2B.png', titulo: 'Carteira de Clientes B2B' }
+        ]
+      },
+      4: {
+        davi: [
+          { fig: 'Fig. 1.22', path: 'Desktop/Cap_01_Instrutor_Master/04_Gazeta_e_Penalidades_IA/01_Planejador_Empecilhos_e_Penalidades.png', titulo: 'Planejador de Empecilhos e Penalidades' },
+          { fig: 'Fig. 1.23', path: 'Desktop/Cap_01_Instrutor_Master/04_Gazeta_e_Penalidades_IA/02_Ficha_Preenchida_com_Cenario_IA.png', titulo: 'Ficha Preenchida com Cenário IA' }
+        ],
+        sofia: [
+          { fig: 'Fig. 1.1', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/01_Painel_Geral_do_Administrador.png', titulo: 'Painel Geral do Administrador & Mercado B2B' }
+        ]
+      },
+      5: {
+        davi: [
+          { fig: 'Fig. 4.1', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/01_Tela_Gabinete_Executivo_Diretor.png', titulo: 'Gabinete Executivo do Diretor' },
+          { fig: 'Fig. 4.2', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/02_Aba_Visao_360_Setores_e_Graficos.png', titulo: 'Aba Visão 360 — Setores e Gráficos' },
+          { fig: 'Fig. 4.3', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/03_Aba_Decisoes_Soberanas_Investimentos.png', titulo: 'Aba Decisões Soberanas (Investimentos)' },
+          { fig: 'Fig. 4.4', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/04_Aba_Jornal_A_Gazeta_do_Triangulo.png', titulo: 'Aba Jornal A Gazeta do Triângulo' },
+          { fig: 'Fig. 4.5', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/05_Aba_Ocorrencias_e_Debitos.png', titulo: 'Aba Ocorrências e Débitos' },
+          { fig: 'Fig. 4.6', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/06_Menu_Troca_Rapida_Meus_Setores.png', titulo: 'Menu — Troca Rápida Meus Setores' },
+          { fig: 'Fig. 4.7', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/01_Modal_Comprar_Maquina_CAPEX.png', titulo: 'Modal — Comprar Máquina (CAPEX)' },
+          { fig: 'Fig. 4.8', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/02_Modal_Comprar_Caminhao_Frota.png', titulo: 'Modal — Comprar Caminhão (Frota)' },
+          { fig: 'Fig. 4.9', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/03_Modal_Expandir_Armazens_Silos.png', titulo: 'Modal — Expandir Armazéns / Silos' },
+          { fig: 'Fig. 4.10', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/04_Modal_Linha_de_Credito_e_Rating.png', titulo: 'Modal — Linha de Crédito e Rating' },
+          { fig: 'Fig. 4.11', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/01_Tela_Central_Aprovacoes_RNCs.png', titulo: 'Central de Aprovações — RNCs' },
+          { fig: 'Fig. 4.12', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/02_Aba_Ordens_Compra_MP_Pendentes.png', titulo: 'Aba Ordens de Compra MP Pendentes' },
+          { fig: 'Fig. 4.13', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/03_Aba_Manutencoes_Industriais_Pendentes.png', titulo: 'Aba Manutenções Industriais Pendentes' },
+          { fig: 'Fig. 4.14', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/04_Aba_Pareceres_e_Comunicados_Diretor.png', titulo: 'Aba Pareceres e Comunicados' },
+          { fig: 'Fig. 4.15', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/04_Espionagem_Industrial/01_Tela_Central_Espionagem_Industrial.png', titulo: 'Central de Espionagem Industrial' },
+          { fig: 'Fig. 4.16', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/04_Espionagem_Industrial/02_Dossie_Confidencial_Descriptografado.png', titulo: 'Dossiê Confidencial Descriptografado' }
+        ],
+        sofia: [
+          { fig: 'Fig. 11.1', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/01_Tela_DRE_Sintetica_Industrial.png', titulo: 'DRE Sintética Industrial' },
+          { fig: 'Fig. 11.2', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/02_SubAba_DRE_Comparativa_Multi_Rodadas.png', titulo: 'DRE Comparativa Multi-Rodadas' },
+          { fig: 'Fig. 11.3', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/03_SubAba_Detalhamento_O_Que_Recebi.png', titulo: 'Detalhamento — O Que Recebi' },
+          { fig: 'Fig. 11.4', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/04_SubAba_Detalhamento_O_Que_Paguei.png', titulo: 'Detalhamento — O Que Paguei' },
+          { fig: 'Fig. 11.5', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/05_Aba_Contas_Pagar_Folha_CLT_e_Receber.png', titulo: 'Contas a Pagar, Folha CLT e Receber' },
+          { fig: 'Fig. 11.6', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/06_Aba_Emprestimos_Rating_e_Simulador.png', titulo: 'Empréstimos, Rating e Simulador' },
+          { fig: 'Fig. 11.7', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/07_Aba_Auditoria_e_Veto_Orcamentario.png', titulo: 'Auditoria e Veto Orçamentário' },
+          { fig: 'Fig. 11.8', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/09_Aba_Extrato_Geral_Movimentacoes.png', titulo: 'Extrato Geral de Movimentações' },
+          { fig: 'Fig. 11.9', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/10_Aba_Comunicacao_Financeiro.png', titulo: 'Comunicação — Financeiro' },
+          { fig: 'Fig. 11.10', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/08_Modal_Exercer_Veto_Financeiro.png', titulo: 'Modal — Exercer Veto Financeiro' }
+        ]
+      },
+      6: {
+        davi: [
+          { fig: 'Fig. 5.1', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/01_Passo_1_Previsao_de_Demanda.png', titulo: 'Passo 1 — Previsão de Demanda' },
+          { fig: 'Fig. 5.2', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/02_Passo_2_Plano_Mestre_MPS.png', titulo: 'Passo 2 — Plano Mestre (MPS)' },
+          { fig: 'Fig. 5.3', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/03_Passo_3_Explosao_Materiais_MRP.png', titulo: 'Passo 3 — Explosão de Materiais (MRP)' },
+          { fig: 'Fig. 5.4', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/04_Passo_4_Capacidade_Finita_CRP_220h.png', titulo: 'Passo 4 — Capacidade Finita (CRP)' }
+        ],
+        sofia: [
+          { fig: 'Fig. 5.5', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/05_Passo_5_Painel_Programacao_e_Sequenciamento_MES.png', titulo: 'Passo 5 — Programação e Sequenciamento MES' },
+          { fig: 'Fig. 5.6', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/06_Aba_Ocorrencias_e_Gargalos.png', titulo: 'Aba Ocorrências e Gargalos' },
+          { fig: 'Fig. 5.7', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/07_Aba_Mensagens_com_Setores.png', titulo: 'Aba Mensagens com Setores' },
+          { fig: 'Fig. 5.8', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/08_Modal_Emitir_Nova_OP_Manual.png', titulo: 'Modal — Emitir Nova OP Manual' }
+        ],
+        faltando: [
+          { responsavel: 'Sofia', fig: 'Fig. 5.9 (esperada)', arquivo: '09_Modal_Programar_Etapa_Turno_Extra.png', motivo: 'Não apareceu porque a conta pcp.alfa@demo.sim não tinha o botão .btn-abrir-programar disponível no momento da captura.' }
+        ]
+      },
+      7: {
+        davi: [
+          { fig: 'Fig. 8.1', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/01_Tela_Ordens_de_Producao_Stepper_MES.png', titulo: 'Ordens de Produção — Stepper MES' },
+          { fig: 'Fig. 8.2', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/02_Aba_Parque_Maquinas_e_Manutencao.png', titulo: 'Aba Parque de Máquinas e Manutenção' },
+          { fig: 'Fig. 8.3', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/03_Aba_Mensagens_Chao_de_Fabrica.png', titulo: 'Aba Mensagens do Chão de Fábrica' },
+          { fig: 'Fig. 8.4', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/04_Tela_Fila_Sequenciada_Visao_Operador.png', titulo: 'Fila Sequenciada — Visão do Operador' }
+        ],
+        sofia: [
+          { fig: 'Fig. 9.1', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/01_Tela_Quarentena_MP_Recebimento.png', titulo: 'Quarentena de MP — Recebimento' },
+          { fig: 'Fig. 9.2', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/03_Aba_Liberacao_PA_Pos_Etapa_4.png', titulo: 'Liberação de PA (Pós-Etapa 4)' },
+          { fig: 'Fig. 9.3', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/05_Aba_Relatorios_Nao_Conformidade_RNC.png', titulo: 'RNCs — Relatórios de Não Conformidade' },
+          { fig: 'Fig. 9.4', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/06_Aba_Historico_Laudos_Inspecao.png', titulo: 'Histórico de Laudos de Inspeção' },
+          { fig: 'Fig. 9.5', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/07_Aba_Graficos_Pareto_de_Defeitos.png', titulo: 'Gráficos Pareto de Defeitos' },
+          { fig: 'Fig. 9.6', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/08_Aba_Mensagens_Qualidade.png', titulo: 'Mensagens da Qualidade' },
+          { fig: 'Fig. 9.7', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/02_Modal_Laudo_Laboratorial_MP.png', titulo: 'Modal — Laudo Laboratorial (MP)' },
+          { fig: 'Fig. 9.8', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/04_Modal_Laudo_Laboratorial_PA.png', titulo: 'Modal — Laudo Laboratorial (PA)' }
+        ]
+      },
+      8: {
+        davi: [
+          { fig: 'Fig. 6.1', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/01_Tela_Mercado_B2B_e_Ofertas_em_Cards.png', titulo: 'Mercado B2B — Ofertas em Cards' },
+          { fig: 'Fig. 6.2', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/02_Aba_Reposicao_Insumos_ROP_e_MRP.png', titulo: 'Reposição de Insumos (ROP/MRP)' },
+          { fig: 'Fig. 6.3', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/03_Aba_Catalogo_e_Cotacao_Fornecedores.png', titulo: 'Catálogo e Cotação de Fornecedores' },
+          { fig: 'Fig. 6.4', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/05_Aba_Historico_Pedidos_MP_Rodada.png', titulo: 'Histórico de Pedidos de MP por Rodada' },
+          { fig: 'Fig. 6.5', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/06_Aba_Chamados_Internos_Compras.png', titulo: 'Chamados Internos — Compras' },
+          { fig: 'Fig. 6.6', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/07_Tela_Historico_Geral_e_Scorecard_Fornecedores.png', titulo: 'Histórico Geral e Scorecard de Fornecedores' },
+          { fig: 'Fig. 7.1', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/01_Tela_Politicas_e_Ressuprimento_ROP.png', titulo: 'Políticas e Ressuprimento (ROP)' },
+          { fig: 'Fig. 7.2', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/04_Aba_Ocupacao_Galpoes_e_Silos.png', titulo: 'Ocupação de Galpões e Silos' },
+          { fig: 'Fig. 7.3', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/05_Aba_Lotes_Rastreabilidade_FEFO_FIFO.png', titulo: 'Lotes — Rastreabilidade FEFO/FIFO' },
+          { fig: 'Fig. 7.4', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/06_Aba_Curva_ABC_Pareto_Completa.png', titulo: 'Curva ABC / Pareto Completa' },
+          { fig: 'Fig. 7.5', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/08_Aba_Calculadora_LEC_EOQ.png', titulo: 'Calculadora LEC / EOQ' },
+          { fig: 'Fig. 7.6', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/10_Aba_Livro_Kardex_Movimentacoes.png', titulo: 'Livro Kardex — Movimentações' },
+          { fig: 'Fig. 7.7', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/11_Aba_Mensagens_Almoxarifado.png', titulo: 'Mensagens do Almoxarifado' },
+          { fig: 'Fig. 7.8', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/07_Curva_ABC_Filtrada_Classe_A.png', titulo: 'Curva ABC Filtrada (Classe A)' },
+          { fig: 'Fig. 7.9', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/09_Calculadora_EOQ_Resultado_Simulado.png', titulo: 'Calculadora EOQ — Resultado Simulado' },
+          { fig: 'Fig. 7.10', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/02_Modal_Configurar_Parametros_ROP_LEC.png', titulo: 'Modal — Configurar Parâmetros ROP/LEC' },
+          { fig: 'Fig. 7.11', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/03_Modal_Baixa_Descarte_Avaria_FEFO.png', titulo: 'Modal — Baixa / Descarte / Avaria (FEFO)' }
+        ],
+        sofia: [
+          { fig: 'Fig. 10.1', path: 'Desktop/Cap_08_Logistica_e_Expedicao/01_Tela_Carteira_Pedidos_e_Expedicao.png', titulo: 'Carteira de Pedidos e Expedição' },
+          { fig: 'Fig. 10.2', path: 'Desktop/Cap_08_Logistica_e_Expedicao/03_Aba_Disponibilidade_Veiculos_e_Escassez.png', titulo: 'Disponibilidade de Veículos e Escassez' },
+          { fig: 'Fig. 10.3', path: 'Desktop/Cap_08_Logistica_e_Expedicao/04_Aba_Malha_Rotas_e_Pedagios.png', titulo: 'Malha de Rotas e Pedágios' },
+          { fig: 'Fig. 10.4', path: 'Desktop/Cap_08_Logistica_e_Expedicao/05_Aba_Historico_Entregas_e_CTe.png', titulo: 'Histórico de Entregas e CT-e' },
+          { fig: 'Fig. 10.5', path: 'Desktop/Cap_08_Logistica_e_Expedicao/06_Aba_Mensagens_Logistica.png', titulo: 'Mensagens da Logística' },
+          { fig: 'Fig. 10.6', path: 'Desktop/Cap_08_Logistica_e_Expedicao/02_Modal_Despacho_CTe_e_Cotacao_Frete.png', titulo: 'Modal — Despacho CT-e e Cotação de Frete' }
+        ],
+        faltando: [
+          { responsavel: 'Davi', fig: 'Fig. 6.7 (esperada)', arquivo: '04_Modal_Emitir_Pedido_Compra_MP.png', motivo: 'Não apareceu porque .btn-comprar-sugestao não estava visível/habilitado na aba de catálogo de compras.alfa@demo.sim.' }
+        ]
+      },
+      9: {
+        davi: [],
+        sofia: [
+          { fig: 'Fig. 3.1', path: 'Desktop/Cap_10_Ranking_e_Competitividade/01_Instrutor_Placar_Geral_e_Podio.png', titulo: 'Instrutor — Placar Geral e Pódio' },
+          { fig: 'Fig. 3.2', path: 'Desktop/Cap_10_Ranking_e_Competitividade/02_Instrutor_Graficos_Evolucao_e_Radar.png', titulo: 'Instrutor — Gráficos de Evolução e Radar' },
+          { fig: 'Fig. 3.3', path: 'Desktop/Cap_10_Ranking_e_Competitividade/03_Instrutor_Dossie_360_Todas_Equipes.png', titulo: 'Instrutor — Dossiê 360 de Todas as Equipes' },
+          { fig: 'Fig. 3.4', path: 'Desktop/Cap_10_Ranking_e_Competitividade/04_Instrutor_Modal_RaioX_Detalhado.png', titulo: 'Instrutor — Modal Raio-X Detalhado' },
+          { fig: 'Fig. 3.5', path: 'Desktop/Cap_10_Ranking_e_Competitividade/05_Aluno_Placar_Geral_com_Sigilo_Industrial.png', titulo: 'Aluno — Placar Geral com Sigilo Industrial' },
+          { fig: 'Fig. 3.6', path: 'Desktop/Cap_10_Ranking_e_Competitividade/06_Aluno_Radar_360_Propria_Empresa.png', titulo: 'Aluno — Radar 360 da Própria Empresa' },
+          { fig: 'Fig. 3.7', path: 'Desktop/Cap_10_Ranking_e_Competitividade/07_Aluno_Dossie_360_Propria_Empresa.png', titulo: 'Aluno — Dossiê 360 da Própria Empresa' },
+          { fig: 'Fig. 3.8', path: 'Desktop/Cap_10_Ranking_e_Competitividade/08_Aluno_Modal_Meu_RaioX.png', titulo: 'Aluno — Modal Meu Raio-X' },
+          { fig: 'Fig. 1.21', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/07_Dossie_Final_e_People_Analytics_RH.png', titulo: 'Dossiê Final e People Analytics (RH)' }
+        ]
+      },
+      10: {
+        davi: [],
+        sofia: []
+      }
+    };
+
+    /* ============================================================
+       DADOS DAS 10 SEMANAS
+       ============================================================ */
     const SEMANAS_DATA = [
       {
         id: 1,
@@ -436,42 +754,13 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Comprovante de envio do projeto ao NIT/UNIUBE + Capítulo 1 (Introdução, Acesso e Ferramentas Comuns).',
         abertaPorPadrao: true,
         tarefas: [
-          {
-            id: 's1_t1',
-            responsavel: 'Conjunto',
-            isNit: true,
-            texto: 'Baixar o formulário de Comunicação de Software / Comunicação da Criação no portal do NIT da UNIUBE, preencher com a lista de autores e resumo do sistema e enviar para nituniube@uniube.br (sem depender do manual).'
-          },
-          {
-            id: 's1_t2',
-            responsavel: 'Davi',
-            texto: 'Documentar a tela de Login (login.php), regras de sessão e timeout de inatividade (30 minutos).'
-          },
-          {
-            id: 's1_t3',
-            responsavel: 'Davi',
-            texto: 'Documentar a Tela de Espera / Motor em Andamento (aguardando_rodada.php), explicando a trava quando a rodada está fechada e a atualização automática ao abrir.'
-          },
-          {
-            id: 's1_t4',
-            responsavel: 'Davi',
-            texto: 'Documentar o Live Sync (atualização em tempo real entre colegas) e o indicador de Status Operacional / Ping no rodapé (footer.php).'
-          },
-          {
-            id: 's1_t5',
-            responsavel: 'Sofia',
-            texto: 'Escrever a Apresentação do Cenário (Polo Industrial de Fertilizantes de Uberaba/MG) e a divisão entre Instrutor Master e 8 Cargos dos Alunos.'
-          },
-          {
-            id: 's1_t6',
-            responsavel: 'Sofia',
-            texto: 'Documentar a Barra Superior (header.php): troca de sala (instrutor), empresa, rodada (R#X), menus por cargo e botão Sair.'
-          },
-          {
-            id: 's1_t7',
-            responsavel: 'Sofia',
-            texto: 'Documentar a Central de Comunicados / Chamados e o Copiloto de Setor (SimuBot) no canto inferior direito.'
-          }
+          { id: 's1_t1', responsavel: 'Conjunto', isNit: true, texto: 'Baixar o formulário de Comunicação de Software / Comunicação da Criação no portal do NIT da UNIUBE, preencher com a lista de autores e resumo do sistema e enviar para nituniube@uniube.br (sem depender do manual).' },
+          { id: 's1_t2', responsavel: 'Davi', texto: 'Documentar a tela de Login (login.php), regras de sessão e timeout de inatividade (30 minutos).' },
+          { id: 's1_t3', responsavel: 'Davi', texto: 'Documentar a Tela de Espera / Motor em Andamento (aguardando_rodada.php), explicando a trava quando a rodada está fechada e a atualização automática ao abrir.' },
+          { id: 's1_t4', responsavel: 'Davi', texto: 'Documentar o Live Sync (atualização em tempo real entre colegas) e o indicador de Status Operacional / Ping no rodapé (footer.php).' },
+          { id: 's1_t5', responsavel: 'Sofia', texto: 'Escrever a Apresentação do Cenário (Polo Industrial de Fertilizantes de Uberaba/MG) e a divisão entre Instrutor Master e 8 Cargos dos Alunos.' },
+          { id: 's1_t6', responsavel: 'Sofia', texto: 'Documentar a Barra Superior (header.php): troca de sala (instrutor), empresa, rodada (R#X), menus por cargo e botão Sair.' },
+          { id: 's1_t7', responsavel: 'Sofia', texto: 'Documentar a Central de Comunicados / Chamados e o Copiloto de Setor (SimuBot) no canto inferior direito.' }
         ]
       },
       {
@@ -481,32 +770,11 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Capítulo 2 (Setup da Turma — Passos 1 a 4).',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's2_t1',
-            responsavel: 'Davi',
-            texto: 'Passo 1: Criar Sala / Jogo (/jogo/criar e /jogo/listar) — abertura automática da Rodada #1 e alternância de salas.'
-          },
-          {
-            id: 's2_t2',
-            responsavel: 'Davi',
-            texto: 'Passo 2: Criar Equipes (/equipe/criar, /equipe/listar, /equipe/perfil) — estoque inicial automático (~1.150t de MP e ~660t de PA) e reparo de estoque.'
-          },
-          {
-            id: 's2_t3',
-            responsavel: 'Sofia',
-            texto: 'Passo 3: Criar Empresas (/empresa/criar, /empresa/listar) — caixa inicial fixo de R$ 15.000.000,00 e instalação das 4 máquinas padrão (Misturador, Granulador, Secador e Ensacadora).'
-          },
-          {
-            id: 's2_t4',
-            responsavel: 'Sofia',
-            texto: 'Passo 4: Matricular Alunos & Cargos (/usuario/criar, /usuario/listar, sucesso.php) — explicando a Regra dos 8 Cargos Obrigatórios.'
-          },
-          {
-            id: 's2_t5',
-            responsavel: 'Conjunto',
-            isNit: true,
-            texto: 'Check semanal NIT/UNIUBE: confirmar se houve retorno ou pedido de ajuste do NIT referente ao e-mail enviado na Semana 1.'
-          }
+          { id: 's2_t1', responsavel: 'Davi', texto: 'Passo 1: Criar Sala / Jogo (/jogo/criar e /jogo/listar) — abertura automática da Rodada #1 e alternância de salas.' },
+          { id: 's2_t2', responsavel: 'Davi', texto: 'Passo 2: Criar Equipes (/equipe/criar, /equipe/listar, /equipe/perfil) — estoque inicial automático (~1.150t de MP e ~660t de PA) e reparo de estoque.' },
+          { id: 's2_t3', responsavel: 'Sofia', texto: 'Passo 3: Criar Empresas (/empresa/criar, /empresa/listar) — caixa inicial fixo de R$ 15.000.000,00 e instalação das 4 máquinas padrão (Misturador, Granulador, Secador e Ensacadora).' },
+          { id: 's2_t4', responsavel: 'Sofia', texto: 'Passo 4: Matricular Alunos & Cargos (/usuario/criar, /usuario/listar, sucesso.php) — explicando a Regra dos 8 Cargos Obrigatórios.' },
+          { id: 's2_t5', responsavel: 'Conjunto', isNit: true, texto: 'Check semanal NIT/UNIUBE: confirmar se houve retorno ou pedido de ajuste do NIT referente ao e-mail enviado na Semana 1.' }
         ]
       },
       {
@@ -516,26 +784,10 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Capítulo 3 (Ciclo de Rodadas e Catálogos Industriais).',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's3_t1',
-            responsavel: 'Davi',
-            texto: 'Documentar o Painel de Controle de Rodadas (controle.php e historico.php): linha do tempo, limite de rodadas (1 a 24, padrão 6), Encerrar Rodada e Iniciar Próxima Rodada.'
-          },
-          {
-            id: 's3_t2',
-            responsavel: 'Davi',
-            texto: 'Documentar as ações de controle e emergência das rodadas: Destravar Rodada, Encerrar Partida Antecipadamente e Reiniciar Turma (Zerar — cria edição -V2, preserva histórico, restaura R$ 15M e máquinas novas).'
-          },
-          {
-            id: 's3_t3',
-            responsavel: 'Sofia',
-            texto: 'Documentar Produtos Acabados (22 NPKs), Matérias-Primas (23 insumos) e Receitas / BOM (balanço de 1,000 t MP / t PA).'
-          },
-          {
-            id: 's3_t4',
-            responsavel: 'Sofia',
-            texto: 'Documentar Fornecedores (92 homologados), Vinculação MP × Fornecedor e Clientes (22 compradores B2B), deixando claro quais telas são bloqueadas/protegidas pela IA.'
-          }
+          { id: 's3_t1', responsavel: 'Davi', texto: 'Documentar o Painel de Controle de Rodadas (controle.php e historico.php): linha do tempo, limite de rodadas (1 a 24, padrão 6), Encerrar Rodada e Iniciar Próxima Rodada.' },
+          { id: 's3_t2', responsavel: 'Davi', texto: 'Documentar as ações de controle e emergência das rodadas: Destravar Rodada, Encerrar Partida Antecipadamente e Reiniciar Turma (Zerar — cria edição -V2, preserva histórico, restaura R$ 15M e máquinas novas).' },
+          { id: 's3_t3', responsavel: 'Sofia', texto: 'Documentar Produtos Acabados (22 NPKs), Matérias-Primas (23 insumos) e Receitas / BOM (balanço de 1,000 t MP / t PA).' },
+          { id: 's3_t4', responsavel: 'Sofia', texto: 'Documentar Fornecedores (92 homologados), Vinculação MP × Fornecedor e Clientes (22 compradores B2B), deixando claro quais telas são bloqueadas/protegidas pela IA.' }
         ]
       },
       {
@@ -545,26 +797,10 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Capítulo 4 (Eventos, Penalidades e Mercado B2B).',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's4_t1',
-            responsavel: 'Davi',
-            texto: 'Documentar Gazeta & Incidentes (evento/gerenciar.php): cenários sugeridos pela IA e agendamento com aviso prévio vs impacto imediato.'
-          },
-          {
-            id: 's4_t2',
-            responsavel: 'Davi',
-            texto: 'Documentar todos os tipos de alvo (rodovia, maquina_tipo, desumidificacao, materia_prima, modalidade_frete, cliente, global) e auditoria/cobrança de penalidades.'
-          },
-          {
-            id: 's4_t3',
-            responsavel: 'Sofia',
-            texto: 'Documentar o Painel do Administrador (admin.php): seleção de equipe, KPIs, mapa sinótico da fábrica, alunos, máquinas e eventos.'
-          },
-          {
-            id: 's4_t4',
-            responsavel: 'Sofia',
-            texto: 'Documentar os botões do Mercado B2B no Painel Admin: Gerar Demandas de Clientes (trava de 1x por rodada) e Apurar Vendas via IA.'
-          }
+          { id: 's4_t1', responsavel: 'Davi', texto: 'Documentar Gazeta & Incidentes (evento/gerenciar.php): cenários sugeridos pela IA e agendamento com aviso prévio vs impacto imediato.' },
+          { id: 's4_t2', responsavel: 'Davi', texto: 'Documentar todos os tipos de alvo (rodovia, maquina_tipo, desumidificacao, materia_prima, modalidade_frete, cliente, global) e auditoria/cobrança de penalidades.' },
+          { id: 's4_t3', responsavel: 'Sofia', texto: 'Documentar o Painel do Administrador (admin.php): seleção de equipe, KPIs, mapa sinótico da fábrica, alunos, máquinas e eventos.' },
+          { id: 's4_t4', responsavel: 'Sofia', texto: 'Documentar os botões do Mercado B2B no Painel Admin: Gerar Demandas de Clientes (trava de 1x por rodada) e Apurar Vendas via IA.' }
         ]
       },
       {
@@ -574,26 +810,10 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Capítulos 5 e 6 (Diretoria Industrial e Financeiro).',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's5_t1',
-            responsavel: 'Davi',
-            texto: 'Cargo 1 — Diretor Industrial (executivo.php): KPIs executivos e CAPEX (máquinas proporcionais a t/h e até 730,001h, frota própria e ampliação de armazéns).'
-          },
-          {
-            id: 's5_t2',
-            responsavel: 'Davi',
-            texto: 'Documentar Fila de Aprovações (aprovacoes.php: RNCs, Compras, Manutenções), Espionagem (espionagem.php: Níveis 1 a 4) e Gazeta do Triângulo.'
-          },
-          {
-            id: 's5_t3',
-            responsavel: 'Sofia',
-            texto: 'Cargo 8 — Controladoria & Finanças (financeiro.php): DRE Industrial (Sintética, Comparativo, Entradas/Saídas) e Folha CLT com 68% de encargos.'
-          },
-          {
-            id: 's5_t4',
-            responsavel: 'Sofia',
-            texto: 'Documentar Contas a Pagar (desconto por antecipação), Contas a Receber (bloqueio até entrega física pela Logística), Empréstimos & Rating (AAA a D), Penalidades e Veto Financeiro.'
-          }
+          { id: 's5_t1', responsavel: 'Davi', texto: 'Cargo 1 — Diretor Industrial (executivo.php): KPIs executivos e CAPEX (máquinas proporcionais a t/h e até 730,001h, frota própria e ampliação de armazéns).' },
+          { id: 's5_t2', responsavel: 'Davi', texto: 'Documentar Fila de Aprovações (aprovacoes.php: RNCs, Compras, Manutenções), Espionagem (espionagem.php: Níveis 1 a 4) e Gazeta do Triângulo.' },
+          { id: 's5_t3', responsavel: 'Sofia', texto: 'Cargo 8 — Controladoria & Finanças (financeiro.php): DRE Industrial (Sintética, Comparativo, Entradas/Saídas) e Folha CLT com 68% de encargos.' },
+          { id: 's5_t4', responsavel: 'Sofia', texto: 'Documentar Contas a Pagar (desconto por antecipação), Contas a Receber (bloqueio até entrega física pela Logística), Empréstimos & Rating (AAA a D), Penalidades e Veto Financeiro.' }
         ]
       },
       {
@@ -603,26 +823,10 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Capítulo 7 (Manual do Gerente de PCP).',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's6_t1',
-            responsavel: 'Davi',
-            texto: 'Cargo 2 — PCP (previsao.php e mps.php): 1. Previsão de Demanda e 2. MPS (equação e geração automática das Ordens de Produção em 4 etapas).'
-          },
-          {
-            id: 's6_t2',
-            responsavel: 'Davi',
-            texto: 'Cargo 2 — PCP (mrp.php e capacidade.php): 3. MRP (explosão BOM + 10% margem) e 4. Capacidade CRP (730,001h/mês e alertas de gargalo).'
-          },
-          {
-            id: 's6_t3',
-            responsavel: 'Sofia',
-            texto: 'Programação da Produção (programacao.php): criação manual de OP, compatibilidade etapa × máquina, campo de horas travado pelo sistema e efeito do Turno Extra (-50% tempo).'
-          },
-          {
-            id: 's6_t4',
-            responsavel: 'Sofia',
-            texto: 'Reordenação de fila, trava de exclusão após início e uso do botão Liberar Etapa no Painel MES do PCP (pcp.php) para o chão de fábrica.'
-          }
+          { id: 's6_t1', responsavel: 'Davi', texto: 'Cargo 2 — PCP (previsao.php e mps.php): 1. Previsão de Demanda e 2. MPS (equação e geração automática das Ordens de Produção em 4 etapas).' },
+          { id: 's6_t2', responsavel: 'Davi', texto: 'Cargo 2 — PCP (mrp.php e capacidade.php): 3. MRP (explosão BOM + 10% margem) e 4. Capacidade CRP (730,001h/mês e alertas de gargalo).' },
+          { id: 's6_t3', responsavel: 'Sofia', texto: 'Programação da Produção (programacao.php): criação manual de OP, compatibilidade etapa × máquina, campo de horas travado pelo sistema e efeito do Turno Extra (-50% tempo).' },
+          { id: 's6_t4', responsavel: 'Sofia', texto: 'Reordenação de fila, trava de exclusão após início e uso do botão Liberar Etapa no Painel MES do PCP (pcp.php) para o chão de fábrica.' }
         ]
       },
       {
@@ -632,26 +836,10 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Capítulos 8 e 9 (Produção e Qualidade).',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's7_t1',
-            responsavel: 'Davi',
-            texto: 'Cargo 5 — Produção Fabril (producao.php): execução das 4 etapas MES (1. Mistura → 2. Granulação → 3. Secagem → 4. Ensacamento), baixa FEFO de MP na Etapa 1 e entrada em PA na Etapa 4 (com trava do galpão).'
-          },
-          {
-            id: 's7_t2',
-            responsavel: 'Davi',
-            texto: 'Documentar impacto do Turno Extra na produção (desgaste 3x) e gestão de Manutenção (preditiva, preventiva, corretiva e corretiva acelerada + risco de quebra >= 75%).'
-          },
-          {
-            id: 's7_t3',
-            responsavel: 'Sofia',
-            texto: 'Cargo 6 — Qualidade QA/QC (qualidade.php): indicadores (FPY, Retrabalho, Refugo, COPQ) e Quarentena MP (umidade ≤ 1,50%, pureza ≥ 98%, granulometria ≥ 90%).'
-          },
-          {
-            id: 's7_t4',
-            responsavel: 'Sofia',
-            texto: 'Documentar Liberação PA (umidade ≤ 1,00%, liberada apenas após conclusão da Etapa 4), fluxo de RNCs para decisão do Diretor e Pareto de Defeitos.'
-          }
+          { id: 's7_t1', responsavel: 'Davi', texto: 'Cargo 5 — Produção Fabril (producao.php): execução das 4 etapas MES (1. Mistura → 2. Granulação → 3. Secagem → 4. Ensacamento), baixa FEFO de MP na Etapa 1 e entrada em PA na Etapa 4 (com trava do galpão).' },
+          { id: 's7_t2', responsavel: 'Davi', texto: 'Documentar impacto do Turno Extra na produção (desgaste 3x) e gestão de Manutenção (preditiva, preventiva, corretiva e corretiva acelerada + risco de quebra >= 75%).' },
+          { id: 's7_t3', responsavel: 'Sofia', texto: 'Cargo 6 — Qualidade QA/QC (qualidade.php): indicadores (FPY, Retrabalho, Refugo, COPQ) e Quarentena MP (umidade ≤ 1,50%, pureza ≥ 98%, granulometria ≥ 90%).' },
+          { id: 's7_t4', responsavel: 'Sofia', texto: 'Documentar Liberação PA (umidade ≤ 1,00%, liberada apenas após conclusão da Etapa 4), fluxo de RNCs para decisão do Diretor e Pareto de Defeitos.' }
         ]
       },
       {
@@ -661,26 +849,10 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Capítulos 10, 11 e 12 (Compras/Vendas, Estoque e Logística).',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's8_t1',
-            responsavel: 'Davi',
-            texto: 'Cargo 3 — Compras & Mercado B2B (compras.php, historico.php): compra de MP via ROP/MRP/Catálogo com trava física dos silos (2.500t + 60% CAPEX), ofertas nos cards (preço, "usar no limite" e desconto) e bloqueio por atraso logístico.'
-          },
-          {
-            id: 's8_t2',
-            responsavel: 'Davi',
-            texto: 'Cargo 4 — Estoque & Almoxarifado (estoque.php): parâmetros ROP, Notificar Compras, Silos MP (2.500t base) e Galpão PA (1.800t base), FEFO/FIFO, desumidificação, Curva ABC, Calculadora LEC/EOQ, Baixa/Descarte e Kardex.'
-          },
-          {
-            id: 's8_t3',
-            responsavel: 'Sofia',
-            texto: 'Cargo 7 — Logística & Expedição (logistica.php): carteira de pedidos, prioridade de atrasados (multas de 10% e 18%), concorrência de viagens no polo entre equipes e fracionamento de cargas.'
-          },
-          {
-            id: 's8_t4',
-            responsavel: 'Sofia',
-            texto: 'Documentar simulação de frete/pedágio/desvios, data de saída travada no calendário do jogo, emissão de CT-e e liberação de recebimento no Financeiro.'
-          }
+          { id: 's8_t1', responsavel: 'Davi', texto: 'Cargo 3 — Compras & Mercado B2B (compras.php, historico.php): compra de MP via ROP/MRP/Catálogo com trava física dos silos (2.500t + 60% CAPEX), ofertas nos cards (preço, "usar no limite" e desconto) e bloqueio por atraso logístico.' },
+          { id: 's8_t2', responsavel: 'Davi', texto: 'Cargo 4 — Estoque & Almoxarifado (estoque.php): parâmetros ROP, Notificar Compras, Silos MP (2.500t base) e Galpão PA (1.800t base), FEFO/FIFO, desumidificação, Curva ABC, Calculadora LEC/EOQ, Baixa/Descarte e Kardex.' },
+          { id: 's8_t3', responsavel: 'Sofia', texto: 'Cargo 7 — Logística & Expedição (logistica.php): carteira de pedidos, prioridade de atrasados (multas de 10% e 18%), concorrência de viagens no polo entre equipes e fracionamento de cargas.' },
+          { id: 's8_t4', responsavel: 'Sofia', texto: 'Documentar simulação de frete/pedágio/desvios, data de saída travada no calendário do jogo, emissão de CT-e e liberação de recebimento no Financeiro.' }
         ]
       },
       {
@@ -690,26 +862,10 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Minuta completa do Manual do SimuFab revisada.',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's9_t1',
-            responsavel: 'Davi',
-            texto: 'Escrever a seção Como o Mercado Funciona (Visão do Usuário): flutuação de preços pelo MotorDemandaOferta / OraculoIA e funcionamento do leilão B2B com a concorrente Trading Brasil.'
-          },
-          {
-            id: 's9_t2',
-            responsavel: 'Davi',
-            texto: 'Fazer a revisão técnica de todos os capítulos escritos pela Sofia.'
-          },
-          {
-            id: 's9_t3',
-            responsavel: 'Sofia',
-            texto: 'Documentar Ranking Geral (ranking/index.php com sigilo industrial) e Dossiê Executivo Final / RH (relatorio_final.php).'
-          },
-          {
-            id: 's9_t4',
-            responsavel: 'Sofia',
-            texto: 'Montar o Glossário Rápido (OEE, OTIF, MRP, MPS, ROP, LEC/EOQ, FEFO/FIFO, COPQ, CAPEX/OPEX, DRE, EBITDA, CT-e, RNC) e revisar ortografia, sumário e prints dos capítulos do Davi.'
-          }
+          { id: 's9_t1', responsavel: 'Davi', texto: 'Escrever a seção Como o Mercado Funciona (Visão do Usuário): flutuação de preços pelo MotorDemandaOferta / OraculoIA e funcionamento do leilão B2B com a concorrente Trading Brasil.' },
+          { id: 's9_t2', responsavel: 'Davi', texto: 'Fazer a revisão técnica de todos os capítulos escritos pela Sofia.' },
+          { id: 's9_t3', responsavel: 'Sofia', texto: 'Documentar Ranking Geral (ranking/index.php com sigilo industrial) e Dossiê Executivo Final / RH (relatorio_final.php).' },
+          { id: 's9_t4', responsavel: 'Sofia', texto: 'Montar o Glossário Rápido (OEE, OTIF, MRP, MPS, ROP, LEC/EOQ, FEFO/FIFO, COPQ, CAPEX/OPEX, DRE, EBITDA, CT-e, RNC) e revisar ortografia, sumário e prints dos capítulos do Davi.' }
         ]
       },
       {
@@ -719,31 +875,17 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         entregavel: 'Manual de Uso do SimuFab (PDF Final) + Confirmação do andamento do protocolo no NIT/UNIUBE.',
         abertaPorPadrao: false,
         tarefas: [
-          {
-            id: 's10_t1',
-            responsavel: 'Conjunto',
-            texto: 'Teste guiado: executar uma rodada completa seguindo exclusivamente o manual para confirmar que não falta nenhum botão, regra ou aviso.'
-          },
-          {
-            id: 's10_t2',
-            responsavel: 'Conjunto',
-            texto: 'Finalização: gerar o PDF final do Manual de Uso do SimuFab (com capa, versão Motor v3.0, sumário clicável e prints padronizados).'
-          },
-          {
-            id: 's10_t3',
-            responsavel: 'Conjunto',
-            isNit: true,
-            texto: 'Check final do NIT: confirmar com o orientador o andamento do protocolo enviado ao NIT/UNIUBE na Semana 1 (assinaturas ou termos complementares, se houver).'
-          }
+          { id: 's10_t1', responsavel: 'Conjunto', texto: 'Teste guiado: executar uma rodada completa seguindo exclusivamente o manual para confirmar que não falta nenhum botão, regra ou aviso.' },
+          { id: 's10_t2', responsavel: 'Conjunto', texto: 'Finalização: gerar o PDF final do Manual de Uso do SimuFab (com capa, versão Motor v3.0, sumário clicável e prints padronizados).' },
+          { id: 's10_t3', responsavel: 'Conjunto', isNit: true, texto: 'Check final do NIT: confirmar com o orientador o andamento do protocolo enviado ao NIT/UNIUBE na Semana 1 (assinaturas ou termos complementares, se houver).' }
         ]
       }
     ];
 
-    // Estado persistido
-    let estado = {
-      checks: {},
-      notas: {}
-    };
+    /* ============================================================
+       ESTADO PERSISTIDO
+       ============================================================ */
+    let estado = { checks: {}, notas: {} };
 
     function carregarEstado() {
       try {
@@ -753,17 +895,12 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
           estado.checks = parsed.checks || {};
           estado.notas = parsed.notas || {};
         }
-      } catch (e) {
-        console.warn('Falha ao ler localStorage:', e);
-      }
+      } catch (e) { console.warn('Falha ao ler localStorage:', e); }
     }
 
     function salvarEstado() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
-      } catch (e) {
-        console.warn('Falha ao salvar localStorage:', e);
-      }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+      catch (e) { console.warn('Falha ao salvar localStorage:', e); }
     }
 
     function escapeHtml(str) {
@@ -778,12 +915,75 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
       const cls = resp === 'Davi' ? 'badge-davi' : (resp === 'Sofia' ? 'badge-sofia' : 'badge-conjunto');
       const icon = resp === 'Conjunto' ? 'bi-people-fill' : 'bi-person-fill';
       let html = `<span class="badge ${cls} rounded-pill px-2.5 py-1 fw-semibold"><i class="bi ${icon} me-1"></i>${escapeHtml(resp)}</span>`;
-      if (isNit) {
-        html += ` <span class="badge badge-nit rounded-pill px-2.5 py-1 fw-bold"><i class="bi bi-bank2 me-1"></i>NIT / UNIUBE</span>`;
-      }
+      if (isNit) html += ` <span class="badge badge-nit rounded-pill px-2.5 py-1 fw-bold"><i class="bi bi-bank2 me-1"></i>NIT / UNIUBE</span>`;
       return html;
     }
 
+    /* ============================================================
+       RENDERIZAÇÃO DA GALERIA DE IMAGENS POR SEMANA
+       ============================================================ */
+    function renderizarGrupoImagens(nome, badgeClass, imgs) {
+      if (!imgs || imgs.length === 0) return '';
+      let html = `<div class="person-group">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="badge ${badgeClass} rounded-pill px-2.5 py-1 fw-semibold"><i class="bi bi-person-fill me-1"></i>${escapeHtml(nome)}</span>
+          <small class="text-muted">${imgs.length} figura${imgs.length !== 1 ? 's' : ''}</small>
+        </div>
+        <div class="image-grid">`;
+      imgs.forEach(img => {
+        html += `<div class="image-card">
+          <div class="image-thumb" data-path="${escapeHtml(img.path)}" title="Abrir: ${escapeHtml(img.path)}">
+            <img src="${escapeHtml(img.path)}" loading="lazy" alt="${escapeHtml(img.titulo)}">
+          </div>
+          <div class="image-info">
+            <div class="fig-ref">${escapeHtml(img.fig)}</div>
+            <div class="fig-title">${escapeHtml(img.titulo)}</div>
+            <button class="btn-copy-path" data-path="${escapeHtml(img.path)}" onclick="copiarCaminho(this)">
+              <i class="bi bi-clipboard"></i> Copiar caminho
+            </button>
+          </div>
+        </div>`;
+      });
+      html += `</div></div>`;
+      return html;
+    }
+
+    function renderizarImagensSemana(semId) {
+      const dados = IMAGENS_POR_SEMANA[semId];
+      if (!dados) return '';
+      const davi = dados.davi || [];
+      const sofia = dados.sofia || [];
+      const faltando = dados.faltando || [];
+      const total = davi.length + sofia.length;
+
+      if (total === 0 && faltando.length === 0) return '';
+
+      let html = '<div class="week-images-section">';
+      html += `<div class="images-header">
+        <h6 class="fw-bold mb-0"><i class="bi bi-camera-fill text-primary me-1"></i>Prints catalogados da semana (${total} figura${total !== 1 ? 's' : ''})</h6>
+        <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Clique na miniatura p/ abrir; use o botão para copiar o caminho</small>
+      </div>`;
+
+      html += renderizarGrupoImagens('Davi', 'badge-davi', davi);
+      html += renderizarGrupoImagens('Sofia', 'badge-sofia', sofia);
+
+      if (faltando.length > 0) {
+        html += `<div class="missing-warning">
+          <strong><i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>Prints pendentes de captura (${faltando.length}):</strong>
+          <ul>`;
+        faltando.forEach(f => {
+          html += `<li><strong>${escapeHtml(f.responsavel)}</strong>: ${f.fig ? escapeHtml(f.fig) + ' — ' : ''}<code>${escapeHtml(f.arquivo)}</code><br><span class="text-muted">${escapeHtml(f.motivo)}</span></li>`;
+        });
+        html += `</ul></div>`;
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    /* ============================================================
+       RENDERIZAÇÃO DAS SEMANAS
+       ============================================================ */
     function renderizarSemanas() {
       const container = document.getElementById('listaSemanas');
       const filtroPessoa = document.querySelector('#filtroPessoaGroup .filter-btn.active')?.dataset.person || 'todos';
@@ -805,16 +1005,17 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
           return true;
         });
 
-        // Se houver filtro ativo e nenhuma tarefa daquela semana bater, oculta a semana
-        if (tarefasFiltradas.length === 0 && (filtroPessoa !== 'todos' || filtroStatus !== 'todos' || termoBusca !== '')) {
-          return;
-        }
+        if (tarefasFiltradas.length === 0 && (filtroPessoa !== 'todos' || filtroStatus !== 'todos' || termoBusca !== '')) return;
 
         const totalSem = sem.tarefas.length;
         const feitasSem = sem.tarefas.filter(t => !!estado.checks[t.id]).length;
         const pctSem = totalSem > 0 ? Math.round((feitasSem / totalSem) * 100) : 0;
         const semCompleta = feitasSem === totalSem;
         const deveAbrir = sem.abertaPorPadrao || filtroPessoa !== 'todos' || filtroStatus !== 'todos' || termoBusca !== '';
+
+        const imgData = IMAGENS_POR_SEMANA[sem.id] || {};
+        const totalImgs = (imgData.davi?.length || 0) + (imgData.sofia?.length || 0);
+        const temFaltando = (imgData.faltando?.length || 0) > 0;
 
         const card = document.createElement('div');
         card.className = `week-card ${semCompleta ? 'week-completed' : ''}`;
@@ -839,6 +1040,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         });
 
         const notaAtual = estado.notas['sem_' + sem.id] || '';
+        const imagensHtml = renderizarImagensSemana(sem.id);
 
         card.innerHTML = `
           <div class="week-header p-3 p-md-4 d-flex flex-wrap justify-content-between align-items-center gap-3"
@@ -852,7 +1054,9 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
               </div>
             </div>
 
-            <div class="d-flex align-items-center gap-3 ms-auto">
+            <div class="d-flex align-items-center gap-3 ms-auto flex-wrap">
+              ${totalImgs > 0 ? `<span class="week-img-count"><i class="bi bi-camera me-1"></i>${totalImgs}</span>` : ''}
+              ${temFaltando ? `<span class="week-img-count text-warning border-warning"><i class="bi bi-exclamation-triangle-fill me-1"></i>${(imgData.faltando||[]).length}</span>` : ''}
               <div class="text-end" style="min-width: 110px;">
                 <div class="small fw-bold mono ${semCompleta ? 'text-success' : 'text-dark'}">${feitasSem} / ${totalSem} (${pctSem}%)</div>
                 <div class="progress mt-1" style="height: 6px;">
@@ -873,6 +1077,8 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
                 <strong class="text-dark"><i class="bi bi-flag-fill text-danger me-1"></i> Entregável da semana:</strong>
                 <span class="text-secondary">${escapeHtml(sem.entregavel)}</span>
               </div>
+
+              ${imagensHtml}
 
               <div class="no-print">
                 <label class="form-label small fw-bold text-muted mb-1">
@@ -900,8 +1106,32 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
       }
 
       atualizarKpis();
+      lidarComErrosDeImagem();
     }
 
+    /* Fallback quando uma imagem não carrega (arquivo não encontrado no servidor) */
+    function lidarComErrosDeImagem() {
+      document.querySelectorAll('.image-thumb img').forEach(img => {
+        img.addEventListener('error', function() {
+          const wrap = this.closest('.image-thumb');
+          if (!wrap) return;
+          wrap.classList.add('img-error');
+          wrap.innerHTML = '<i class="bi bi-image" title="Print não encontrado no servidor"></i>';
+        });
+        // Se já falhou antes do listener:
+        if (img.complete && img.naturalWidth === 0) {
+          const wrap = img.closest('.image-thumb');
+          if (wrap) {
+            wrap.classList.add('img-error');
+            wrap.innerHTML = '<i class="bi bi-image" title="Print não encontrado no servidor"></i>';
+          }
+        }
+      });
+    }
+
+    /* ============================================================
+       AÇÕES
+       ============================================================ */
     function alternarTarefa(taskId, checked) {
       estado.checks[taskId] = checked;
       salvarEstado();
@@ -923,14 +1153,8 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
           const ok = !!estado.checks[t.id];
           totalGeral++;
           if (ok) feitasGeral++;
-
-          if (t.responsavel === 'Davi') {
-            totalDavi++;
-            if (ok) feitasDavi++;
-          } else if (t.responsavel === 'Sofia') {
-            totalSofia++;
-            if (ok) feitasSofia++;
-          }
+          if (t.responsavel === 'Davi') { totalDavi++; if (ok) feitasDavi++; }
+          else if (t.responsavel === 'Sofia') { totalSofia++; if (ok) feitasSofia++; }
         });
       });
 
@@ -950,7 +1174,6 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
       document.getElementById('kpiSofiaContagem').innerText = `${feitasSofia} / ${totalSofia} tarefas`;
       document.getElementById('barSofia').style.width = pctSofia + '%';
 
-      // Atualiza status do banner do NIT com base na tarefa s1_t1
       const badgeNit = document.getElementById('badgeNitStatus');
       if (estado.checks['s1_t1']) {
         badgeNit.className = 'badge bg-success rounded-pill px-3 py-1.5';
@@ -964,8 +1187,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
     function expandirOuRecolherTodas(abrir) {
       document.querySelectorAll('#listaSemanas .collapse').forEach(el => {
         const inst = bootstrap.Collapse.getOrCreateInstance(el, { toggle: false });
-        if (abrir) inst.show();
-        else inst.hide();
+        if (abrir) inst.show(); else inst.hide();
       });
     }
 
@@ -991,6 +1213,26 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Modelo Copiado!';
         setTimeout(() => { btn.innerHTML = orig; }, 1800);
       });
+    }
+
+    function copiarCaminho(btn) {
+      const path = btn.dataset.path;
+      if (!path) return;
+      navigator.clipboard.writeText(path).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check2"></i> Copiado!';
+        btn.classList.add('copiado');
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.classList.remove('copiado');
+        }, 1600);
+      }).catch(() => {
+        alert('Não foi possível copiar o caminho: ' + path);
+      });
+    }
+
+    function abrirImagem(path) {
+      if (path) window.open(path, '_blank');
     }
 
     function exportarProgresso() {
@@ -1024,7 +1266,9 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
       reader.readAsText(file);
     }
 
-    // Eventos dos filtros
+    /* ============================================================
+       EVENTOS / INICIALIZAÇÃO
+       ============================================================ */
     document.addEventListener('DOMContentLoaded', () => {
       carregarEstado();
       renderizarSemanas();
@@ -1039,6 +1283,14 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
 
       document.getElementById('filtroStatus').addEventListener('change', renderizarSemanas);
       document.getElementById('campoBusca').addEventListener('input', renderizarSemanas);
+
+      // Delegação de clique nas miniaturas das imagens
+      document.getElementById('listaSemanas').addEventListener('click', function(e) {
+        const thumb = e.target.closest('.image-thumb');
+        if (thumb && thumb.dataset.path && !thumb.classList.contains('img-error')) {
+          abrirImagem(thumb.dataset.path);
+        }
+      });
     });
   </script>
 </body>
