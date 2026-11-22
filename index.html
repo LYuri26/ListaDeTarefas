@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checklist Semanal — Manual SimuFab & NIT UNIUBE</title>
-
-  <!-- Bootstrap 5.3 + Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
-  <!-- Tipografia -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --simu-primary: #b91c1c;
@@ -30,14 +28,16 @@
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: var(--simu-bg);
+      background: var(--simu-bg);
       color: #0f172a;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    .mono { font-family: 'JetBrains Mono', monospace; }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
 
     .topbar {
       background: linear-gradient(135deg, var(--simu-dark) 0%, #111827 100%);
@@ -55,39 +55,71 @@
     }
 
     .kpi-box {
-      background: #ffffff;
+      background: #fff;
       border: 1px solid var(--simu-border);
       border-radius: 1rem;
       padding: 1rem 1.15rem;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 2px 6px rgba(15, 23, 42, .04);
       height: 100%;
     }
 
-    .badge-davi   { background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-    .badge-sofia  { background-color: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe; }
-    .badge-conjunto { background-color: #d1fae5; color: #047857; border: 1px solid #a7f3d0; }
-    .badge-nit    { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .badge-davi {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge-sofia {
+      background-color: #ede9fe;
+      color: #6d28d9;
+      border: 1px solid #ddd6fe;
+    }
+
+    .badge-conjunto {
+      background-color: #d1fae5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .badge-nit {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
 
     .week-card {
       border: 1px solid var(--simu-border);
       border-radius: 1rem;
       overflow: hidden;
-      background: #ffffff;
-      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, .04);
+      transition: border-color .2s ease, box-shadow .2s ease;
     }
 
-    .week-card.week-completed { border-color: #86efac; }
+    .week-card.week-completed {
+      border-color: #86efac;
+    }
+
+    .week-card.week-highlight {
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, .25);
+    }
 
     .week-header {
-      background: #ffffff;
+      background: #fff;
       border-bottom: 1px solid var(--simu-border);
       cursor: pointer;
       user-select: none;
-      transition: background-color 0.15s ease;
+      transition: background-color .15s ease;
     }
 
-    .week-header:hover { background-color: #f8fafc; }
+    .week-header:hover {
+      background-color: #f8fafc;
+    }
+
+    .week-header:focus {
+      outline: 2px solid var(--simu-primary);
+      outline-offset: -2px;
+    }
 
     .week-number-pill {
       width: 42px;
@@ -97,59 +129,113 @@
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: .95rem;
       background: var(--simu-dark);
-      color: #ffffff;
+      color: #fff;
       flex-shrink: 0;
     }
 
-    .week-completed .week-number-pill { background: #16a34a; }
+    .week-completed .week-number-pill {
+      background: #16a34a;
+    }
+
+    .week-progress-mini {
+      width: 80px;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .week-progress-mini>div {
+      height: 100%;
+      background: var(--simu-primary);
+      transition: width .25s ease;
+    }
+
+    .week-completed .week-progress-mini>div {
+      background: #16a34a;
+    }
 
     .task-item {
       display: flex;
       align-items: flex-start;
-      gap: 0.75rem;
-      padding: 0.75rem 0.9rem;
+      gap: .75rem;
+      padding: .75rem .9rem;
       border: 1px solid #e2e8f0;
-      border-radius: 0.75rem;
-      background: #ffffff;
-      transition: all 0.15s ease;
+      border-radius: .75rem;
+      background: #fff;
+      transition: all .15s ease;
       cursor: pointer;
     }
 
-    .task-item:hover { border-color: #cbd5e1; background: #f8fafc; }
-    .task-item.done { background: #f0fdf4; border-color: #bbf7d0; }
-    .task-item.done .task-text { text-decoration: line-through; color: #64748b; }
+    .task-item:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .task-item.done {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .task-item.done .task-text {
+      text-decoration: line-through;
+      color: #64748b;
+    }
+
+    .task-item.task-nit {
+      border-left: 4px solid #d97706;
+    }
 
     .task-checkbox {
       width: 1.25rem;
       height: 1.25rem;
-      margin-top: 0.12rem;
+      margin-top: .12rem;
       cursor: pointer;
       flex-shrink: 0;
     }
 
-    .task-checkbox:checked { background-color: #16a34a; border-color: #16a34a; }
+    .task-checkbox:checked {
+      background-color: #16a34a;
+      border-color: #16a34a;
+    }
+
+    mark {
+      background: #fde68a;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
 
     .deliverable-box {
       background: #f1f5f9;
       border-left: 4px solid var(--simu-primary);
-      border-radius: 0.5rem;
-      padding: 0.65rem 0.9rem;
-      font-size: 0.85rem;
+      border-radius: .5rem;
+      padding: .65rem .9rem;
+      font-size: .85rem;
     }
 
-    .notes-area { font-size: 0.84rem; resize: vertical; }
-    .filter-btn.active { font-weight: 700; }
+    .notes-area {
+      font-size: .84rem;
+      resize: vertical;
+    }
 
-    .chevron-icon { transition: transform 0.2s ease; }
-    .week-header[aria-expanded="true"] .chevron-icon { transform: rotate(180deg); }
+    .filter-btn.active {
+      font-weight: 700;
+    }
 
-    /* ============ NOVO: Galeria de imagens dentro de cada semana ============ */
+    .chevron-icon {
+      transition: transform .2s ease;
+    }
+
+    .week-header[aria-expanded="true"] .chevron-icon {
+      transform: rotate(180deg);
+    }
+
     .week-images-section {
-      background: #ffffff;
+      background: #fff;
       border: 1px solid var(--simu-border);
-      border-radius: 0.75rem;
+      border-radius: .75rem;
       padding: 1rem;
       margin-bottom: 1rem;
     }
@@ -159,40 +245,45 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
-      gap: 0.5rem;
+      gap: .5rem;
       border-bottom: 1px dashed var(--simu-border);
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.75rem;
+      padding-bottom: .5rem;
+      margin-bottom: .75rem;
     }
 
-    .person-group { margin-bottom: 1rem; }
-    .person-group:last-child { margin-bottom: 0; }
+    .person-group {
+      margin-bottom: 1rem;
+    }
+
+    .person-group:last-child {
+      margin-bottom: 0;
+    }
 
     .image-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
-      gap: 0.65rem;
-      margin-top: 0.4rem;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: .7rem;
+      margin-top: .4rem;
     }
 
     .image-card {
       border: 1px solid #e2e8f0;
-      border-radius: 0.5rem;
+      border-radius: .55rem;
       overflow: hidden;
-      background: #f8fafc;
-      transition: all 0.15s ease;
+      background: #fff;
+      transition: all .15s ease;
       display: flex;
       flex-direction: column;
     }
 
     .image-card:hover {
       border-color: var(--simu-primary);
-      box-shadow: 0 3px 10px rgba(185, 28, 28, 0.12);
-      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(185, 28, 28, .15);
+      transform: translateY(-2px);
     }
 
     .image-thumb {
-      height: 95px;
+      height: 110px;
       background: #0f172a;
       display: flex;
       align-items: center;
@@ -202,33 +293,39 @@
       overflow: hidden;
       cursor: zoom-in;
       position: relative;
+      flex-shrink: 0;
     }
 
     .image-thumb::after {
-      content: "\F52A"; /* bi-zoom-in */
+      content: "\F52A";
       font-family: "bootstrap-icons";
       position: absolute;
-      bottom: 4px; right: 4px;
-      font-size: 0.75rem;
+      bottom: 5px;
+      right: 5px;
+      font-size: .75rem;
       color: #fff;
-      background: rgba(0,0,0,0.6);
-      padding: 1px 5px;
+      background: rgba(0, 0, 0, .65);
+      padding: 2px 6px;
       border-radius: 4px;
       opacity: 0;
-      transition: opacity 0.15s;
+      transition: opacity .15s;
     }
 
-    .image-thumb:hover::after { opacity: 1; }
+    .image-thumb:hover::after {
+      opacity: 1;
+    }
 
     .image-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top;
-      transition: transform 0.2s;
+      transition: transform .2s;
     }
 
-    .image-thumb:hover img { transform: scale(1.04); }
+    .image-thumb:hover img {
+      transform: scale(1.04);
+    }
 
     .image-thumb.img-error {
       background: #1e293b;
@@ -236,60 +333,119 @@
       cursor: not-allowed;
     }
 
-    .image-info { padding: 0.5rem; display: flex; flex-direction: column; flex: 1; }
+    .image-thumb.img-error:hover::after {
+      display: none;
+    }
+
+    .img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .3rem;
+      width: 100%;
+      height: 100%;
+      padding: .5rem;
+      text-align: center;
+      font-size: .65rem;
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.2;
+      word-break: break-all;
+    }
+
+    .img-placeholder i {
+      font-size: 1.4rem;
+      opacity: .5;
+    }
+
+    .image-info {
+      padding: .6rem .65rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: .2rem;
+    }
 
     .fig-ref {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
+      font-size: .66rem;
       font-weight: 700;
       color: var(--simu-primary);
-      margin-bottom: 0.15rem;
+      letter-spacing: .02em;
     }
 
     .fig-title {
-      font-size: 0.74rem;
-      color: #334155;
-      line-height: 1.3;
-      margin-bottom: 0.45rem;
-      min-height: 2.5em;
-      flex: 1;
+      font-size: .8rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.25;
     }
 
-    .btn-copy-path {
-      font-size: 0.66rem;
-      padding: 0.25rem 0.5rem;
-      background: #e2e8f0;
+    .fig-desc {
+      font-size: .72rem;
+      color: #475569;
+      line-height: 1.35;
+      margin-top: .15rem;
+    }
+
+    .fig-fonte {
+      font-size: .66rem;
+      color: #64748b;
+      font-style: italic;
+      margin-top: .2rem;
+      padding-top: .2rem;
+      border-top: 1px dotted #e2e8f0;
+    }
+
+    .btn-copy-legenda {
+      margin-top: .5rem;
+      font-size: .7rem;
+      padding: .35rem .5rem;
+      background: #1e293b;
       border: none;
       border-radius: 999px;
-      color: #475569;
+      color: #fff;
       cursor: pointer;
       width: 100%;
-      font-weight: 600;
-      transition: all 0.15s ease;
+      font-weight: 700;
+      transition: all .15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .3rem;
     }
 
-    .btn-copy-path:hover {
+    .btn-copy-legenda:hover {
       background: var(--simu-primary);
-      color: #ffffff;
     }
 
-    .btn-copy-path.copiado {
+    .btn-copy-legenda.copiado {
       background: #16a34a;
-      color: #ffffff;
     }
 
     .missing-warning {
       background: #fffbeb;
       border: 1px solid #fcd34d;
       border-left: 4px solid #d97706;
-      border-radius: 0.5rem;
-      padding: 0.65rem 0.9rem;
-      font-size: 0.8rem;
-      margin-top: 0.75rem;
+      border-radius: .5rem;
+      padding: .65rem .9rem;
+      font-size: .8rem;
+      margin-top: .75rem;
     }
 
-    .missing-warning ul { margin: 0.35rem 0 0 0; padding-left: 1.1rem; }
-    .missing-warning code { background: #fef3c7; padding: 1px 5px; border-radius: 4px; color: #92400e; }
+    .missing-warning ul {
+      margin: .35rem 0 0 0;
+      padding-left: 1.1rem;
+    }
+
+    .missing-warning code {
+      background: #fef3c7;
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: #92400e;
+      font-size: .75rem;
+    }
 
     .alert-info-images {
       background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
@@ -299,27 +455,117 @@
     }
 
     .week-img-count {
-      background: #ffffff;
+      background: #fff;
       border: 1px solid var(--simu-border);
       color: #475569;
-      font-size: 0.72rem;
+      font-size: .72rem;
       font-weight: 700;
-      padding: 0.25rem 0.6rem;
+      padding: .25rem .6rem;
       border-radius: 999px;
     }
 
+    .empty-state {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      opacity: .5;
+    }
+
+    /* Preview do Exemplo Visual no Modal */
+    .exemplo-preview-box {
+      border: 1px solid #cbd5e1;
+      border-radius: .75rem;
+      background: #f8fafc;
+      padding: .75rem;
+      text-align: center;
+    }
+
+    .exemplo-preview-box img {
+      max-height: 520px;
+      width: auto;
+      max-width: 100%;
+      border-radius: .5rem;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, .12);
+      cursor: zoom-in;
+      transition: transform .2s ease;
+      background: #fff;
+    }
+
+    .exemplo-preview-box img:hover {
+      transform: scale(1.015);
+    }
+
+    .exemplo-preview-box .badge-mock {
+      position: relative;
+      display: inline-block;
+      margin-bottom: .4rem;
+    }
+
+    .toast-container {
+      z-index: 9999;
+    }
+
+    .img-mode-toggle .btn {
+      font-size: .7rem;
+      padding: .2rem .55rem;
+    }
+
+    @media (max-width:576px) {
+      .image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+
+      .image-thumb {
+        height: 90px;
+      }
+    }
+
     @media print {
-      .no-print { display: none !important; }
-      .collapse { display: block !important; height: auto !important; }
-      .week-card { break-inside: avoid; box-shadow: none !important; margin-bottom: 1rem !important; }
-      body { background: #ffffff !important; }
-      .image-thumb { height: 70px; }
+      .no-print {
+        display: none !important;
+      }
+
+      .collapse {
+        display: block !important;
+        height: auto !important;
+      }
+
+      .week-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        margin-bottom: 1rem !important;
+        border: 1px solid #ccc !important;
+      }
+
+      body {
+        background: #fff !important;
+      }
+
+      .image-thumb {
+        height: 70px;
+      }
+
+      .btn-copy-legenda {
+        display: none;
+      }
+
+      .week-progress-mini {
+        display: none;
+      }
+
+      .toast-container {
+        display: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- BARRA SUPERIOR -->
   <header class="topbar text-white py-3 shadow-sm no-print">
     <div class="container-fluid px-3 px-lg-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
       <div class="d-flex align-items-center gap-2">
@@ -329,427 +575,594 @@
           <small class="text-white-50">Cronograma de 10 Semanas &bull; Equipe: Davi &amp; Sofia</small>
         </div>
       </div>
-
-      <div class="d-flex flex-wrap gap-2">
-        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#modalTemplate">
-          <i class="bi bi-file-earmark-text me-1"></i> Modelo de Página
+      <div class="d-flex flex-wrap gap-2 align-items-center">
+        <div class="input-group input-group-sm" style="max-width:260px;">
+          <span class="input-group-text bg-white border-0"><i class="bi bi-folder2-open text-muted"></i></span>
+          <input type="text" id="basePathInput" class="form-control border-0"
+            placeholder="Pasta-base (ex: ../capturas/)" title="Caminho onde estão as pastas Desktop/ e Mobile/">
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal"
+          data-bs-target="#modalTemplate" title="Modelo e exemplo visual de página para cada módulo">
+          <i class="bi bi-file-earmark-text me-1"></i> Modelo &amp; Exemplo
         </button>
-        <button type="button" class="btn btn-sm btn-outline-warning rounded-pill px-3" onclick="exportarProgresso()">
-          <i class="bi bi-download me-1"></i> Exportar JSON
-        </button>
-        <label class="btn btn-sm btn-outline-info rounded-pill px-3 mb-0" style="cursor:pointer;">
-          <i class="bi bi-upload me-1"></i> Importar JSON
-          <input type="file" id="inputImportJson" accept=".json" class="d-none" onchange="importarProgresso(event)">
-        </label>
-        <button type="button" class="btn btn-sm btn-light rounded-pill px-3 fw-semibold" onclick="window.print()">
-          <i class="bi bi-printer me-1"></i> Imprimir / PDF
-        </button>
+        <button type="button" class="btn btn-sm btn-outline-warning rounded-pill px-3" onclick="exportarProgresso()"><i
+            class="bi bi-download me-1"></i> Exportar</button>
+        <label class="btn btn-sm btn-outline-info rounded-pill px-3 mb-0" style="cursor:pointer;"><i
+            class="bi bi-upload me-1"></i> Importar<input type="file" id="inputImportJson" accept=".json"
+            class="d-none"></label>
+        <button type="button" class="btn btn-sm btn-light rounded-pill px-3 fw-semibold" onclick="window.print()"><i
+            class="bi bi-printer me-1"></i> PDF</button>
       </div>
     </div>
   </header>
 
-  <main class="container-fluid px-3 px-lg-4 py-4 flex-grow-1" style="max-width: 1380px;">
+  <main class="container-fluid px-3 px-lg-4 py-4 flex-grow-1" style="max-width:1380px;">
 
-    <!-- BANNER PRIORITÁRIO: ENVIO AO NIT UNIUBE -->
+    <!-- BANNER NIT -->
     <div class="nit-banner p-3 p-md-4 mb-4 shadow-sm">
       <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
         <div class="d-flex align-items-start gap-3">
-          <div class="bg-warning text-dark rounded-circle p-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style="width:46px;height:46px;">
-            <i class="bi bi-bank2 fs-4"></i>
-          </div>
+          <div
+            class="bg-warning text-dark rounded-circle p-2 d-flex align-items-center justify-content-center flex-shrink-0"
+            style="width:46px;height:46px;"><i class="bi bi-bank2 fs-4"></i></div>
           <div>
             <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-              <span class="badge bg-dark text-warning rounded-pill px-2.5 py-1">PRIORIDADE SEMANA 1</span>
+              <span class="badge bg-dark text-warning rounded-pill px-3 py-1">PRIORIDADE SEMANA 1</span>
               <h6 class="fw-bold text-dark mb-0">Lembrete Oficial: Envio do Projeto para a UNIUBE pelo NIT</h6>
             </div>
-            <p class="small text-dark mb-1">
-              O envio para o <strong>NIT (Núcleo de Inovação Tecnológica da UNIUBE)</strong> <u>não precisa do Manual pronto</u>.
-              Basta preencher o formulário de <strong>Comunicação de Software / Comunicação da Criação</strong> no portal do NIT/UNIUBE e enviar antes de divulgar qualquer material publicamente.
+            <p class="small text-dark mb-1">O envio para o <strong>NIT (Núcleo de Inovação Tecnológica da
+                UNIUBE)</strong> <u>não precisa do Manual pronto</u>. Basta preencher o formulário de
+              <strong>Comunicação de Software / Comunicação da Criação</strong> no portal do NIT/UNIUBE e enviar antes
+              de divulgar qualquer material publicamente.
             </p>
             <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
-              <span class="badge bg-white text-dark border mono px-2.5 py-1.5">
-                <i class="bi bi-envelope-fill text-danger me-1"></i> nituniube@uniube.br
-              </span>
-              <button type="button" class="btn btn-sm btn-dark rounded-pill px-3 no-print" onclick="copiarEmailNit(this)">
-                <i class="bi bi-clipboard me-1"></i> Copiar e-mail do NIT
-              </button>
-              <span id="badgeNitStatus" class="badge bg-danger rounded-pill px-3 py-1.5">Pendente de envio</span>
+              <span class="badge bg-white text-dark border mono px-3 py-2"><i
+                  class="bi bi-envelope-fill text-danger me-1"></i> nituniube@uniube.br</span>
+              <button type="button" class="btn btn-sm btn-dark rounded-pill px-3 no-print"
+                onclick="copiarEmailNit(this)"><i class="bi bi-clipboard me-1"></i> Copiar e-mail</button>
+              <button type="button" id="btnMarcarNit" class="btn btn-sm btn-success rounded-pill px-3 no-print"
+                onclick="marcarNitEnviado(this)"><i class="bi bi-check2-circle me-1"></i> Marcar como enviado</button>
+              <span id="badgeNitStatus" class="badge bg-danger rounded-pill px-3 py-2">Pendente de envio</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- BANNER INFORMATIVO: ACERVO DE IMAGENS -->
+    <!-- BANNER IMAGENS -->
     <div class="alert-info-images p-3 mb-4 shadow-sm">
       <div class="d-flex align-items-start gap-3">
-        <div class="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width:42px;height:42px;">
-          <i class="bi bi-images fs-5"></i>
-        </div>
+        <div
+          class="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center flex-shrink-0"
+          style="width:42px;height:42px;"><i class="bi bi-images fs-5"></i></div>
         <div class="flex-grow-1">
-          <h6 class="fw-bold text-dark mb-1">
-            <i class="bi bi-camera-fill text-primary me-1"></i>
-            Acervo Visual do Manual — 123 figuras catalogadas (246 arquivos: Desktop + Mobile)
-          </h6>
-          <p class="small text-dark mb-1">
-            Cada semana abaixo já exibe os <strong>prints correspondentes às suas tarefas</strong>, separados por responsável (Davi / Sofia) com referência de figura, título e caminho relativo (botão de copiar). Clique na miniatura para abrir o print em nova aba.
-          </p>
-          <div class="d-flex flex-wrap gap-2 small">
-            <span class="badge badge-davi rounded-pill px-2.5 py-1"><i class="bi bi-person-fill me-1"></i>Davi: 58 figuras</span>
-            <span class="badge badge-sofia rounded-pill px-2.5 py-1"><i class="bi bi-person-fill me-1"></i>Sofia: 65 figuras</span>
-            <span class="badge bg-warning text-dark rounded-pill px-2.5 py-1"><i class="bi bi-exclamation-triangle-fill me-1"></i>4 prints pendentes de captura</span>
+          <h6 class="fw-bold text-dark mb-1"><i class="bi bi-camera-fill text-primary me-1"></i>Acervo Visual do Manual
+            — 123 figuras catalogadas (246 arquivos: Desktop + Mobile)</h6>
+          <p class="small text-dark mb-1">Cada semana exibe os <strong>prints com legendas prontas em padrão
+              ABNT</strong>, separados por responsável (Davi / Sofia). Clique em <strong>“Copiar legenda ABNT”</strong>
+            e cole no manual (Word/Google Docs).</p>
+          <div class="d-flex flex-wrap gap-2 small align-items-center">
+            <span class="badge badge-davi rounded-pill px-3 py-1"><i class="bi bi-person-fill me-1"></i>Davi: 58
+              figuras</span>
+            <span class="badge badge-sofia rounded-pill px-3 py-1"><i class="bi bi-person-fill me-1"></i>Sofia: 65
+              figuras</span>
+            <span class="badge bg-warning text-dark rounded-pill px-3 py-1"><i
+                class="bi bi-exclamation-triangle-fill me-1"></i>4 prints pendentes</span>
+            <span class="badge bg-success rounded-pill px-3 py-1"><i class="bi bi-check2-circle me-1"></i>Fonte:
+              Elaborado pelos autores (2025)</span>
+            <div class="img-mode-toggle btn-group btn-group-sm ms-auto" role="group" aria-label="Modo de imagem">
+              <input type="radio" class="btn-check" name="imgMode" id="imgModeDesktop" value="desktop" checked>
+              <label class="btn btn-outline-primary" for="imgModeDesktop"><i
+                  class="bi bi-display me-1"></i>Desktop</label>
+              <input type="radio" class="btn-check" name="imgMode" id="imgModeMobile" value="mobile">
+              <label class="btn btn-outline-primary" for="imgModeMobile"><i class="bi bi-phone me-1"></i>Mobile</label>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- PAINEL DE PROGRESSO -->
+    <!-- KPIs -->
     <div class="row g-3 mb-4">
       <div class="col-12 col-md-4">
         <div class="kpi-box border-start border-4 border-danger">
-          <div class="d-flex justify-content-between align-items-center mb-1">
-            <span class="small fw-bold text-muted">PROGRESSO GERAL DO ROTEIRO</span>
-            <span class="badge bg-danger-subtle text-danger rounded-pill mono" id="kpiGeralPct">0%</span>
-          </div>
+          <div class="d-flex justify-content-between align-items-center mb-1"><span
+              class="small fw-bold text-muted">PROGRESSO GERAL</span><span
+              class="badge bg-danger-subtle text-danger rounded-pill mono" id="kpiGeralPct">0%</span></div>
           <h4 class="fw-bold mb-2 mono" id="kpiGeralContagem">0 / 0 tarefas</h4>
-          <div class="progress" style="height: 8px;">
-            <div class="progress-bar bg-danger" id="barGeral" style="width: 0%;"></div>
+          <div class="progress" style="height:8px;">
+            <div class="progress-bar bg-danger" id="barGeral" style="width:0%;"></div>
           </div>
         </div>
       </div>
-
       <div class="col-12 col-sm-6 col-md-4">
         <div class="kpi-box border-start border-4 border-info">
-          <div class="d-flex justify-content-between align-items-center mb-1">
-            <span class="small fw-bold text-muted">TAREFAS DO DAVI</span>
-            <span class="badge badge-davi rounded-pill mono" id="kpiDaviPct">0%</span>
-          </div>
+          <div class="d-flex justify-content-between align-items-center mb-1"><span
+              class="small fw-bold text-muted">TAREFAS DO DAVI</span><span class="badge badge-davi rounded-pill mono"
+              id="kpiDaviPct">0%</span></div>
           <h4 class="fw-bold text-info mb-2 mono" id="kpiDaviContagem">0 / 0 tarefas</h4>
-          <div class="progress" style="height: 8px;">
-            <div class="progress-bar bg-info" id="barDavi" style="width: 0%;"></div>
+          <div class="progress" style="height:8px;">
+            <div class="progress-bar bg-info" id="barDavi" style="width:0%;"></div>
           </div>
         </div>
       </div>
-
       <div class="col-12 col-sm-6 col-md-4">
-        <div class="kpi-box border-start border-4" style="border-left-color: var(--sofia-color) !important;">
-          <div class="d-flex justify-content-between align-items-center mb-1">
-            <span class="small fw-bold text-muted">TAREFAS DA SOFIA</span>
-            <span class="badge badge-sofia rounded-pill mono" id="kpiSofiaPct">0%</span>
-          </div>
-          <h4 class="fw-bold mb-2 mono" style="color: var(--sofia-color);" id="kpiSofiaContagem">0 / 0 tarefas</h4>
-          <div class="progress" style="height: 8px;">
-            <div class="progress-bar" id="barSofia" style="width: 0%; background-color: var(--sofia-color);"></div>
+        <div class="kpi-box border-start border-4" style="border-left-color:var(--sofia-color)!important;">
+          <div class="d-flex justify-content-between align-items-center mb-1"><span
+              class="small fw-bold text-muted">TAREFAS DA SOFIA</span><span class="badge badge-sofia rounded-pill mono"
+              id="kpiSofiaPct">0%</span></div>
+          <h4 class="fw-bold mb-2 mono" style="color:var(--sofia-color);" id="kpiSofiaContagem">0 / 0 tarefas</h4>
+          <div class="progress" style="height:8px;">
+            <div class="progress-bar" id="barSofia" style="width:0%;background-color:var(--sofia-color);"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- BARRA DE FILTROS -->
+    <!-- FILTROS -->
     <div class="card border-0 shadow-sm rounded-4 mb-4 no-print">
       <div class="card-body p-3">
         <div class="row g-2 align-items-center">
           <div class="col-12 col-lg-5">
             <div class="d-flex flex-wrap gap-1" id="filtroPessoaGroup">
-              <button type="button" class="btn btn-sm btn-dark rounded-pill filter-btn active" data-person="todos">Todos</button>
-              <button type="button" class="btn btn-sm btn-outline-info rounded-pill filter-btn" data-person="Davi">Davi</button>
-              <button type="button" class="btn btn-sm btn-outline-primary rounded-pill filter-btn" data-person="Sofia" style="border-color:#7c3aed;color:#7c3aed;">Sofia</button>
-              <button type="button" class="btn btn-sm btn-outline-success rounded-pill filter-btn" data-person="Conjunto">Em Conjunto</button>
+              <button type="button" class="btn btn-sm btn-dark rounded-pill filter-btn active"
+                data-person="todos">Todos</button>
+              <button type="button" class="btn btn-sm btn-outline-info rounded-pill filter-btn"
+                data-person="Davi">Davi</button>
+              <button type="button" class="btn btn-sm btn-outline-primary rounded-pill filter-btn" data-person="Sofia"
+                style="border-color:#7c3aed;color:#7c3aed;">Sofia</button>
+              <button type="button" class="btn btn-sm btn-outline-success rounded-pill filter-btn"
+                data-person="Conjunto">Em Conjunto</button>
             </div>
           </div>
-
           <div class="col-12 col-sm-6 col-lg-3">
             <select id="filtroStatus" class="form-select form-select-sm rounded-pill">
-              <option value="todos">Mostrar: Todas as tarefas</option>
-              <option value="pendentes">Mostrar: Somente pendentes</option>
-              <option value="concluidas">Mostrar: Somente concluídas</option>
+              <option value="todos">Mostrar: Todas</option>
+              <option value="pendentes">Mostrar: Pendentes</option>
+              <option value="concluidas">Mostrar: Concluídas</option>
             </select>
           </div>
-
           <div class="col-12 col-sm-6 col-lg-4">
             <div class="input-group input-group-sm">
-              <span class="input-group-text bg-light border-end-0 rounded-start-pill"><i class="bi bi-search"></i></span>
-              <input type="text" id="campoBusca" class="form-control border-start-0 rounded-end-pill" placeholder="Buscar módulo, tela ou regra (ex: NIT, MRP, DRE)...">
+              <span class="input-group-text bg-light border-end-0 rounded-start-pill"><i
+                  class="bi bi-search"></i></span>
+              <input type="text" id="campoBusca" class="form-control border-start-0 rounded-end-pill"
+                placeholder="Buscar (ex: NIT, MRP, DRE, CT-e)...">
             </div>
           </div>
         </div>
-
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-2 pt-2 border-top gap-2">
-          <div class="d-flex gap-2">
-            <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill px-3 py-1" onclick="expandirOuRecolherTodas(true)">
-              <i class="bi bi-arrows-expand me-1"></i> Expandir todas
-            </button>
-            <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill px-3 py-1" onclick="expandirOuRecolherTodas(false)">
-              <i class="bi bi-arrows-collapse me-1"></i> Recolher todas
-            </button>
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3"
+              onclick="expandirOuRecolherTodas(true)"><i class="bi bi-arrows-expand me-1"></i> Expandir</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3"
+              onclick="expandirOuRecolherTodas(false)"><i class="bi bi-arrows-collapse me-1"></i> Recolher</button>
+            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3"
+              onclick="irParaProximoPendente()"><i class="bi bi-arrow-right-circle me-1"></i> Próximo pendente</button>
           </div>
-          <button type="button" class="btn btn-xs btn-outline-danger rounded-pill px-3 py-1" onclick="resetarProgresso()">
-            <i class="bi bi-arrow-counterclockwise me-1"></i> Limpar marcações
-          </button>
+          <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="resetarProgresso()"><i
+              class="bi bi-arrow-counterclockwise me-1"></i> Limpar marcações</button>
         </div>
       </div>
     </div>
 
-    <!-- LISTA DAS 10 SEMANAS -->
     <div id="listaSemanas" class="d-flex flex-column gap-3"></div>
-
+    <noscript>
+      <div class="alert alert-warning mt-3">Ative o JavaScript para usar o checklist interativo.</div>
+    </noscript>
   </main>
 
   <footer class="bg-dark text-white-50 text-center py-3 mt-4 border-top border-danger border-3 no-print">
-    <small>SimuFab &bull; Polo Industrial de Fertilizantes (Uberaba/MG) &bull; Checklist salvo localmente no navegador</small>
+    <small>SimuFab &bull; Polo Industrial de Fertilizantes (Uberaba/MG) &bull; Progresso salvo localmente no
+      navegador</small>
   </footer>
 
-  <!-- MODAL: MODELO DE PÁGINA DO MANUAL -->
+  <!-- ============ MODAL TEMPLATE & EXEMPLO VISUAL ============ -->
   <div class="modal fade" id="modalTemplate" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
         <div class="modal-header bg-dark text-white border-0">
-          <h6 class="modal-title fw-bold"><i class="bi bi-file-earmark-text text-warning me-2"></i>Modelo Padrão de Capítulo para o Manual</h6>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <h6 class="modal-title fw-bold"><i class="bi bi-file-earmark-text text-warning me-2"></i>Modelo Padrão de
+            Capítulo &amp; Exemplo Preenchido</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
         <div class="modal-body p-4">
-          <p class="small text-muted mb-2">Davi e Sofia devem copiar esta estrutura para cada módulo documentado, garantindo padrão visual e clareza em todo o manual:</p>
-          <pre id="textoTemplate" class="p-3 bg-light border rounded-3 small mono mb-0" style="white-space: pre-wrap;">MÓDULO / SETOR: [Ex.: 7. Logística & Expedição]
+          <div class="row g-4 align-items-start">
+            <!-- Coluna 1: Texto copiável -->
+            <div class="col-12 col-lg-6">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small fw-bold text-uppercase text-muted"><i class="bi bi-code-square me-1"></i>Estrutura em
+                  Texto (Copiar)</span>
+                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 fw-bold"
+                  onclick="copiarTemplate(this)"><i class="bi bi-clipboard me-1"></i> Copiar Modelo</button>
+              </div>
+              <pre id="textoTemplate" class="p-3 bg-light border rounded-3 small mono mb-3"
+                style="white-space:pre-wrap;">MÓDULO / SETOR: [Ex.: 7. Logística &amp; Expedição]
 QUEM ACESSA: [Ex.: Gerente de Logística (Cargo 7)]
 OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
 
 1. O que você encontra nesta tela:
-   - [Lista dos cartões, abas ou indicadores principais]
+  - [Lista dos cartões, abas ou indicadores principais]
 
 2. Passo a passo para operar:
-   - Passo 1: ...
-   - Passo 2: ...
-   - Passo 3: ...
+  - Passo 1: ...
+  - Passo 2: ...
+  - Passo 3: ...
 
 3. Regras e travas importantes do sistema:
-   - [Ex.: A data de envio é calculada automaticamente e travada pelo sistema.]
-   - [Ex.: Se o modal atingir o limite de viagens do polo, o despacho é bloqueado.]
+  - [Ex.: A data de envio é calculada automaticamente e travada pelo sistema.]
+  - [Ex.: Se o modal atingir o limite de viagens do polo, o despacho é bloqueado.]
 
 4. Prints e Destaques:
-   - [Inserir print legível com setas numeradas apontando para os botões principais]</pre>
+  - [Inserir print legível com setas numeradas apontando para os botões principais]</pre>
+
+              <div class="alert alert-light border small mb-0">
+                <i class="bi bi-lightbulb-fill text-warning me-1"></i>
+                <strong>Dica de diagramação:</strong> Ao inserir o print no Word ou Google Docs, use <strong>círculos
+                  vermelhos numerados</strong> (1, 2, 3, 4) apontando para os botões principais e descreva cada número
+                logo abaixo da figura, como mostrado na imagem ao lado.
+              </div>
+            </div>
+
+            <!-- Coluna 2: Imagem exemplo (exemplo.png com fallback SVG automático) -->
+            <div class="col-12 col-lg-6">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small fw-bold text-uppercase text-muted"><i
+                    class="bi bi-eye-fill text-danger me-1"></i>Exemplo Visual Pronto (exemplo.png)</span>
+                <span class="badge bg-secondary-subtle text-dark border">Clique na imagem para ampliar</span>
+              </div>
+              <div class="exemplo-preview-box">
+                <span class="badge bg-warning text-dark badge-mock mb-2">
+                  <i class="bi bi-stars me-1"></i>Exemplo Ilustrativo — Módulo 7 (Logística &amp; Expedição)
+                </span>
+                <img id="imgExemploModal" src="exemplo.png"
+                  alt="Exemplo visual de página preenchida do manual (Módulo 7 - Logística & Expedição)"
+                  onclick="abrirZoomExemplo(this)" style="min-height:300px;">
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer bg-light border-0">
-          <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary rounded-pill px-4 fw-bold" onclick="copiarTemplate(this)">
-            <i class="bi bi-clipboard me-1"></i> Copiar Modelo
-          </button>
+          <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- ============ MODAL ZOOM IMAGEM ============ -->
+  <div class="modal fade" id="modalImageZoom" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header bg-dark text-white border-0">
+          <div>
+            <h6 class="modal-title fw-bold" id="zoomTitulo">Imagem</h6><small class="text-white-50 mono"
+              id="zoomPath"></small>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body p-0 bg-black text-center" style="min-height:300px;"><img id="zoomImg" src="" alt=""
+            class="img-fluid" style="max-height:80vh;"></div>
+        <div class="modal-footer bg-light border-0"><span class="small text-muted" id="zoomDesc"></span></div>
+      </div>
+    </div>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const STORAGE_KEY = 'simufab_checklist_manual_v1';
+    /* ============================================================
+       CONSTANTES E DADOS
+       ============================================================ */
+    const STORAGE_KEY = 'simufab_checklist_manual_v3';
+    const FONTE_ABNT = 'Elaborado pelos autores (2025).';
 
     /* ============================================================
-       CATÁLOGO DE IMAGENS POR SEMANA (Desktop)
-       Baseado no acervo de 123 figuras (58 Davi + 65 Sofia).
+       SVG FALLBACK DO EXEMPLO VISUAL (caso exemplo.png não exista)
+       ============================================================ */
+    function gerarSVGExemplo() {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1010" font-family="Inter,Arial,sans-serif">
+<rect width="800" height="1010" fill="#ffffff"/>
+<rect x="0" y="0" width="800" height="72" fill="#090e17"/>
+<text x="40" y="34" fill="#ffffff" font-size="20" font-weight="800">7. LOGÍSTICA &amp; EXPEDIÇÃO</text>
+<text x="40" y="56" fill="#94a3b8" font-size="11">Capítulo 7 · Manual SimuFab v3.0 · Página 42</text>
+
+<rect x="40" y="90" width="720" height="68" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+<text x="55" y="114" fill="#0f172a" font-size="12" font-weight="700">QUEM ACESSA: <tspan fill="#475569" font-weight="400">Gerente de Logística (Cargo 7)</tspan></text>
+<text x="55" y="138" fill="#0f172a" font-size="12" font-weight="700">OBJETIVO: <tspan fill="#475569" font-weight="400">Gerenciar despacho de pedidos, CT-e e cotação de frete.</tspan></text>
+
+<text x="40" y="195" fill="#b91c1c" font-size="13" font-weight="800">1. O QUE VOCÊ ENCONTRA NESTA TELA:</text>
+<text x="55" y="218" fill="#334155" font-size="12">• Carteira de pedidos com status em tempo real</text>
+<text x="55" y="237" fill="#334155" font-size="12">• Painel de disponibilidade de veículos e concorrência no polo</text>
+<text x="55" y="256" fill="#334155" font-size="12">• Botão de despacho CT-e e cotação de frete integrada</text>
+
+<text x="40" y="300" fill="#b91c1c" font-size="13" font-weight="800">2. PASSO A PASSO (PRINT ANOTADO):</text>
+
+<rect x="40" y="315" width="720" height="415" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<rect x="40" y="315" width="720" height="34" rx="8" fill="#090e17"/>
+<text x="60" y="336" fill="#ffffff" font-size="12" font-weight="700">SimuFab</text>
+<text x="130" y="336" fill="#94a3b8" font-size="11">Logística &amp; Expedição · Rodada R#3</text>
+
+<rect x="60" y="365" width="340" height="345" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="80" y="388" fill="#0f172a" font-size="13" font-weight="700">Carteira de Pedidos</text>
+
+<rect x="75" y="402" width="310" height="52" rx="4" fill="#fef3c7" stroke="#fcd34d"/>
+<text x="90" y="422" fill="#92400e" font-size="11" font-weight="700">Pedido #1042 · ATRASADO (2 dias)</text>
+<text x="90" y="439" fill="#78716c" font-size="10">Cooperativa Vale Verde · 180t NPK</text>
+
+<rect x="75" y="462" width="310" height="52" rx="4" fill="#f0fdf4" stroke="#bbf7d0"/>
+<text x="90" y="482" fill="#166534" font-size="11" font-weight="700">Pedido #1043 · Pendente</text>
+<text x="90" y="499" fill="#78716c" font-size="10">Revenda Campo Bom · 220t NPK</text>
+
+<rect x="75" y="522" width="310" height="52" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/>
+<text x="90" y="542" fill="#334155" font-size="11" font-weight="700">Pedido #1044 · Pendente</text>
+<text x="90" y="559" fill="#78716c" font-size="10">Fazenda Santa Rita · 160t NPK</text>
+
+<rect x="75" y="582" width="310" height="52" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/>
+<text x="90" y="602" fill="#334155" font-size="11" font-weight="700">Pedido #1045 · Pendente</text>
+<text x="90" y="619" fill="#78716c" font-size="10">Grupo Agrotec · 200t NPK</text>
+
+<text x="80" y="660" fill="#64748b" font-size="10">Exibindo 4 de 4 pedidos ativos</text>
+<text x="80" y="680" fill="#dc2626" font-size="10" font-weight="700">⚠ 1 pedido atrasado — multa de 10% ao 7º dia</text>
+
+<rect x="415" y="365" width="330" height="345" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="435" y="388" fill="#0f172a" font-size="13" font-weight="700">Despacho CT-e</text>
+
+<rect x="430" y="402" width="300" height="62" rx="4" fill="#eff6ff" stroke="#93c5fd"/>
+<text x="445" y="422" fill="#1e40af" font-size="11" font-weight="700">Disponibilidade de Veículos</text>
+<text x="445" y="439" fill="#475569" font-size="10">14 viagens disponíveis esta rodada</text>
+<text x="445" y="454" fill="#dc2626" font-size="10" font-weight="700">⚠ Concorrência alta no polo</text>
+
+<rect x="430" y="474" width="300" height="98" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="445" y="494" fill="#0f172a" font-size="11" font-weight="700">Cotação de Frete</text>
+<text x="445" y="512" fill="#475569" font-size="10">Rota: Uberaba → São Paulo (SP)</text>
+<text x="445" y="528" fill="#475569" font-size="10">Frete base: R$ 18.500,00</text>
+<text x="445" y="544" fill="#475569" font-size="10">Pedágios: R$ 1.240,00</text>
+<text x="445" y="562" fill="#16a34a" font-size="10" font-weight="700">Desvio (-12%): R$ 17.400,00</text>
+
+<rect x="430" y="584" width="300" height="48" rx="6" fill="#b91c1c"/>
+<text x="580" y="614" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800">EMITIR CT-e E DESPACHAR</text>
+
+<text x="435" y="654" fill="#64748b" font-size="9">Após emissão, o CT-e é enviado ao Financeiro</text>
+<text x="435" y="669" fill="#64748b" font-size="9">e a data de saída é travada no calendário.</text>
+
+<circle cx="72" cy="385" r="13" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="72" y="390" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="800">1</text>
+<circle cx="422" cy="418" r="13" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="422" y="423" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="800">2</text>
+<circle cx="422" cy="489" r="13" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="422" y="494" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="800">3</text>
+<circle cx="422" cy="608" r="13" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="422" y="613" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="800">4</text>
+
+<text x="40" y="765" fill="#b91c1c" font-size="13" font-weight="800">LEGENDA DAS MARCAÇÕES:</text>
+
+<circle cx="55" cy="790" r="11" fill="#dc2626"/>
+<text x="55" y="795" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800">1</text>
+<text x="78" y="795" fill="#334155" font-size="12">Carteira de Pedidos — clique no pedido para ver detalhes</text>
+
+<circle cx="55" cy="818" r="11" fill="#dc2626"/>
+<text x="55" y="823" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800">2</text>
+<text x="78" y="823" fill="#334155" font-size="12">Verifique a disponibilidade de veículos antes de despachar</text>
+
+<circle cx="55" cy="846" r="11" fill="#dc2626"/>
+<text x="55" y="851" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800">3</text>
+<text x="78" y="851" fill="#334155" font-size="12">Simule o frete e compare rota padrão vs desvio sugerido</text>
+
+<circle cx="55" cy="874" r="11" fill="#dc2626"/>
+<text x="55" y="879" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800">4</text>
+<text x="78" y="879" fill="#334155" font-size="12">Emita o CT-e e confirme o despacho do pedido</text>
+
+<rect x="40" y="908" width="720" height="62" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 3"/>
+<text x="55" y="928" fill="#0f172a" font-size="11" font-weight="700">Figura 10.1 — Tela de Carteira de Pedidos e Expedição.</text>
+<text x="55" y="945" fill="#475569" font-size="11">Interface de despacho de pedidos com cotação de frete e emissão de CT-e.</text>
+<text x="55" y="962" fill="#64748b" font-size="10" font-style="italic">Fonte: Elaborado pelos autores (2025).</text>
+
+<line x1="40" y1="985" x2="760" y2="985" stroke="#e2e8f0"/>
+<text x="400" y="1000" text-anchor="middle" fill="#94a3b8" font-size="10">Manual de Uso SimuFab v3.0 · Capítulo 7 · Página 42</text>
+</svg>`;
+      return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+
+    /* ============================================================
+       CATÁLOGO DE IMAGENS — TODAS AS 10 SEMANAS
        ============================================================ */
     const IMAGENS_POR_SEMANA = {
       1: {
         davi: [
-          { fig: 'Fig. 0.1', path: 'Desktop/Cap_00_Acesso_e_Navegacao/01_Tela_Login.png', titulo: 'Tela de Login (login.php)' },
-          { fig: 'Fig. 0.2', path: 'Desktop/Cap_00_Acesso_e_Navegacao/02_Alerta_Credenciais_Invalidas.png', titulo: 'Alerta de Credenciais Inválidas' },
-          { fig: 'Fig. 0.3', path: 'Desktop/Cap_00_Acesso_e_Navegacao/03_Pagina_Erro_404.png', titulo: 'Página de Erro 404' },
-          { fig: 'Fig. 2.1', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/01_Modal_Telemetria_e_Ping_Sistema.png', titulo: 'Telemetria / Ping do Sistema (footer.php)' }
+          { fig: 'Figura 0.1', path: 'Desktop/Cap_00_Acesso_e_Navegacao/01_Tela_Login.png', titulo: 'Tela de Login', descricao: 'Autenticação de instrutores e alunos por e-mail corporativo e senha.' },
+          { fig: 'Figura 0.2', path: 'Desktop/Cap_00_Acesso_e_Navegacao/02_Alerta_Credenciais_Invalidas.png', titulo: 'Alerta de Erro no Login', descricao: 'Mensagem de retorno exibida quando e-mail ou senha são inválidos.' },
+          { fig: 'Figura 0.3', path: 'Desktop/Cap_00_Acesso_e_Navegacao/03_Pagina_Erro_404.png', titulo: 'Página de Erro 404', descricao: 'Tela de roteamento não encontrado com botão de retorno ao painel.' },
+          { fig: 'Figura 2.1', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/01_Modal_Telemetria_e_Ping_Sistema.png', titulo: 'Telemetria e Status Operacional', descricao: 'Monitoramento de latência do banco MySQL, memória e status do motor v3.0.' }
         ],
         sofia: [
-          { fig: 'Fig. 1.2', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/02_Menu_Setup_da_Turma.png', titulo: 'Menu Superior — Setup da Turma' },
-          { fig: 'Fig. 1.3', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/03_Menu_Cadastros_Industriais.png', titulo: 'Menu Superior — Cadastros Industriais' },
-          { fig: 'Fig. 1.4', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/04_Menu_Seletor_de_Sala_Ativa.png', titulo: 'Menu Superior — Seletor de Sala/Turma' },
-          { fig: 'Fig. 2.4', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/02_Modal_Abrir_Chamado_Entre_Setores.png', titulo: 'Modal — Abrir Chamado entre Setores' },
-          { fig: 'Fig. 2.2', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/03_Copiloto_SimuBot_Instrutor.png', titulo: 'Copiloto SimuBot — Instrutor' },
-          { fig: 'Fig. 2.5', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/04_Copiloto_SimuBot_Diretor.png', titulo: 'Copiloto SimuBot — Diretor' },
-          { fig: 'Fig. 2.7', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/05_Copiloto_SimuBot_PCP.png', titulo: 'Copiloto SimuBot — PCP' },
-          { fig: 'Fig. 2.9', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/06_Copiloto_SimuBot_Compras.png', titulo: 'Copiloto SimuBot — Compras' },
-          { fig: 'Fig. 2.10', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/07_Copiloto_SimuBot_Estoque.png', titulo: 'Copiloto SimuBot — Estoque' },
-          { fig: 'Fig. 2.11', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/08_Copiloto_SimuBot_Producao.png', titulo: 'Copiloto SimuBot — Produção' },
-          { fig: 'Fig. 2.12', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/09_Copiloto_SimuBot_Qualidade.png', titulo: 'Copiloto SimuBot — Qualidade' },
-          { fig: 'Fig. 2.13', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/10_Copiloto_SimuBot_Logistica.png', titulo: 'Copiloto SimuBot — Logística' },
-          { fig: 'Fig. 2.14', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/11_Copiloto_SimuBot_Financeiro.png', titulo: 'Copiloto SimuBot — Financeiro' },
-          { fig: 'Fig. 2.3', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/12_Tutorial_Interativo_Instrutor.png', titulo: 'Tutorial Interativo — Instrutor' },
-          { fig: 'Fig. 2.6', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/13_Tutorial_Interativo_Diretor.png', titulo: 'Tutorial Interativo — Diretor' },
-          { fig: 'Fig. 2.8', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/14_Tutorial_Interativo_PCP.png', titulo: 'Tutorial Interativo — PCP' }
+          { fig: 'Figura 1.2', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/02_Menu_Setup_da_Turma.png', titulo: 'Menu Superior — Setup da Turma (4 Passos)', descricao: 'Atalho sequencial para criação de Salas, Equipes, Empresas e Alunos.' },
+          { fig: 'Figura 1.3', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/03_Menu_Cadastros_Industriais.png', titulo: 'Menu Superior — Cadastros Industriais', descricao: 'Acesso aos catálogos de Produtos, Matérias-Primas, Receitas BOM, Fornecedores e Clientes.' },
+          { fig: 'Figura 1.4', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/04_Menu_Seletor_de_Sala_Ativa.png', titulo: 'Menu Superior — Seletor de Sala/Turma', descricao: 'Permite ao instrutor alternar rapidamente entre diferentes turmas cadastradas.' },
+          { fig: 'Figura 2.4', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/02_Modal_Abrir_Chamado_Entre_Setores.png', titulo: 'Modal — Abrir Chamado Interdepartamental', descricao: 'Comunicação restrita e rastreável entre os departamentos da equipe.' },
+          { fig: 'Figura 2.2', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/03_Copiloto_SimuBot_Instrutor.png', titulo: 'Copiloto SimuBot — Instrutor', descricao: 'Diagnóstico de cobertura de cargos das equipes e ações pedagógicas recomendadas.' },
+          { fig: 'Figura 2.5', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/04_Copiloto_SimuBot_Diretor.png', titulo: 'Copiloto SimuBot — Diretor', descricao: 'Alertas de pendências executivas, liquidez e pílula sobre CAPEX vs OPEX.' },
+          { fig: 'Figura 2.7', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/05_Copiloto_SimuBot_PCP.png', titulo: 'Copiloto SimuBot — PCP', descricao: 'Análise de OPs abertas, gargalos de horas e pílula sobre TOC.' },
+          { fig: 'Figura 2.9', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/06_Copiloto_SimuBot_Compras.png', titulo: 'Copiloto SimuBot — Compras', descricao: 'Alertas de ruptura ROP, status de ofertas B2B e pílula sobre LEC.' },
+          { fig: 'Figura 2.10', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/07_Copiloto_SimuBot_Estoque.png', titulo: 'Copiloto SimuBot — Estoque', descricao: 'Alerta de desumidificação e pílula sobre Curva ABC e FEFO.' },
+          { fig: 'Figura 2.11', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/08_Copiloto_SimuBot_Producao.png', titulo: 'Copiloto SimuBot — Produção', descricao: 'Diagnóstico de máquinas paradas e pílula sobre OEE e TPM.' },
+          { fig: 'Figura 2.12', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/09_Copiloto_SimuBot_Qualidade.png', titulo: 'Copiloto SimuBot — Qualidade', descricao: 'Contagem de lotes em quarentena e pílula sobre COPQ e MAPA.' },
+          { fig: 'Figura 2.13', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/10_Copiloto_SimuBot_Logistica.png', titulo: 'Copiloto SimuBot — Logística', descricao: 'Alerta de pedidos atrasados e pílula sobre OTIF.' },
+          { fig: 'Figura 2.14', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/11_Copiloto_SimuBot_Financeiro.png', titulo: 'Copiloto SimuBot — Financeiro', descricao: 'Monitoramento de liquidez e pílula sobre Capital de Giro e DRE.' },
+          { fig: 'Figura 2.3', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/12_Tutorial_Interativo_Instrutor.png', titulo: 'Tutorial Guiado — Instrutor', descricao: 'Tour interativo com holofote para orientar o professor na primeira visita.' },
+          { fig: 'Figura 2.6', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/13_Tutorial_Interativo_Diretor.png', titulo: 'Tutorial Guiado — Diretor', descricao: 'Passo a passo interativo exibindo comandos da Diretoria.' },
+          { fig: 'Figura 2.8', path: 'Desktop/Cap_11_Recursos_IA_Chamados_e_Tutorial/14_Tutorial_Interativo_PCP.png', titulo: 'Tutorial Guiado — PCP', descricao: 'Tour interativo explicando os 5 módulos de planejamento.' }
         ],
         faltando: [
-          { responsavel: 'Davi', fig: 'Sem figura', arquivo: 'aguardando_rodada.php (Tela de Espera / Motor em Andamento)', motivo: 'Só aparece quando a rodada está encerrada/em processamento — capturar manualmente.' }
+          { responsavel: 'Davi', fig: 'Sem figura', arquivo: 'aguardando_rodada.php (Tela de Espera)', motivo: 'Só aparece quando a rodada está encerrada — capturar manualmente.' }
         ]
       },
       2: {
         davi: [
-          { fig: 'Fig. 1.5', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/01_Passo_1_Listar_Salas_e_Fluxo_Setup.png', titulo: 'Passo 1 — Listar Salas e Fluxo' },
-          { fig: 'Fig. 1.6', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/02_Passo_1_Criar_Nova_Sala.png', titulo: 'Passo 1 — Criar Nova Sala / Jogo' },
-          { fig: 'Fig. 1.7', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/03_Passo_2_Listar_Equipes.png', titulo: 'Passo 2 — Listar Equipes' },
-          { fig: 'Fig. 1.8', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/04_Passo_2_Perfil_Organograma_8_Cargos.png', titulo: 'Passo 2 — Organograma dos 8 Cargos' },
-          { fig: 'Fig. 1.9', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/05_Passo_2_Criar_Nova_Equipe.png', titulo: 'Passo 2 — Criar Nova Equipe' }
+          { fig: 'Figura 1.5', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/01_Passo_1_Listar_Salas_e_Fluxo_Setup.png', titulo: 'Passo 1 — Gerenciador de Salas', descricao: 'Exibe os 4 passos obrigatórios de montagem da turma e a lista de salas ativas.' },
+          { fig: 'Figura 1.6', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/02_Passo_1_Criar_Nova_Sala.png', titulo: 'Passo 1 — Criar Nova Sala', descricao: 'Formulário de abertura de nova turma com geração automática da Rodada #1.' },
+          { fig: 'Figura 1.7', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/03_Passo_2_Listar_Equipes.png', titulo: 'Passo 2 — Listar Equipes', descricao: 'Relação de equipes cadastradas na sala com quantidade de membros e status.' },
+          { fig: 'Figura 1.8', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/04_Passo_2_Perfil_Organograma_8_Cargos.png', titulo: 'Passo 2 — Organograma dos 8 Cargos', descricao: 'Validação visual da cobertura obrigatória dos 8 departamentos industriais.' },
+          { fig: 'Figura 1.9', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/05_Passo_2_Criar_Nova_Equipe.png', titulo: 'Passo 2 — Criar Nova Equipe', descricao: 'Cadastro de nova equipe vinculada à sala/jogo selecionado.' }
         ],
         sofia: [
-          { fig: 'Fig. 1.10', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/06_Passo_3_Listar_Empresas.png', titulo: 'Passo 3 — Listar Empresas' },
-          { fig: 'Fig. 1.11', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/07_Passo_3_Criar_Empresa.png', titulo: 'Passo 3 — Criar Empresa' },
-          { fig: 'Fig. 1.12', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/08_Passo_4_Listar_Alunos_Matriculados.png', titulo: 'Passo 4 — Listar Alunos Matriculados' },
-          { fig: 'Fig. 1.13', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/09_Passo_4_Matricular_Aluno_Vazio.png', titulo: 'Passo 4 — Formulário de Matrícula' },
-          { fig: 'Fig. 1.14', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/10_Passo_4_Alunos_Acumulo_Multiplos_Cargos.png', titulo: 'Passo 4 — Aluno com Múltiplos Cargos' }
+          { fig: 'Figura 1.10', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/06_Passo_3_Listar_Empresas.png', titulo: 'Passo 3 — Empresas das Equipes', descricao: 'Relação das empresas industriais com capital inicial de R$ 15.000.000,00.' },
+          { fig: 'Figura 1.11', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/07_Passo_3_Criar_Empresa.png', titulo: 'Passo 3 — Criar Empresa', descricao: 'Vínculo da razão social à equipe com instalação automática das 4 máquinas padrão.' },
+          { fig: 'Figura 1.12', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/08_Passo_4_Listar_Alunos_Matriculados.png', titulo: 'Passo 4 — Alunos Matriculados', descricao: 'Tabela pesquisável com e-mail, equipe e múltiplos cargos atribuídos por aluno.' },
+          { fig: 'Figura 1.13', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/09_Passo_4_Matricular_Aluno_Vazio.png', titulo: 'Passo 4 — Formulário de Matrícula', descricao: 'Permite atribuir 1 ou mais cargos ao mesmo aluno (equipes de 4 a 8 integrantes).' },
+          { fig: 'Figura 1.14', path: 'Desktop/Cap_01_Instrutor_Master/02_Setup_da_Turma_4_Passos/10_Passo_4_Alunos_Acumulo_Multiplos_Cargos.png', titulo: 'Passo 4 — Múltiplos Cargos', descricao: 'Destaque automático dos cargos disponíveis/ocupados na equipe ao marcar mais de uma função.' }
         ],
         faltando: [
-          { responsavel: 'Sofia', fig: 'Sem figura', arquivo: 'sucesso.php (Tela de Sucesso após cadastro de aluno)', motivo: 'Aparece apenas logo após concluir o cadastro — capturar manualmente.' }
+          { responsavel: 'Sofia', fig: 'Sem figura', arquivo: 'sucesso.php (Tela de Sucesso após cadastro)', motivo: 'Aparece apenas logo após concluir o cadastro.' }
         ]
       },
       3: {
         davi: [
-          { fig: 'Fig. 1.15', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/01_Painel_Controle_Rodadas_e_Linha_do_Tempo.png', titulo: 'Painel de Controle de Rodadas' },
-          { fig: 'Fig. 1.16', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/02_Modal_Configurar_Limite_Rodadas.png', titulo: 'Modal — Configurar Limite de Rodadas' },
-          { fig: 'Fig. 1.17', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/03_Modal_Confirmar_Encerramento_Rodada.png', titulo: 'Modal — Confirmar Encerramento de Rodada' },
-          { fig: 'Fig. 1.18', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/04_Modal_Reiniciar_Turma_Nova_Edicao.png', titulo: 'Modal — Reiniciar Turma (Nova Edição)' },
-          { fig: 'Fig. 1.19', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/05_Modal_Encerrar_Partida_Antecipado.png', titulo: 'Modal — Encerrar Partida Antecipadamente' },
-          { fig: 'Fig. 1.20', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/06_Historico_Cronologico_Rodadas.png', titulo: 'Histórico Cronológico de Rodadas' }
+          { fig: 'Figura 1.15', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/01_Painel_Controle_Rodadas_e_Linha_do_Tempo.png', titulo: 'Controle de Rodadas & Linha do Tempo', descricao: 'Acompanhamento cronológico do ciclo, núcleo do Oráculo IA e status de governança.' },
+          { fig: 'Figura 1.16', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/02_Modal_Configurar_Limite_Rodadas.png', titulo: 'Modal — Configurar Limite', descricao: 'Permite definir de 4 a 24 rodadas para a duração do jogo.' },
+          { fig: 'Figura 1.17', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/03_Modal_Confirmar_Encerramento_Rodada.png', titulo: 'Modal — Encerrar Rodada', descricao: 'Confirmação antes de processar compras, folha, multas e KPIs da rodada.' },
+          { fig: 'Figura 1.18', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/04_Modal_Reiniciar_Turma_Nova_Edicao.png', titulo: 'Modal — Reiniciar Turma', descricao: 'Arquiva o jogo atual mantendo histórico e inicia nova edição zerada com R$ 15M.' },
+          { fig: 'Figura 1.19', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/05_Modal_Encerrar_Partida_Antecipado.png', titulo: 'Modal — Encerramento Antecipado', descricao: 'Finaliza a simulação antes do limite configurado gerando o pódio oficial.' },
+          { fig: 'Figura 1.20', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/06_Historico_Cronologico_Rodadas.png', titulo: 'Histórico Cronológico', descricao: 'Registro de datas de abertura, encerramento e status de cada ciclo.' }
         ],
         sofia: [
-          { fig: 'Fig. 1.24', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/01_Catalogo_Produtos_Acabados_NPK.png', titulo: 'Catálogo de Produtos Acabados (NPK)' },
-          { fig: 'Fig. 1.25', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/02_Catalogo_Materias_Primas_Quimicas.png', titulo: 'Catálogo de Matérias-Primas' },
-          { fig: 'Fig. 1.26', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/03_Matriz_Receitas_BOM_Estequiometria.png', titulo: 'Matriz de Receitas (BOM)' },
-          { fig: 'Fig. 1.27', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/04_Fornecedores_Homologados.png', titulo: 'Fornecedores Homologados' },
-          { fig: 'Fig. 1.28', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/05_Vinculacao_Materia_Prima_Fornecedor.png', titulo: 'Vinculação MP × Fornecedor' },
-          { fig: 'Fig. 1.29', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/06_Carteira_de_Clientes_B2B.png', titulo: 'Carteira de Clientes B2B' }
+          { fig: 'Figura 1.24', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/01_Catalogo_Produtos_Acabados_NPK.png', titulo: 'Catálogo de Produtos Acabados', descricao: '22 fórmulas com preços e CPVs regulados dinamicamente pelo motor econômico.' },
+          { fig: 'Figura 1.25', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/02_Catalogo_Materias_Primas_Quimicas.png', titulo: 'Catálogo de Matérias-Primas', descricao: '23 insumos com cotações médias de mercado e lead times de reposição.' },
+          { fig: 'Figura 1.26', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/03_Matriz_Receitas_BOM_Estequiometria.png', titulo: 'Receitas (BOM)', descricao: 'Proporções técnicas fechadas em 1,0000 ton de MP por tonelada de PA.' },
+          { fig: 'Figura 1.27', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/04_Fornecedores_Homologados.png', titulo: 'Fornecedores Homologados', descricao: '92 parceiros com confiabilidade, qualidade média, lead time e preço base.' },
+          { fig: 'Figura 1.28', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/05_Vinculacao_Materia_Prima_Fornecedor.png', titulo: 'Matriz MP × Fornecedor', descricao: 'Visualização da rede homologada de fornecimento por insumo.' },
+          { fig: 'Figura 1.29', path: 'Desktop/Cap_01_Instrutor_Master/05_Cadastros_Protegidos_IA/06_Carteira_de_Clientes_B2B.png', titulo: 'Carteira de Clientes', descricao: '22 compradores B2B — cooperativas, revendas e grandes produtores.' }
         ]
       },
       4: {
         davi: [
-          { fig: 'Fig. 1.22', path: 'Desktop/Cap_01_Instrutor_Master/04_Gazeta_e_Penalidades_IA/01_Planejador_Empecilhos_e_Penalidades.png', titulo: 'Planejador de Empecilhos e Penalidades' },
-          { fig: 'Fig. 1.23', path: 'Desktop/Cap_01_Instrutor_Master/04_Gazeta_e_Penalidades_IA/02_Ficha_Preenchida_com_Cenario_IA.png', titulo: 'Ficha Preenchida com Cenário IA' }
+          { fig: 'Figura 1.22', path: 'Desktop/Cap_01_Instrutor_Master/04_Gazeta_e_Penalidades_IA/01_Planejador_Empecilhos_e_Penalidades.png', titulo: 'Planejador de Empecilhos', descricao: 'Cenários sugeridos pela IA, agendamento de alertas na Gazeta e auditoria de débitos.' },
+          { fig: 'Figura 1.23', path: 'Desktop/Cap_01_Instrutor_Master/04_Gazeta_e_Penalidades_IA/02_Ficha_Preenchida_com_Cenario_IA.png', titulo: 'Empecilho IA Carregado', descricao: 'Cenário sugerido pela IA carregado automaticamente nos campos de manchete, alvo e multa.' }
         ],
         sofia: [
-          { fig: 'Fig. 1.1', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/01_Painel_Geral_do_Administrador.png', titulo: 'Painel Geral do Administrador & Mercado B2B' }
+          { fig: 'Figura 1.1', path: 'Desktop/Cap_01_Instrutor_Master/01_Visao_Geral_e_Menus/01_Painel_Geral_do_Administrador.png', titulo: 'Painel do Administrador & Mercado B2B', descricao: 'Visão consolidada de caixa, OEE, OTIF, mapa sinótico, alunos, máquinas e comandos de IA.' }
         ]
       },
       5: {
         davi: [
-          { fig: 'Fig. 4.1', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/01_Tela_Gabinete_Executivo_Diretor.png', titulo: 'Gabinete Executivo do Diretor' },
-          { fig: 'Fig. 4.2', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/02_Aba_Visao_360_Setores_e_Graficos.png', titulo: 'Aba Visão 360 — Setores e Gráficos' },
-          { fig: 'Fig. 4.3', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/03_Aba_Decisoes_Soberanas_Investimentos.png', titulo: 'Aba Decisões Soberanas (Investimentos)' },
-          { fig: 'Fig. 4.4', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/04_Aba_Jornal_A_Gazeta_do_Triangulo.png', titulo: 'Aba Jornal A Gazeta do Triângulo' },
-          { fig: 'Fig. 4.5', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/05_Aba_Ocorrencias_e_Debitos.png', titulo: 'Aba Ocorrências e Débitos' },
-          { fig: 'Fig. 4.6', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/06_Menu_Troca_Rapida_Meus_Setores.png', titulo: 'Menu — Troca Rápida Meus Setores' },
-          { fig: 'Fig. 4.7', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/01_Modal_Comprar_Maquina_CAPEX.png', titulo: 'Modal — Comprar Máquina (CAPEX)' },
-          { fig: 'Fig. 4.8', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/02_Modal_Comprar_Caminhao_Frota.png', titulo: 'Modal — Comprar Caminhão (Frota)' },
-          { fig: 'Fig. 4.9', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/03_Modal_Expandir_Armazens_Silos.png', titulo: 'Modal — Expandir Armazéns / Silos' },
-          { fig: 'Fig. 4.10', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/04_Modal_Linha_de_Credito_e_Rating.png', titulo: 'Modal — Linha de Crédito e Rating' },
-          { fig: 'Fig. 4.11', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/01_Tela_Central_Aprovacoes_RNCs.png', titulo: 'Central de Aprovações — RNCs' },
-          { fig: 'Fig. 4.12', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/02_Aba_Ordens_Compra_MP_Pendentes.png', titulo: 'Aba Ordens de Compra MP Pendentes' },
-          { fig: 'Fig. 4.13', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/03_Aba_Manutencoes_Industriais_Pendentes.png', titulo: 'Aba Manutenções Industriais Pendentes' },
-          { fig: 'Fig. 4.14', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/04_Aba_Pareceres_e_Comunicados_Diretor.png', titulo: 'Aba Pareceres e Comunicados' },
-          { fig: 'Fig. 4.15', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/04_Espionagem_Industrial/01_Tela_Central_Espionagem_Industrial.png', titulo: 'Central de Espionagem Industrial' },
-          { fig: 'Fig. 4.16', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/04_Espionagem_Industrial/02_Dossie_Confidencial_Descriptografado.png', titulo: 'Dossiê Confidencial Descriptografado' }
+          { fig: 'Figura 4.1', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/01_Tela_Gabinete_Executivo_Diretor.png', titulo: 'Gabinete Executivo', descricao: 'Visão 360° com caixa, OEE, OTIF, resultado econômico, ativos e botões de CAPEX.' },
+          { fig: 'Figura 4.2', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/02_Aba_Visao_360_Setores_e_Graficos.png', titulo: 'Aba Visão 360°', descricao: 'Status semafórico da planta, composição do OEE, carga das máquinas (220h) e estoque.' },
+          { fig: 'Figura 4.3', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/03_Aba_Decisoes_Soberanas_Investimentos.png', titulo: 'Aba Decisões Soberanas', descricao: 'Atalhos de investimento em máquinas, frota própria, armazéns e crédito.' },
+          { fig: 'Figura 4.4', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/04_Aba_Jornal_A_Gazeta_do_Triangulo.png', titulo: 'Aba Jornal A Gazeta', descricao: 'Boletins econômicos e alertas preventivos de riscos da rodada vigente.' },
+          { fig: 'Figura 4.5', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/05_Aba_Ocorrencias_e_Debitos.png', titulo: 'Aba Ocorrências & Débitos', descricao: 'Registro auditável de sinistros, avisos e penalidades aplicadas à empresa.' },
+          { fig: 'Figura 4.6', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/01_Gabinete_e_Abas/06_Menu_Troca_Rapida_Meus_Setores.png', titulo: 'Menu Troca Rápida', descricao: 'Permite ao aluno que acumula múltiplos cargos alternar de setor em 1 clique.' },
+          { fig: 'Figura 4.7', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/01_Modal_Comprar_Maquina_CAPEX.png', titulo: 'Modal CAPEX — Máquina', descricao: 'Cálculo automático proporcional à capacidade (t/h) e às horas contratadas (até 220h).' },
+          { fig: 'Figura 4.8', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/02_Modal_Comprar_Caminhao_Frota.png', titulo: 'Modal — Comprar Caminhão', descricao: 'Aquisição de veículo dedicado (10 viagens/mês sem concorrência no polo).' },
+          { fig: 'Figura 4.9', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/03_Modal_Expandir_Armazens_Silos.png', titulo: 'Modal — Expandir Armazéns', descricao: 'Expande a capacidade física (60% Silos MP e 40% Galpão PA).' },
+          { fig: 'Figura 4.10', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/02_CAPEX_e_Credito/04_Modal_Linha_de_Credito_e_Rating.png', titulo: 'Modal — Crédito e Rating', descricao: 'Simulação dinâmica com Rating AAA–D, limite disponível e restrições de prazo.' },
+          { fig: 'Figura 4.11', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/01_Tela_Central_Aprovacoes_RNCs.png', titulo: 'Central de Aprovações — RNCs', descricao: 'Decisão executiva de Retrabalho, Concessão ou Descarte sobre lotes reprovados.' },
+          { fig: 'Figura 4.12', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/02_Aba_Ordens_Compra_MP_Pendentes.png', titulo: 'Aba Ordens de Compra MP', descricao: 'Liberação financeira de compras solicitadas pelo setor de Compras.' },
+          { fig: 'Figura 4.13', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/03_Aba_Manutencoes_Industriais_Pendentes.png', titulo: 'Aba Manutenções Pendentes', descricao: 'Autorização de reparos e preventivas solicitadas pelo chão de fábrica.' },
+          { fig: 'Figura 4.14', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/03_Central_de_Aprovacoes/04_Aba_Pareceres_e_Comunicados_Diretor.png', titulo: 'Aba Pareceres', descricao: 'Mensagens direcionadas à Diretoria com opção de resposta.' },
+          { fig: 'Figura 4.15', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/04_Espionagem_Industrial/01_Tela_Central_Espionagem_Industrial.png', titulo: 'Central de Espionagem', descricao: 'Contratação de dossiês confidenciais sobre máquinas, estoques, preços e finanças.' },
+          { fig: 'Figura 4.16', path: 'Desktop/Cap_02_Diretor_Industrial_CEO/04_Espionagem_Industrial/02_Dossie_Confidencial_Descriptografado.png', titulo: 'Dossiê Descriptografado', descricao: 'Relatório confidencial exibindo os dados interceptados da empresa concorrente.' }
         ],
         sofia: [
-          { fig: 'Fig. 11.1', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/01_Tela_DRE_Sintetica_Industrial.png', titulo: 'DRE Sintética Industrial' },
-          { fig: 'Fig. 11.2', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/02_SubAba_DRE_Comparativa_Multi_Rodadas.png', titulo: 'DRE Comparativa Multi-Rodadas' },
-          { fig: 'Fig. 11.3', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/03_SubAba_Detalhamento_O_Que_Recebi.png', titulo: 'Detalhamento — O Que Recebi' },
-          { fig: 'Fig. 11.4', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/04_SubAba_Detalhamento_O_Que_Paguei.png', titulo: 'Detalhamento — O Que Paguei' },
-          { fig: 'Fig. 11.5', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/05_Aba_Contas_Pagar_Folha_CLT_e_Receber.png', titulo: 'Contas a Pagar, Folha CLT e Receber' },
-          { fig: 'Fig. 11.6', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/06_Aba_Emprestimos_Rating_e_Simulador.png', titulo: 'Empréstimos, Rating e Simulador' },
-          { fig: 'Fig. 11.7', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/07_Aba_Auditoria_e_Veto_Orcamentario.png', titulo: 'Auditoria e Veto Orçamentário' },
-          { fig: 'Fig. 11.8', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/09_Aba_Extrato_Geral_Movimentacoes.png', titulo: 'Extrato Geral de Movimentações' },
-          { fig: 'Fig. 11.9', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/10_Aba_Comunicacao_Financeiro.png', titulo: 'Comunicação — Financeiro' },
-          { fig: 'Fig. 11.10', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/08_Modal_Exercer_Veto_Financeiro.png', titulo: 'Modal — Exercer Veto Financeiro' }
+          { fig: 'Figura 11.1', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/01_Tela_DRE_Sintetica_Industrial.png', titulo: 'DRE Sintética Industrial', descricao: 'Demonstrativo de resultado com receitas, custos, despesas e margem consolidada.' },
+          { fig: 'Figura 11.2', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/02_SubAba_DRE_Comparativa_Multi_Rodadas.png', titulo: 'DRE Comparativa Multi-Rodadas', descricao: 'Comparativo histórico das DREs para identificar tendências e desvios.' },
+          { fig: 'Figura 11.3', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/03_SubAba_Detalhamento_O_Que_Recebi.png', titulo: 'Detalhamento O Que Recebi', descricao: 'Detalhamento de todas as entradas financeiras da rodada.' },
+          { fig: 'Figura 11.4', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/04_SubAba_Detalhamento_O_Que_Paguei.png', titulo: 'Detalhamento O Que Paguei', descricao: 'Detalhamento de todas as saídas financeiras da rodada.' },
+          { fig: 'Figura 11.5', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/05_Aba_Contas_Pagar_Folha_CLT_e_Receber.png', titulo: 'Contas a Pagar e Receber', descricao: 'Gestão de obrigações e recebíveis travados até entrega física pela Logística.' },
+          { fig: 'Figura 11.6', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/06_Aba_Emprestimos_Rating_e_Simulador.png', titulo: 'Empréstimos e Rating', descricao: 'Simulador de crédito com Rating AAA a D, taxas e prazos.' },
+          { fig: 'Figura 11.7', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/07_Aba_Auditoria_e_Veto_Orcamentario.png', titulo: 'Auditoria e Veto', descricao: 'Histórico auditável de vetos e recusas orçamentárias.' },
+          { fig: 'Figura 11.8', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/09_Aba_Extrato_Geral_Movimentacoes.png', titulo: 'Extrato Geral', descricao: 'Extrato consolidado de todas as movimentações financeiras.' },
+          { fig: 'Figura 11.9', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/10_Aba_Comunicacao_Financeiro.png', titulo: 'Comunicação Financeiro', descricao: 'Canal de mensagens entre Controladoria e demais setores.' },
+          { fig: 'Figura 11.10', path: 'Desktop/Cap_09_Financeiro_e_Controladoria/08_Modal_Exercer_Veto_Financeiro.png', titulo: 'Modal Veto Financeiro', descricao: 'Formulário para bloquear despesas que comprometam o caixa.' }
         ]
       },
       6: {
         davi: [
-          { fig: 'Fig. 5.1', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/01_Passo_1_Previsao_de_Demanda.png', titulo: 'Passo 1 — Previsão de Demanda' },
-          { fig: 'Fig. 5.2', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/02_Passo_2_Plano_Mestre_MPS.png', titulo: 'Passo 2 — Plano Mestre (MPS)' },
-          { fig: 'Fig. 5.3', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/03_Passo_3_Explosao_Materiais_MRP.png', titulo: 'Passo 3 — Explosão de Materiais (MRP)' },
-          { fig: 'Fig. 5.4', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/04_Passo_4_Capacidade_Finita_CRP_220h.png', titulo: 'Passo 4 — Capacidade Finita (CRP)' }
+          { fig: 'Figura 5.1', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/01_Passo_1_Previsao_de_Demanda.png', titulo: 'Passo 1 — Previsão de Demanda', descricao: 'Projeção de vendas por produto acabado considerando histórico dos últimos 3 meses.' },
+          { fig: 'Figura 5.2', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/02_Passo_2_Plano_Mestre_MPS.png', titulo: 'Passo 2 — MPS', descricao: 'Cálculo da necessidade líquida e geração automática das Ordens de Produção.' },
+          { fig: 'Figura 5.3', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/03_Passo_3_Explosao_Materiais_MRP.png', titulo: 'Passo 3 — MRP', descricao: 'Explosão da BOM com margem de +10% para envio das sugestões de compra.' },
+          { fig: 'Figura 5.4', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/04_Passo_4_Capacidade_Finita_CRP_220h.png', titulo: 'Passo 4 — CRP (220h)', descricao: 'Monitoramento da carga mensal, zona de fadiga (>160h), eficiência e desgaste.' }
         ],
         sofia: [
-          { fig: 'Fig. 5.5', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/05_Passo_5_Painel_Programacao_e_Sequenciamento_MES.png', titulo: 'Passo 5 — Programação e Sequenciamento MES' },
-          { fig: 'Fig. 5.6', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/06_Aba_Ocorrencias_e_Gargalos.png', titulo: 'Aba Ocorrências e Gargalos' },
-          { fig: 'Fig. 5.7', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/07_Aba_Mensagens_com_Setores.png', titulo: 'Aba Mensagens com Setores' },
-          { fig: 'Fig. 5.8', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/08_Modal_Emitir_Nova_OP_Manual.png', titulo: 'Modal — Emitir Nova OP Manual' }
+          { fig: 'Figura 5.5', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/05_Passo_5_Painel_Programacao_e_Sequenciamento_MES.png', titulo: 'Passo 5 — Programação MES', descricao: 'Etapas pendentes para agendar e fila sequenciada das máquinas na fábrica.' },
+          { fig: 'Figura 5.6', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/06_Aba_Ocorrencias_e_Gargalos.png', titulo: 'Aba Ocorrências & Gargalos', descricao: 'Alertas ativos de ruptura ou parada que impactam o Lead Time.' },
+          { fig: 'Figura 5.7', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/07_Aba_Mensagens_com_Setores.png', titulo: 'Aba Mensagens com Setores', descricao: 'Comunicação do PCP com os demais departamentos da empresa.' },
+          { fig: 'Figura 5.8', path: 'Desktop/Cap_03_PCP_Planejamento_e_Controle/08_Modal_Emitir_Nova_OP_Manual.png', titulo: 'Modal Emitir OP Manual', descricao: 'Formulário para criação manual de uma Ordem de Produção.' }
         ],
         faltando: [
-          { responsavel: 'Sofia', fig: 'Fig. 5.9 (esperada)', arquivo: '09_Modal_Programar_Etapa_Turno_Extra.png', motivo: 'Não apareceu porque a conta pcp.alfa@demo.sim não tinha o botão .btn-abrir-programar disponível no momento da captura.' }
+          { responsavel: 'Sofia', fig: 'Figura 5.9 (esperada)', arquivo: '09_Modal_Programar_Etapa_Turno_Extra.png', motivo: 'Não apareceu porque a conta pcp.alfa@demo.sim não tinha o botão .btn-abrir-programar disponível no momento da captura.' }
         ]
       },
       7: {
         davi: [
-          { fig: 'Fig. 8.1', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/01_Tela_Ordens_de_Producao_Stepper_MES.png', titulo: 'Ordens de Produção — Stepper MES' },
-          { fig: 'Fig. 8.2', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/02_Aba_Parque_Maquinas_e_Manutencao.png', titulo: 'Aba Parque de Máquinas e Manutenção' },
-          { fig: 'Fig. 8.3', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/03_Aba_Mensagens_Chao_de_Fabrica.png', titulo: 'Aba Mensagens do Chão de Fábrica' },
-          { fig: 'Fig. 8.4', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/04_Tela_Fila_Sequenciada_Visao_Operador.png', titulo: 'Fila Sequenciada — Visão do Operador' }
+          { fig: 'Figura 8.1', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/01_Tela_Ordens_de_Producao_Stepper_MES.png', titulo: 'Ordens de Produção — Stepper MES', descricao: 'Acompanhamento visual das 4 etapas MES (Mistura → Granulação → Secagem → Ensacamento).' },
+          { fig: 'Figura 8.2', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/02_Aba_Parque_Maquinas_e_Manutencao.png', titulo: 'Parque de Máquinas', descricao: 'Status de desgaste por máquina e gestão de manutenções (preditiva, preventiva, corretiva).' },
+          { fig: 'Figura 8.3', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/03_Aba_Mensagens_Chao_de_Fabrica.png', titulo: 'Mensagens Chão de Fábrica', descricao: 'Comunicação entre operadores, PCP e manutenção.' },
+          { fig: 'Figura 8.4', path: 'Desktop/Cap_06_Producao_Chao_de_Fabrica_MES/04_Tela_Fila_Sequenciada_Visao_Operador.png', titulo: 'Fila Sequenciada', descricao: 'Fila de OPs organizada na ordem de execução.' }
         ],
         sofia: [
-          { fig: 'Fig. 9.1', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/01_Tela_Quarentena_MP_Recebimento.png', titulo: 'Quarentena de MP — Recebimento' },
-          { fig: 'Fig. 9.2', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/03_Aba_Liberacao_PA_Pos_Etapa_4.png', titulo: 'Liberação de PA (Pós-Etapa 4)' },
-          { fig: 'Fig. 9.3', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/05_Aba_Relatorios_Nao_Conformidade_RNC.png', titulo: 'RNCs — Relatórios de Não Conformidade' },
-          { fig: 'Fig. 9.4', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/06_Aba_Historico_Laudos_Inspecao.png', titulo: 'Histórico de Laudos de Inspeção' },
-          { fig: 'Fig. 9.5', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/07_Aba_Graficos_Pareto_de_Defeitos.png', titulo: 'Gráficos Pareto de Defeitos' },
-          { fig: 'Fig. 9.6', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/08_Aba_Mensagens_Qualidade.png', titulo: 'Mensagens da Qualidade' },
-          { fig: 'Fig. 9.7', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/02_Modal_Laudo_Laboratorial_MP.png', titulo: 'Modal — Laudo Laboratorial (MP)' },
-          { fig: 'Fig. 9.8', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/04_Modal_Laudo_Laboratorial_PA.png', titulo: 'Modal — Laudo Laboratorial (PA)' }
+          { fig: 'Figura 9.1', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/01_Tela_Quarentena_MP_Recebimento.png', titulo: 'Quarentena de MP', descricao: 'Lotes de matéria-prima aguardando laudo laboratorial antes da liberação.' },
+          { fig: 'Figura 9.2', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/03_Aba_Liberacao_PA_Pos_Etapa_4.png', titulo: 'Liberação de PA', descricao: 'Liberação de produto acabado apenas após conclusão da Etapa 4 (umidade ≤ 1,00%).' },
+          { fig: 'Figura 9.3', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/05_Aba_Relatorios_Nao_Conformidade_RNC.png', titulo: 'RNCs', descricao: 'RNCs abertas com fluxo de decisão executiva (Retrabalho/Concessão/Descarte).' },
+          { fig: 'Figura 9.4', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/06_Aba_Historico_Laudos_Inspecao.png', titulo: 'Histórico de Laudos', descricao: 'Consulta dos laudos laboratoriais emitidos por lote.' },
+          { fig: 'Figura 9.5', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/07_Aba_Graficos_Pareto_de_Defeitos.png', titulo: 'Pareto de Defeitos', descricao: 'Análise de Pareto dos defeitos mais frequentes (80/20).' },
+          { fig: 'Figura 9.6', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/08_Aba_Mensagens_Qualidade.png', titulo: 'Mensagens da Qualidade', descricao: 'Comunicação entre QA/QC e demais setores.' },
+          { fig: 'Figura 9.7', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/02_Modal_Laudo_Laboratorial_MP.png', titulo: 'Laudo Laboratorial (MP)', descricao: 'Formulário de inspeção de matéria-prima (umidade, pureza, granulometria).' },
+          { fig: 'Figura 9.8', path: 'Desktop/Cap_07_Garantia_da_Qualidade_QA_QC/04_Modal_Laudo_Laboratorial_PA.png', titulo: 'Laudo Laboratorial (PA)', descricao: 'Formulário de inspeção de produto acabado antes da liberação.' }
         ]
       },
       8: {
         davi: [
-          { fig: 'Fig. 6.1', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/01_Tela_Mercado_B2B_e_Ofertas_em_Cards.png', titulo: 'Mercado B2B — Ofertas em Cards' },
-          { fig: 'Fig. 6.2', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/02_Aba_Reposicao_Insumos_ROP_e_MRP.png', titulo: 'Reposição de Insumos (ROP/MRP)' },
-          { fig: 'Fig. 6.3', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/03_Aba_Catalogo_e_Cotacao_Fornecedores.png', titulo: 'Catálogo e Cotação de Fornecedores' },
-          { fig: 'Fig. 6.4', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/05_Aba_Historico_Pedidos_MP_Rodada.png', titulo: 'Histórico de Pedidos de MP por Rodada' },
-          { fig: 'Fig. 6.5', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/06_Aba_Chamados_Internos_Compras.png', titulo: 'Chamados Internos — Compras' },
-          { fig: 'Fig. 6.6', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/07_Tela_Historico_Geral_e_Scorecard_Fornecedores.png', titulo: 'Histórico Geral e Scorecard de Fornecedores' },
-          { fig: 'Fig. 7.1', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/01_Tela_Politicas_e_Ressuprimento_ROP.png', titulo: 'Políticas e Ressuprimento (ROP)' },
-          { fig: 'Fig. 7.2', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/04_Aba_Ocupacao_Galpoes_e_Silos.png', titulo: 'Ocupação de Galpões e Silos' },
-          { fig: 'Fig. 7.3', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/05_Aba_Lotes_Rastreabilidade_FEFO_FIFO.png', titulo: 'Lotes — Rastreabilidade FEFO/FIFO' },
-          { fig: 'Fig. 7.4', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/06_Aba_Curva_ABC_Pareto_Completa.png', titulo: 'Curva ABC / Pareto Completa' },
-          { fig: 'Fig. 7.5', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/08_Aba_Calculadora_LEC_EOQ.png', titulo: 'Calculadora LEC / EOQ' },
-          { fig: 'Fig. 7.6', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/10_Aba_Livro_Kardex_Movimentacoes.png', titulo: 'Livro Kardex — Movimentações' },
-          { fig: 'Fig. 7.7', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/11_Aba_Mensagens_Almoxarifado.png', titulo: 'Mensagens do Almoxarifado' },
-          { fig: 'Fig. 7.8', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/07_Curva_ABC_Filtrada_Classe_A.png', titulo: 'Curva ABC Filtrada (Classe A)' },
-          { fig: 'Fig. 7.9', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/09_Calculadora_EOQ_Resultado_Simulado.png', titulo: 'Calculadora EOQ — Resultado Simulado' },
-          { fig: 'Fig. 7.10', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/02_Modal_Configurar_Parametros_ROP_LEC.png', titulo: 'Modal — Configurar Parâmetros ROP/LEC' },
-          { fig: 'Fig. 7.11', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/03_Modal_Baixa_Descarte_Avaria_FEFO.png', titulo: 'Modal — Baixa / Descarte / Avaria (FEFO)' }
+          { fig: 'Figura 6.1', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/01_Tela_Mercado_B2B_e_Ofertas_em_Cards.png', titulo: 'Mercado B2B', descricao: 'Ofertas de matéria-prima exibidas em cards com preço, fornecedor e validade.' },
+          { fig: 'Figura 6.2', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/02_Aba_Reposicao_Insumos_ROP_e_MRP.png', titulo: 'Reposição ROP/MRP', descricao: 'Sugestões automáticas de compra baseadas em ROP e MRP.' },
+          { fig: 'Figura 6.3', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/03_Aba_Catalogo_e_Cotacao_Fornecedores.png', titulo: 'Catálogo Fornecedores', descricao: 'Consulta de preços, lead times e confiabilidade por fornecedor.' },
+          { fig: 'Figura 6.4', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/05_Aba_Historico_Pedidos_MP_Rodada.png', titulo: 'Histórico Pedidos MP', descricao: 'Rastreamento de todos os pedidos de matéria-prima realizados.' },
+          { fig: 'Figura 6.5', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/06_Aba_Chamados_Internos_Compras.png', titulo: 'Chamados de Compras', descricao: 'Solicitações internas de compra aguardando aprovação.' },
+          { fig: 'Figura 6.6', path: 'Desktop/Cap_04_Compras_e_Vendas_B2B/07_Tela_Historico_Geral_e_Scorecard_Fornecedores.png', titulo: 'Scorecard Fornecedores', descricao: 'Avaliação consolidada de fornecedores (prazo, qualidade, preço).' },
+          { fig: 'Figura 7.1', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/01_Tela_Politicas_e_Ressuprimento_ROP.png', titulo: 'Políticas ROP', descricao: 'Configuração do Ponto de Pedido (ROP) por insumo e envio de notificação para Compras.' },
+          { fig: 'Figura 7.2', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/04_Aba_Ocupacao_Galpoes_e_Silos.png', titulo: 'Ocupação Silos/Galpões', descricao: 'Monitoramento da capacidade física (Silos MP 2.500t e Galpão PA 1.800t).' },
+          { fig: 'Figura 7.3', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/05_Aba_Lotes_Rastreabilidade_FEFO_FIFO.png', titulo: 'Rastreabilidade FEFO', descricao: 'Rastreabilidade completa dos lotes com política FEFO (First Expire, First Out).' },
+          { fig: 'Figura 7.4', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/06_Aba_Curva_ABC_Pareto_Completa.png', titulo: 'Curva ABC / Pareto', descricao: 'Classificação ABC dos insumos com análise de Pareto.' },
+          { fig: 'Figura 7.5', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/08_Aba_Calculadora_LEC_EOQ.png', titulo: 'Calculadora LEC', descricao: 'Cálculo do Lote Econômico de Compra (LEC/EOQ).' },
+          { fig: 'Figura 7.6', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/10_Aba_Livro_Kardex_Movimentacoes.png', titulo: 'Livro Kardex', descricao: 'Livro fiscal de entradas e saídas do estoque.' },
+          { fig: 'Figura 7.7', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/11_Aba_Mensagens_Almoxarifado.png', titulo: 'Mensagens Almoxarifado', descricao: 'Comunicação entre almoxarifado e demais setores.' },
+          { fig: 'Figura 7.8', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/07_Curva_ABC_Filtrada_Classe_A.png', titulo: 'Curva ABC Classe A', descricao: 'Visualização apenas dos insumos Classe A (maior valor).' },
+          { fig: 'Figura 7.9', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/09_Calculadora_EOQ_Resultado_Simulado.png', titulo: 'EOQ Simulado', descricao: 'Resultado do cálculo de LEC para um insumo selecionado.' },
+          { fig: 'Figura 7.10', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/02_Modal_Configurar_Parametros_ROP_LEC.png', titulo: 'Modal ROP/LEC', descricao: 'Formulário de ajuste de parâmetros de ressuprimento.' },
+          { fig: 'Figura 7.11', path: 'Desktop/Cap_05_Estoque_e_Almoxarifado/03_Modal_Baixa_Descarte_Avaria_FEFO.png', titulo: 'Modal Baixa/Avaria', descricao: 'Formulário para baixa de estoque (avaria, descarte, vencimento).' }
         ],
         sofia: [
-          { fig: 'Fig. 10.1', path: 'Desktop/Cap_08_Logistica_e_Expedicao/01_Tela_Carteira_Pedidos_e_Expedicao.png', titulo: 'Carteira de Pedidos e Expedição' },
-          { fig: 'Fig. 10.2', path: 'Desktop/Cap_08_Logistica_e_Expedicao/03_Aba_Disponibilidade_Veiculos_e_Escassez.png', titulo: 'Disponibilidade de Veículos e Escassez' },
-          { fig: 'Fig. 10.3', path: 'Desktop/Cap_08_Logistica_e_Expedicao/04_Aba_Malha_Rotas_e_Pedagios.png', titulo: 'Malha de Rotas e Pedágios' },
-          { fig: 'Fig. 10.4', path: 'Desktop/Cap_08_Logistica_e_Expedicao/05_Aba_Historico_Entregas_e_CTe.png', titulo: 'Histórico de Entregas e CT-e' },
-          { fig: 'Fig. 10.5', path: 'Desktop/Cap_08_Logistica_e_Expedicao/06_Aba_Mensagens_Logistica.png', titulo: 'Mensagens da Logística' },
-          { fig: 'Fig. 10.6', path: 'Desktop/Cap_08_Logistica_e_Expedicao/02_Modal_Despacho_CTe_e_Cotacao_Frete.png', titulo: 'Modal — Despacho CT-e e Cotação de Frete' }
+          { fig: 'Figura 10.1', path: 'Desktop/Cap_08_Logistica_e_Expedicao/01_Tela_Carteira_Pedidos_e_Expedicao.png', titulo: 'Carteira de Pedidos', descricao: 'Pedidos pendentes com prioridade para atrasados (multas de 10% e 18%).' },
+          { fig: 'Figura 10.2', path: 'Desktop/Cap_08_Logistica_e_Expedicao/03_Aba_Disponibilidade_Veiculos_e_Escassez.png', titulo: 'Disponibilidade Veículos', descricao: 'Concorrência de viagens no polo entre equipes — fracionamento de cargas necessário.' },
+          { fig: 'Figura 10.3', path: 'Desktop/Cap_08_Logistica_e_Expedicao/04_Aba_Malha_Rotas_e_Pedagios.png', titulo: 'Malha de Rotas', descricao: 'Rotas disponíveis com custos de frete, pedágio e desvios.' },
+          { fig: 'Figura 10.4', path: 'Desktop/Cap_08_Logistica_e_Expedicao/05_Aba_Historico_Entregas_e_CTe.png', titulo: 'Histórico Entregas', descricao: 'Histórico de entregas concluídas com emissão de Conhecimento de Transporte.' },
+          { fig: 'Figura 10.5', path: 'Desktop/Cap_08_Logistica_e_Expedicao/06_Aba_Mensagens_Logistica.png', titulo: 'Mensagens Logística', descricao: 'Comunicação entre Logística, Comercial e Financeiro.' },
+          { fig: 'Figura 10.6', path: 'Desktop/Cap_08_Logistica_e_Expedicao/02_Modal_Despacho_CTe_e_Cotacao_Frete.png', titulo: 'Modal Despacho CT-e', descricao: 'Formulário de cotação de frete e emissão de CT-e.' }
         ],
         faltando: [
-          { responsavel: 'Davi', fig: 'Fig. 6.7 (esperada)', arquivo: '04_Modal_Emitir_Pedido_Compra_MP.png', motivo: 'Não apareceu porque .btn-comprar-sugestao não estava visível/habilitado na aba de catálogo de compras.alfa@demo.sim.' }
+          { responsavel: 'Davi', fig: 'Figura 6.7 (esperada)', arquivo: '04_Modal_Emitir_Pedido_Compra_MP.png', motivo: 'Não apareceu porque .btn-comprar-sugestao não estava visível/habilitado na aba de catálogo de compras.alfa@demo.sim.' }
         ]
       },
       9: {
         davi: [],
         sofia: [
-          { fig: 'Fig. 3.1', path: 'Desktop/Cap_10_Ranking_e_Competitividade/01_Instrutor_Placar_Geral_e_Podio.png', titulo: 'Instrutor — Placar Geral e Pódio' },
-          { fig: 'Fig. 3.2', path: 'Desktop/Cap_10_Ranking_e_Competitividade/02_Instrutor_Graficos_Evolucao_e_Radar.png', titulo: 'Instrutor — Gráficos de Evolução e Radar' },
-          { fig: 'Fig. 3.3', path: 'Desktop/Cap_10_Ranking_e_Competitividade/03_Instrutor_Dossie_360_Todas_Equipes.png', titulo: 'Instrutor — Dossiê 360 de Todas as Equipes' },
-          { fig: 'Fig. 3.4', path: 'Desktop/Cap_10_Ranking_e_Competitividade/04_Instrutor_Modal_RaioX_Detalhado.png', titulo: 'Instrutor — Modal Raio-X Detalhado' },
-          { fig: 'Fig. 3.5', path: 'Desktop/Cap_10_Ranking_e_Competitividade/05_Aluno_Placar_Geral_com_Sigilo_Industrial.png', titulo: 'Aluno — Placar Geral com Sigilo Industrial' },
-          { fig: 'Fig. 3.6', path: 'Desktop/Cap_10_Ranking_e_Competitividade/06_Aluno_Radar_360_Propria_Empresa.png', titulo: 'Aluno — Radar 360 da Própria Empresa' },
-          { fig: 'Fig. 3.7', path: 'Desktop/Cap_10_Ranking_e_Competitividade/07_Aluno_Dossie_360_Propria_Empresa.png', titulo: 'Aluno — Dossiê 360 da Própria Empresa' },
-          { fig: 'Fig. 3.8', path: 'Desktop/Cap_10_Ranking_e_Competitividade/08_Aluno_Modal_Meu_RaioX.png', titulo: 'Aluno — Modal Meu Raio-X' },
-          { fig: 'Fig. 1.21', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/07_Dossie_Final_e_People_Analytics_RH.png', titulo: 'Dossiê Final e People Analytics (RH)' }
+          { fig: 'Figura 3.1', path: 'Desktop/Cap_10_Ranking_e_Competitividade/01_Instrutor_Placar_Geral_e_Podio.png', titulo: 'Ranking Instrutor — Placar', descricao: 'Visão global docente com classificação multicritério de todas as equipes.' },
+          { fig: 'Figura 3.2', path: 'Desktop/Cap_10_Ranking_e_Competitividade/02_Instrutor_Graficos_Evolucao_e_Radar.png', titulo: 'Evolução e Radar', descricao: 'Curva de liquidez rodada a rodada, radar competitivo e comparativo OTIF × OEE.' },
+          { fig: 'Figura 3.3', path: 'Desktop/Cap_10_Ranking_e_Competitividade/03_Instrutor_Dossie_360_Todas_Equipes.png', titulo: 'Dossiê 360°', descricao: 'Análise SWOT e organograma liberados para todas as equipes no modo instrutor.' },
+          { fig: 'Figura 3.4', path: 'Desktop/Cap_10_Ranking_e_Competitividade/04_Instrutor_Modal_RaioX_Detalhado.png', titulo: 'Modal Raio-X', descricao: 'Detalhamento de caixa, OTIF, OEE, multas, diagnóstico IA e membros.' },
+          { fig: 'Figura 3.5', path: 'Desktop/Cap_10_Ranking_e_Competitividade/05_Aluno_Placar_Geral_com_Sigilo_Industrial.png', titulo: 'Placar com Sigilo', descricao: 'O aluno vê sua posição, mas o Raio-X das rivais fica bloqueado por sigilo.' },
+          { fig: 'Figura 3.6', path: 'Desktop/Cap_10_Ranking_e_Competitividade/06_Aluno_Radar_360_Propria_Empresa.png', titulo: 'Radar 360° Aluno', descricao: 'Curva de liquidez e Radar 360° exclusivo da equipe contra a meta de excelência.' },
+          { fig: 'Figura 3.7', path: 'Desktop/Cap_10_Ranking_e_Competitividade/07_Aluno_Dossie_360_Propria_Empresa.png', titulo: 'Dossiê 360° Própria', descricao: 'Pontos fortes, vulnerabilidades, plano de ação e organograma da própria empresa.' },
+          { fig: 'Figura 3.8', path: 'Desktop/Cap_10_Ranking_e_Competitividade/08_Aluno_Modal_Meu_RaioX.png', titulo: 'Meu Raio-X', descricao: 'Resumo executivo da própria equipe com diagnóstico IA.' },
+          { fig: 'Figura 1.21', path: 'Desktop/Cap_01_Instrutor_Master/03_Controle_de_Rodadas_e_RH/07_Dossie_Final_e_People_Analytics_RH.png', titulo: 'Dossiê Final & RH', descricao: 'Relatório imprimível com pódio das equipes e avaliação individual (0–100) por cargo.' }
         ]
       },
-      10: {
-        davi: [],
-        sofia: []
-      }
+      10: { davi: [], sofia: [] }
     };
 
     /* ============================================================
-       DADOS DAS 10 SEMANAS
+       DADOS DAS 10 SEMANAS — TODAS COMPLETAS
        ============================================================ */
     const SEMANAS_DATA = [
       {
-        id: 1,
-        titulo: 'Semana 1 — Envio ao NIT (UNIUBE) + Acesso e Navegação Geral',
+        id: 1, titulo: 'Semana 1 — Envio ao NIT (UNIUBE) + Acesso e Navegação Geral',
         objetivo: 'Protocolar o projeto no NIT da UNIUBE sem esperar o manual e estruturar o Capítulo 1 do manual.',
         entregavel: 'Comprovante de envio do projeto ao NIT/UNIUBE + Capítulo 1 (Introdução, Acesso e Ferramentas Comuns).',
         abertaPorPadrao: true,
@@ -764,8 +1177,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 2,
-        titulo: 'Semana 2 — Guia do Instrutor (Parte 1): Setup da Turma em 4 Passos',
+        id: 2, titulo: 'Semana 2 — Guia do Instrutor (Parte 1): Setup da Turma em 4 Passos',
         objetivo: 'Documentar como o instrutor cria a turma do zero.',
         entregavel: 'Capítulo 2 (Setup da Turma — Passos 1 a 4).',
         abertaPorPadrao: false,
@@ -778,8 +1190,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 3,
-        titulo: 'Semana 3 — Guia do Instrutor (Parte 2): Controle de Rodadas e Catálogos',
+        id: 3, titulo: 'Semana 3 — Guia do Instrutor (Parte 2): Controle de Rodadas e Catálogos',
         objetivo: 'Documentar o avanço das rodadas e os catálogos técnicos do sistema.',
         entregavel: 'Capítulo 3 (Ciclo de Rodadas e Catálogos Industriais).',
         abertaPorPadrao: false,
@@ -791,8 +1202,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 4,
-        titulo: 'Semana 4 — Guia do Instrutor (Parte 3): Gazeta, Empecilhos IA e Mercado B2B',
+        id: 4, titulo: 'Semana 4 — Guia do Instrutor (Parte 3): Gazeta, Empecilhos IA e Mercado B2B',
         objetivo: 'Documentar incidentes, penalidades e rodadas comerciais.',
         entregavel: 'Capítulo 4 (Eventos, Penalidades e Mercado B2B).',
         abertaPorPadrao: false,
@@ -804,8 +1214,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 5,
-        titulo: 'Semana 5 — Manual dos Alunos (Bloco 1): Diretor Industrial & Financeiro',
+        id: 5, titulo: 'Semana 5 — Manual dos Alunos (Bloco 1): Diretor Industrial & Financeiro',
         objetivo: 'Documentar decisões executivas, CAPEX e gestão financeira.',
         entregavel: 'Capítulos 5 e 6 (Diretoria Industrial e Financeiro).',
         abertaPorPadrao: false,
@@ -817,8 +1226,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 6,
-        titulo: 'Semana 6 — Manual dos Alunos (Bloco 2): PCP & Programação da Produção',
+        id: 6, titulo: 'Semana 6 — Manual dos Alunos (Bloco 2): PCP & Programação da Produção',
         objetivo: 'Documentar planejamento de demanda, materiais, capacidade e sequenciamento.',
         entregavel: 'Capítulo 7 (Manual do Gerente de PCP).',
         abertaPorPadrao: false,
@@ -830,8 +1238,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 7,
-        titulo: 'Semana 7 — Manual dos Alunos (Bloco 3): Produção & Qualidade',
+        id: 7, titulo: 'Semana 7 — Manual dos Alunos (Bloco 3): Produção & Qualidade',
         objetivo: 'Documentar execução na fábrica e controle laboratorial.',
         entregavel: 'Capítulos 8 e 9 (Produção e Qualidade).',
         abertaPorPadrao: false,
@@ -843,8 +1250,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 8,
-        titulo: 'Semana 8 — Manual dos Alunos (Bloco 4): Compras, Estoque e Logística',
+        id: 8, titulo: 'Semana 8 — Manual dos Alunos (Bloco 4): Compras, Estoque e Logística',
         objetivo: 'Documentar suprimentos, armazenagem e expedição.',
         entregavel: 'Capítulos 10, 11 e 12 (Compras/Vendas, Estoque e Logística).',
         abertaPorPadrao: false,
@@ -856,8 +1262,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 9,
-        titulo: 'Semana 9 — Bastidores da IA, Ranking e Revisão Cruzada',
+        id: 9, titulo: 'Semana 9 — Bastidores da IA, Ranking e Revisão Cruzada',
         objetivo: 'Explicar a lógica do jogo para o usuário e revisar o texto completo.',
         entregavel: 'Minuta completa do Manual do SimuFab revisada.',
         abertaPorPadrao: false,
@@ -869,8 +1274,7 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
         ]
       },
       {
-        id: 10,
-        titulo: 'Semana 10 — Teste Prático e Entrega Final do Manual',
+        id: 10, titulo: 'Semana 10 — Teste Prático e Entrega Final do Manual',
         objetivo: 'Validar o manual rodando uma simulação real e entregar a versão final.',
         entregavel: 'Manual de Uso do SimuFab (PDF Final) + Confirmação do andamento do protocolo no NIT/UNIUBE.',
         abertaPorPadrao: false,
@@ -883,415 +1287,450 @@ OBJETIVO DA TELA: [Resumo em 2 linhas sobre para que serve a tela]
     ];
 
     /* ============================================================
-       ESTADO PERSISTIDO
+       ESTADO E PERSISTÊNCIA
        ============================================================ */
-    let estado = { checks: {}, notas: {} };
+    const state = { checked: {}, nitEnviado: false, semanasAbertas: {}, modoImagem: 'desktop', basePath: '', filtroPessoa: 'todos', filtroStatus: 'todos', busca: '' };
 
     function carregarEstado() {
       try {
-        const salvo = localStorage.getItem(STORAGE_KEY);
-        if (salvo) {
-          const parsed = JSON.parse(salvo);
-          estado.checks = parsed.checks || {};
-          estado.notas = parsed.notas || {};
-        }
-      } catch (e) { console.warn('Falha ao ler localStorage:', e); }
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const p = JSON.parse(raw);
+        if (p.checked && typeof p.checked === 'object') state.checked = p.checked;
+        if (typeof p.nitEnviado === 'boolean') state.nitEnviado = p.nitEnviado;
+        if (p.semanasAbertas && typeof p.semanasAbertas === 'object') state.semanasAbertas = p.semanasAbertas;
+        if (typeof p.modoImagem === 'string') state.modoImagem = p.modoImagem;
+        if (typeof p.basePath === 'string') state.basePath = p.basePath;
+      } catch (e) { console.warn('Erro ao carregar estado:', e); }
     }
-
     function salvarEstado() {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
-      catch (e) { console.warn('Falha ao salvar localStorage:', e); }
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    }
-
-    function badgeResponsavel(resp, isNit) {
-      const cls = resp === 'Davi' ? 'badge-davi' : (resp === 'Sofia' ? 'badge-sofia' : 'badge-conjunto');
-      const icon = resp === 'Conjunto' ? 'bi-people-fill' : 'bi-person-fill';
-      let html = `<span class="badge ${cls} rounded-pill px-2.5 py-1 fw-semibold"><i class="bi ${icon} me-1"></i>${escapeHtml(resp)}</span>`;
-      if (isNit) html += ` <span class="badge badge-nit rounded-pill px-2.5 py-1 fw-bold"><i class="bi bi-bank2 me-1"></i>NIT / UNIUBE</span>`;
-      return html;
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ checked: state.checked, nitEnviado: state.nitEnviado, semanasAbertas: state.semanasAbertas, modoImagem: state.modoImagem, basePath: state.basePath })); }
+      catch (e) { console.warn('Erro ao salvar estado:', e); }
     }
 
     /* ============================================================
-       RENDERIZAÇÃO DA GALERIA DE IMAGENS POR SEMANA
+       UTILS
        ============================================================ */
-    function renderizarGrupoImagens(nome, badgeClass, imgs) {
-      if (!imgs || imgs.length === 0) return '';
-      let html = `<div class="person-group">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <span class="badge ${badgeClass} rounded-pill px-2.5 py-1 fw-semibold"><i class="bi bi-person-fill me-1"></i>${escapeHtml(nome)}</span>
-          <small class="text-muted">${imgs.length} figura${imgs.length !== 1 ? 's' : ''}</small>
-        </div>
-        <div class="image-grid">`;
-      imgs.forEach(img => {
-        html += `<div class="image-card">
-          <div class="image-thumb" data-path="${escapeHtml(img.path)}" title="Abrir: ${escapeHtml(img.path)}">
-            <img src="${escapeHtml(img.path)}" loading="lazy" alt="${escapeHtml(img.titulo)}">
-          </div>
-          <div class="image-info">
-            <div class="fig-ref">${escapeHtml(img.fig)}</div>
-            <div class="fig-title">${escapeHtml(img.titulo)}</div>
-            <button class="btn-copy-path" data-path="${escapeHtml(img.path)}" onclick="copiarCaminho(this)">
-              <i class="bi bi-clipboard"></i> Copiar caminho
-            </button>
-          </div>
-        </div>`;
-      });
-      html += `</div></div>`;
-      return html;
+    function escapeHTML(str) { return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+    function normalizar(s) { return String(s ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function destacar(texto, termo) {
+      if (!termo) return escapeHTML(texto);
+      const norm = normalizar(texto); const t = normalizar(termo);
+      if (!t) return escapeHTML(texto);
+      const idx = norm.indexOf(t);
+      if (idx === -1) return escapeHTML(texto);
+      return escapeHTML(texto.slice(0, idx)) + '<mark>' + escapeHTML(texto.slice(idx, idx + t.length)) + '</mark>' + escapeHTML(texto.slice(idx + t.length));
+    }
+    function getImgPath(p) {
+      let p2 = p;
+      if (state.modoImagem === 'mobile') p2 = p.replace(/^Desktop\//, 'Mobile/');
+      const base = state.basePath ? state.basePath.replace(/\/?$/, '/') : '';
+      return base + p2;
+    }
+    function filenameOf(p) { return p.split('/').pop(); }
+
+    let toastContainer;
+    function toast(msg, tipo = 'success') {
+      if (!toastContainer) { toastContainer = document.createElement('div'); toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3'; document.body.appendChild(toastContainer); }
+      const id = 'toast-' + Date.now() + Math.random().toString(36).slice(2, 6);
+      const icons = { success: 'check-circle-fill', error: 'x-circle-fill', info: 'info-circle-fill', warning: 'exclamation-triangle-fill' };
+      const bgs = { success: 'bg-success', error: 'bg-danger', info: 'bg-primary', warning: 'bg-warning text-dark' };
+      toastContainer.insertAdjacentHTML('beforeend', `<div id="${id}" class="toast align-items-center ${bgs[tipo] || 'bg-success'} border-0" role="alert"><div class="d-flex"><div class="toast-body d-flex align-items-center gap-2 text-white"><i class="bi bi-${icons[tipo] || 'info-circle-fill'}"></i><span>${escapeHTML(msg)}</span></div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div></div>`);
+      const el = document.getElementById(id); const t = new bootstrap.Toast(el, { delay: 2600 }); t.show();
+      el.addEventListener('hidden.bs.toast', () => el.remove());
     }
 
-    function renderizarImagensSemana(semId) {
-      const dados = IMAGENS_POR_SEMANA[semId];
-      if (!dados) return '';
-      const davi = dados.davi || [];
-      const sofia = dados.sofia || [];
-      const faltando = dados.faltando || [];
-      const total = davi.length + sofia.length;
+    async function copiarTexto(texto) {
+      try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(texto); return true; } } catch (_) { }
+      try { const ta = document.createElement('textarea'); ta.value = texto; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; } catch (_) { return false; }
+    }
 
-      if (total === 0 && faltando.length === 0) return '';
+    function gerarLegendaABNT(img) {
+      const desc = img.descricao ? img.descricao.trim() : '';
+      return `${img.fig} — ${img.titulo}.${desc ? ' ' + desc : ''} Fonte: ${FONTE_ABNT}`;
+    }
 
-      let html = '<div class="week-images-section">';
-      html += `<div class="images-header">
-        <h6 class="fw-bold mb-0"><i class="bi bi-camera-fill text-primary me-1"></i>Prints catalogados da semana (${total} figura${total !== 1 ? 's' : ''})</h6>
-        <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Clique na miniatura p/ abrir; use o botão para copiar o caminho</small>
-      </div>`;
-
-      html += renderizarGrupoImagens('Davi', 'badge-davi', davi);
-      html += renderizarGrupoImagens('Sofia', 'badge-sofia', sofia);
-
-      if (faltando.length > 0) {
-        html += `<div class="missing-warning">
-          <strong><i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>Prints pendentes de captura (${faltando.length}):</strong>
-          <ul>`;
-        faltando.forEach(f => {
-          html += `<li><strong>${escapeHtml(f.responsavel)}</strong>: ${f.fig ? escapeHtml(f.fig) + ' — ' : ''}<code>${escapeHtml(f.arquivo)}</code><br><span class="text-muted">${escapeHtml(f.motivo)}</span></li>`;
-        });
-        html += `</ul></div>`;
+    /* ============================================================
+       RENDER
+       ============================================================ */
+    function tarefaVisivel(t, semana) {
+      if (state.filtroPessoa !== 'todos' && t.responsavel !== state.filtroPessoa) return false;
+      const done = !!state.checked[t.id];
+      if (state.filtroStatus === 'pendentes' && done) return false;
+      if (state.filtroStatus === 'concluidas' && !done) return false;
+      if (state.busca) {
+        const hay = normalizar(t.texto + ' ' + (semana.titulo || '') + ' ' + (semana.objetivo || ''));
+        if (!hay.includes(normalizar(state.busca))) return false;
       }
-
-      html += '</div>';
-      return html;
+      return true;
     }
 
-    /* ============================================================
-       RENDERIZAÇÃO DAS SEMANAS
-       ============================================================ */
     function renderizarSemanas() {
       const container = document.getElementById('listaSemanas');
-      const filtroPessoa = document.querySelector('#filtroPessoaGroup .filter-btn.active')?.dataset.person || 'todos';
-      const filtroStatus = document.getElementById('filtroStatus').value;
-      const termoBusca = document.getElementById('campoBusca').value.trim().toLowerCase();
-
       container.innerHTML = '';
+      let totalVisivel = 0;
 
       SEMANAS_DATA.forEach(sem => {
-        const tarefasFiltradas = sem.tarefas.filter(t => {
-          const concluida = !!estado.checks[t.id];
-          if (filtroPessoa !== 'todos' && t.responsavel !== filtroPessoa) return false;
-          if (filtroStatus === 'pendentes' && concluida) return false;
-          if (filtroStatus === 'concluidas' && !concluida) return false;
-          if (termoBusca) {
-            const alvo = (sem.titulo + ' ' + sem.objetivo + ' ' + t.texto + ' ' + t.responsavel).toLowerCase();
-            if (!alvo.includes(termoBusca)) return false;
-          }
-          return true;
-        });
-
-        if (tarefasFiltradas.length === 0 && (filtroPessoa !== 'todos' || filtroStatus !== 'todos' || termoBusca !== '')) return;
+        const visiveis = sem.tarefas.filter(t => tarefaVisivel(t, sem));
+        if (visiveis.length === 0) return;
+        totalVisivel += visiveis.length;
 
         const totalSem = sem.tarefas.length;
-        const feitasSem = sem.tarefas.filter(t => !!estado.checks[t.id]).length;
-        const pctSem = totalSem > 0 ? Math.round((feitasSem / totalSem) * 100) : 0;
-        const semCompleta = feitasSem === totalSem;
-        const deveAbrir = sem.abertaPorPadrao || filtroPessoa !== 'todos' || filtroStatus !== 'todos' || termoBusca !== '';
+        const doneSem = sem.tarefas.filter(t => state.checked[t.id]).length;
+        const pctSem = totalSem ? Math.round(doneSem / totalSem * 100) : 0;
+        const completa = doneSem === totalSem && totalSem > 0;
+        const aberta = state.semanasAbertas[sem.id] ?? !!sem.abertaPorPadrao;
 
-        const imgData = IMAGENS_POR_SEMANA[sem.id] || {};
-        const totalImgs = (imgData.davi?.length || 0) + (imgData.sofia?.length || 0);
-        const temFaltando = (imgData.faltando?.length || 0) > 0;
+        const gal = IMAGENS_POR_SEMANA[sem.id] || {};
+        const imgsCount = (gal.davi?.length || 0) + (gal.sofia?.length || 0);
+        const faltandoCount = gal.faltando?.length || 0;
 
         const card = document.createElement('div');
-        card.className = `week-card ${semCompleta ? 'week-completed' : ''}`;
-
-        let tasksHtml = '';
-        tarefasFiltradas.forEach(t => {
-          const checked = !!estado.checks[t.id];
-          tasksHtml += `
-            <label class="task-item ${checked ? 'done' : ''}" for="chk_${t.id}">
-              <input class="form-check-input task-checkbox" type="checkbox" id="chk_${t.id}"
-                     ${checked ? 'checked' : ''} onchange="alternarTarefa('${t.id}', this.checked)">
-              <div class="flex-grow-1">
-                <div class="d-flex flex-wrap align-items-center gap-1 mb-1">
-                  ${badgeResponsavel(t.responsavel, !!t.isNit)}
-                </div>
-                <div class="task-text small fw-medium text-dark" style="line-height: 1.45;">
-                  ${escapeHtml(t.texto)}
-                </div>
-              </div>
-            </label>
-          `;
-        });
-
-        const notaAtual = estado.notas['sem_' + sem.id] || '';
-        const imagensHtml = renderizarImagensSemana(sem.id);
-
+        card.className = `week-card ${completa ? 'week-completed' : ''}`;
+        card.dataset.weekId = sem.id;
         card.innerHTML = `
-          <div class="week-header p-3 p-md-4 d-flex flex-wrap justify-content-between align-items-center gap-3"
-               data-bs-toggle="collapse" data-bs-target="#collapseSem${sem.id}"
-               aria-expanded="${deveAbrir ? 'true' : 'false'}">
-            <div class="d-flex align-items-center gap-3">
-              <div class="week-number-pill">${semCompleta ? '<i class="bi bi-check-lg"></i>' : 'S' + sem.id}</div>
-              <div>
-                <h6 class="fw-bold text-dark mb-1">${escapeHtml(sem.titulo)}</h6>
-                <div class="small text-muted">${escapeHtml(sem.objetivo)}</div>
-              </div>
-            </div>
-
-            <div class="d-flex align-items-center gap-3 ms-auto flex-wrap">
-              ${totalImgs > 0 ? `<span class="week-img-count"><i class="bi bi-camera me-1"></i>${totalImgs}</span>` : ''}
-              ${temFaltando ? `<span class="week-img-count text-warning border-warning"><i class="bi bi-exclamation-triangle-fill me-1"></i>${(imgData.faltando||[]).length}</span>` : ''}
-              <div class="text-end" style="min-width: 110px;">
-                <div class="small fw-bold mono ${semCompleta ? 'text-success' : 'text-dark'}">${feitasSem} / ${totalSem} (${pctSem}%)</div>
-                <div class="progress mt-1" style="height: 6px;">
-                  <div class="progress-bar ${semCompleta ? 'bg-success' : 'bg-primary'}" style="width: ${pctSem}%;"></div>
-                </div>
-              </div>
-              <i class="bi bi-chevron-down fs-5 text-muted chevron-icon no-print"></i>
-            </div>
+      <div class="week-header p-3" role="button" tabindex="0" aria-expanded="${aberta}" data-bs-toggle="collapse" data-bs-target="#weekBody${sem.id}" aria-controls="weekBody${sem.id}">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <div class="week-number-pill">${completa ? '<i class="bi bi-check-lg"></i>' : sem.id}</div>
+          <div class="flex-grow-1">
+            <h6 class="fw-bold mb-1">${escapeHTML(sem.titulo)}</h6>
+            <p class="small text-muted mb-0">${escapeHTML(sem.objetivo)}</p>
           </div>
-
-          <div id="collapseSem${sem.id}" class="collapse ${deveAbrir ? 'show' : ''}">
-            <div class="p-3 p-md-4 pt-3 border-top bg-light bg-opacity-25">
-              <div class="d-flex flex-column gap-2 mb-3">
-                ${tasksHtml}
-              </div>
-
-              <div class="deliverable-box mb-3">
-                <strong class="text-dark"><i class="bi bi-flag-fill text-danger me-1"></i> Entregável da semana:</strong>
-                <span class="text-secondary">${escapeHtml(sem.entregavel)}</span>
-              </div>
-
-              ${imagensHtml}
-
-              <div class="no-print">
-                <label class="form-label small fw-bold text-muted mb-1">
-                  <i class="bi bi-journal-text me-1"></i>Anotações / Links dos rascunhos e prints (Semana ${sem.id}):
-                </label>
-                <textarea class="form-control notes-area" rows="2"
-                  placeholder="Ex.: Link do Google Docs, pasta dos prints ou protocolo do NIT..."
-                  oninput="salvarNota(${sem.id}, this.value)">${escapeHtml(notaAtual)}</textarea>
-              </div>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="week-img-count no-print" title="${imgsCount} imagens + ${faltandoCount} pendentes">
+              <i class="bi bi-image me-1"></i>${imgsCount}
+              ${faltandoCount ? `<span class="text-warning">+${faltandoCount}<i class="bi bi-exclamation-triangle-fill ms-1"></i></span>` : ''}
+            </span>
+            <div class="d-flex align-items-center gap-2">
+              <div class="week-progress-mini" title="${doneSem}/${totalSem} tarefas"><div style="width:${pctSem}%"></div></div>
+              <span class="small fw-bold mono ${completa ? 'text-success' : 'text-muted'}">${pctSem}%</span>
             </div>
+            <i class="bi bi-chevron-down chevron-icon fs-5 text-muted"></i>
           </div>
-        `;
-
+        </div>
+      </div>
+      <div id="weekBody${sem.id}" class="collapse ${aberta ? 'show' : ''}">
+        <div class="p-3">
+          <div class="deliverable-box mb-3"><i class="bi bi-box-seam text-danger me-1"></i><strong>Entregável:</strong> ${escapeHTML(sem.entregavel)}</div>
+          <h6 class="fw-bold small text-uppercase text-muted mb-2"><i class="bi bi-list-check me-1"></i>Tarefas da Semana</h6>
+          <div class="d-flex flex-column gap-2 mb-3">${sem.tarefas.map(t => renderizarTarefa(t, sem)).join('')}</div>
+          ${renderizarGaleria(sem.id, gal)}
+          ${(gal.faltando && gal.faltando.length) ? renderizarFaltando(gal.faltando) : ''}
+          <div class="mt-3">
+            <label class="form-label small fw-bold text-muted"><i class="bi bi-pencil-square me-1"></i>Notas / Observações desta semana</label>
+            <textarea class="form-control notes-area" rows="2" placeholder="Anotações, pendências, links..." data-notes="${sem.id}"></textarea>
+          </div>
+        </div>
+      </div>`;
         container.appendChild(card);
+
+        const notesEl = card.querySelector(`[data-notes="${sem.id}"]`);
+        if (notesEl) notesEl.value = (state.checked['__notes_' + sem.id]) || '';
+        notesEl?.addEventListener('input', e => { state.checked['__notes_' + sem.id] = e.target.value; salvarEstado(); });
       });
 
-      if (container.innerHTML === '') {
-        container.innerHTML = `
-          <div class="alert alert-light border text-center py-5 rounded-4">
-            <i class="bi bi-search fs-1 text-muted d-block mb-2"></i>
-            <h6 class="fw-bold">Nenhuma tarefa encontrada para este filtro.</h6>
-            <span class="small text-muted">Tente limpar a busca ou selecionar "Todos".</span>
-          </div>
-        `;
+      if (totalVisivel === 0) {
+        container.innerHTML = `<div class="empty-state"><i class="bi bi-search"></i><h5 class="mt-2">Nenhuma tarefa encontrada</h5><p class="small">Ajuste os filtros ou limpe a busca.</p></div>`;
       }
 
-      atualizarKpis();
-      lidarComErrosDeImagem();
+      container.querySelectorAll('.week-header').forEach(h => {
+        h.addEventListener('click', onToggleWeek);
+        h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggleWeek(e); } });
+      });
+      container.querySelectorAll('.task-item').forEach(el => {
+        el.addEventListener('click', onToggleTarefaClick);
+        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggleTarefaClick(e); } });
+      });
+      container.querySelectorAll('.task-checkbox').forEach(cb => {
+        cb.addEventListener('click', e => e.stopPropagation());
+        cb.addEventListener('change', e => {
+          const id = e.target.dataset.taskId;
+          state.checked[id] = e.target.checked;
+          if (!e.target.checked) delete state.checked[id];
+          atualizarItemVisual(id); atualizarKPIs(); salvarEstado();
+        });
+      });
+      container.querySelectorAll('.btn-copy-legenda').forEach(b => {
+        b.addEventListener('click', e => { e.stopPropagation(); copiarLegendaABNT(b); });
+      });
+      container.querySelectorAll('.image-thumb[data-zoom]').forEach(th => {
+        th.addEventListener('click', () => abrirZoom(th));
+        th.addEventListener('keydown', e => { if (e.key === 'Enter') { abrirZoom(th); } });
+      });
+      container.querySelectorAll('img[data-src]').forEach(img => {
+        img.addEventListener('error', onImgError, { once: true });
+      });
+
+      atualizarKPIs();
+      atualizarBadgeNit();
     }
 
-    /* Fallback quando uma imagem não carrega (arquivo não encontrado no servidor) */
-    function lidarComErrosDeImagem() {
-      document.querySelectorAll('.image-thumb img').forEach(img => {
-        img.addEventListener('error', function() {
-          const wrap = this.closest('.image-thumb');
-          if (!wrap) return;
-          wrap.classList.add('img-error');
-          wrap.innerHTML = '<i class="bi bi-image" title="Print não encontrado no servidor"></i>';
-        });
-        // Se já falhou antes do listener:
-        if (img.complete && img.naturalWidth === 0) {
-          const wrap = img.closest('.image-thumb');
-          if (wrap) {
-            wrap.classList.add('img-error');
-            wrap.innerHTML = '<i class="bi bi-image" title="Print não encontrado no servidor"></i>';
-          }
-        }
-      });
+    function renderizarTarefa(t, sem) {
+      const done = !!state.checked[t.id];
+      const respClass = t.responsavel === 'Davi' ? 'badge-davi' : t.responsavel === 'Sofia' ? 'badge-sofia' : 'badge-conjunto';
+      const nitBadge = t.isNit ? '<span class="badge badge-nit rounded-pill ms-1"><i class="bi bi-bank2 me-1"></i>NIT</span>' : '';
+      const txt = state.busca ? destacar(t.texto, state.busca) : escapeHTML(t.texto);
+      return `<div class="task-item ${done ? 'done' : ''} ${t.isNit ? 'task-nit' : ''}" data-task-id="${t.id}" tabindex="0" role="checkbox" aria-checked="${done}">
+    <input class="form-check-input task-checkbox" type="checkbox" ${done ? 'checked' : ''} data-task-id="${t.id}" aria-label="Marcar tarefa">
+    <div class="flex-grow-1">
+      <div class="d-flex align-items-center gap-1 mb-1 flex-wrap"><span class="badge ${respClass} rounded-pill">${escapeHTML(t.responsavel)}</span>${nitBadge}</div>
+      <div class="task-text small">${txt}</div>
+    </div>
+  </div>`;
+    }
+
+    function renderizarGaleria(semId, gal) {
+      const davi = gal.davi || []; const sofia = gal.sofia || [];
+      if (davi.length + sofia.length === 0) return '';
+      return `<div class="week-images-section">
+    <div class="images-header">
+      <h6 class="fw-bold small text-uppercase text-muted mb-0"><i class="bi bi-images me-1"></i>Galeria da Semana — Legendas ABNT</h6>
+      <span class="badge bg-light text-dark border">${state.modoImagem === 'mobile' ? 'Mobile' : 'Desktop'}</span>
+    </div>
+    ${davi.length ? renderizarGrupo('Davi', davi, 'davi') : ''}
+    ${sofia.length ? renderizarGrupo('Sofia', sofia, 'sofia') : ''}
+  </div>`;
+    }
+
+    function renderizarGrupo(pessoa, imgs, key) {
+      const badge = key === 'davi' ? 'badge-davi' : 'badge-sofia';
+      return `<div class="person-group">
+    <div class="d-flex align-items-center gap-2 mb-2"><span class="badge ${badge} rounded-pill px-2 py-1"><i class="bi bi-person-fill me-1"></i>${pessoa} <span class="opacity-75">(${imgs.length})</span></span></div>
+    <div class="image-grid">${imgs.map(img => renderizarCardImagem(img, pessoa)).join('')}</div>
+  </div>`;
+    }
+
+    function renderizarCardImagem(img, pessoa) {
+      const src = getImgPath(img.path);
+      const fname = filenameOf(img.path);
+      const legenda = gerarLegendaABNT(img);
+      const seguranca = escapeHTML(legenda).replace(/'/g, '&#39;');
+      return `<div class="image-card">
+    <div class="image-thumb" data-zoom data-src="${escapeHTML(src)}" data-title="${escapeHTML(img.titulo)}" data-desc="${escapeHTML(img.descricao || '')}" data-path="${escapeHTML(img.path)}" role="button" tabindex="0" aria-label="Ampliar ${escapeHTML(img.titulo)}">
+      <img data-src="${escapeHTML(src)}" src="${escapeHTML(src)}" alt="${escapeHTML(img.titulo)}" loading="lazy">
+      <div class="img-placeholder" style="display:none;"><i class="bi bi-image"></i><span>${escapeHTML(fname)}</span></div>
+    </div>
+    <div class="image-info">
+      <div class="fig-ref">${escapeHTML(img.fig)}</div>
+      <div class="fig-title">${escapeHTML(img.titulo)}</div>
+      ${img.descricao ? `<div class="fig-desc">${escapeHTML(img.descricao)}</div>` : ''}
+      <div class="fig-fonte">Fonte: ${FONTE_ABNT}</div>
+      <button type="button" class="btn-copy-legenda" data-legenda="${seguranca}" title="Copiar legenda ABNT completa"><i class="bi bi-clipboard"></i> Copiar legenda ABNT</button>
+    </div>
+  </div>`;
+    }
+
+    function renderizarFaltando(lista) {
+      return `<div class="missing-warning">
+    <strong><i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>Prints pendentes de captura (${lista.length}):</strong>
+    <ul>${lista.map(f => `<li><strong>${escapeHTML(f.responsavel)}</strong> — <code>${escapeHTML(f.arquivo)}</code><br><span class="text-muted">${escapeHTML(f.motivo || '')}</span></li>`).join('')}</ul>
+  </div>`;
     }
 
     /* ============================================================
-       AÇÕES
+       HANDLERS
        ============================================================ */
-    function alternarTarefa(taskId, checked) {
-      estado.checks[taskId] = checked;
-      salvarEstado();
-      renderizarSemanas();
+    function onToggleWeek(e) {
+      const header = e.currentTarget; const card = header.closest('.week-card'); const id = Number(card.dataset.weekId);
+      const body = document.getElementById('weekBody' + id); if (!body) return;
+      const bsCollapse = bootstrap.Collapse.getOrCreateInstance(body, { toggle: false });
+      const isShown = body.classList.contains('show');
+      if (isShown) bsCollapse.hide(); else bsCollapse.show();
+      header.setAttribute('aria-expanded', String(!isShown));
+      state.semanasAbertas[id] = !isShown; salvarEstado();
     }
-
-    function salvarNota(semId, texto) {
-      estado.notas['sem_' + semId] = texto;
-      salvarEstado();
+    function onToggleTarefaClick(e) {
+      if (e.target.matches('.task-checkbox')) return;
+      const item = e.currentTarget; const cb = item.querySelector('.task-checkbox'); if (!cb) return;
+      cb.checked = !cb.checked; cb.dispatchEvent(new Event('change', { bubbles: true }));
     }
-
-    function atualizarKpis() {
-      let totalGeral = 0, feitasGeral = 0;
-      let totalDavi = 0, feitasDavi = 0;
-      let totalSofia = 0, feitasSofia = 0;
-
-      SEMANAS_DATA.forEach(sem => {
-        sem.tarefas.forEach(t => {
-          const ok = !!estado.checks[t.id];
-          totalGeral++;
-          if (ok) feitasGeral++;
-          if (t.responsavel === 'Davi') { totalDavi++; if (ok) feitasDavi++; }
-          else if (t.responsavel === 'Sofia') { totalSofia++; if (ok) feitasSofia++; }
-        });
-      });
-
-      const pctGeral = totalGeral ? Math.round((feitasGeral / totalGeral) * 100) : 0;
-      const pctDavi  = totalDavi  ? Math.round((feitasDavi / totalDavi) * 100) : 0;
-      const pctSofia = totalSofia ? Math.round((feitasSofia / totalSofia) * 100) : 0;
-
-      document.getElementById('kpiGeralPct').innerText = pctGeral + '%';
-      document.getElementById('kpiGeralContagem').innerText = `${feitasGeral} / ${totalGeral} tarefas`;
-      document.getElementById('barGeral').style.width = pctGeral + '%';
-
-      document.getElementById('kpiDaviPct').innerText = pctDavi + '%';
-      document.getElementById('kpiDaviContagem').innerText = `${feitasDavi} / ${totalDavi} tarefas`;
-      document.getElementById('barDavi').style.width = pctDavi + '%';
-
-      document.getElementById('kpiSofiaPct').innerText = pctSofia + '%';
-      document.getElementById('kpiSofiaContagem').innerText = `${feitasSofia} / ${totalSofia} tarefas`;
-      document.getElementById('barSofia').style.width = pctSofia + '%';
-
-      const badgeNit = document.getElementById('badgeNitStatus');
-      if (estado.checks['s1_t1']) {
-        badgeNit.className = 'badge bg-success rounded-pill px-3 py-1.5';
-        badgeNit.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>Enviado ao NIT/UNIUBE';
-      } else {
-        badgeNit.className = 'badge bg-danger rounded-pill px-3 py-1.5';
-        badgeNit.innerHTML = '<i class="bi bi-exclamation-circle-fill me-1"></i>Pendente de envio';
-      }
-    }
-
-    function expandirOuRecolherTodas(abrir) {
-      document.querySelectorAll('#listaSemanas .collapse').forEach(el => {
-        const inst = bootstrap.Collapse.getOrCreateInstance(el, { toggle: false });
-        if (abrir) inst.show(); else inst.hide();
+    function atualizarItemVisual(id) {
+      document.querySelectorAll(`.task-item[data-task-id="${id}"]`).forEach(el => {
+        const done = !!state.checked[id];
+        el.classList.toggle('done', done); el.setAttribute('aria-checked', String(done));
+        const cb = el.querySelector('.task-checkbox'); if (cb) cb.checked = done;
       });
     }
-
-    function resetarProgresso() {
-      if (!confirm('Tem certeza que deseja limpar todas as tarefas marcadas e anotações?')) return;
-      estado = { checks: {}, notas: {} };
-      salvarEstado();
-      renderizarSemanas();
+    function onImgError(e) {
+      const img = e.currentTarget; const parent = img.closest('.image-thumb'); if (!parent) return;
+      parent.classList.add('img-error'); img.style.display = 'none';
+      const ph = parent.querySelector('.img-placeholder'); if (ph) ph.style.display = 'flex';
+    }
+    function abrirZoom(thumb) {
+      const src = thumb.dataset.src; const title = thumb.dataset.title || ''; const desc = thumb.dataset.desc || '';
+      document.getElementById('zoomTitulo').textContent = title;
+      document.getElementById('zoomPath').textContent = thumb.dataset.path || '';
+      document.getElementById('zoomDesc').textContent = desc;
+      const img = document.getElementById('zoomImg'); img.src = src; img.alt = title;
+      new bootstrap.Modal(document.getElementById('modalImageZoom')).show();
+    }
+    function abrirZoomExemplo(imgEl) {
+      document.getElementById('zoomTitulo').textContent = 'Exemplo Visual de Capítulo — Módulo 7 (Logística & Expedição)';
+      document.getElementById('zoomPath').textContent = 'exemplo.png';
+      document.getElementById('zoomDesc').textContent = 'Modelo ilustrativo mostrando a estrutura completa com print anotado por setas e legendas numeradas.';
+      const img = document.getElementById('zoomImg');
+      img.src = imgEl.src;
+      img.alt = imgEl.alt;
+      new bootstrap.Modal(document.getElementById('modalImageZoom')).show();
+    }
+    function configurarImagemExemplo() {
+      const imgExemplo = document.getElementById('imgExemploModal');
+      if (!imgExemplo) return;
+      imgExemplo.addEventListener('error', () => {
+        imgExemplo.src = gerarSVGExemplo();
+      }, { once: true });
+    }
+    async function copiarLegendaABNT(btn) {
+      const legenda = btn.dataset.legenda || ''; const ok = await copiarTexto(legenda);
+      if (ok) {
+        btn.classList.add('copiado'); const original = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check2"></i> Copiada!';
+        toast('Legenda ABNT copiada.', 'success');
+        setTimeout(() => { btn.classList.remove('copiado'); btn.innerHTML = original; }, 2000);
+      } else toast('Não foi possível copiar.', 'error');
+    }
+    async function copiarEmailNit(btn) { const ok = await copiarTexto('nituniube@uniube.br'); toast(ok ? 'E-mail copiado.' : 'Falha ao copiar.', ok ? 'success' : 'error'); }
+    async function copiarTemplate(btn) { const txt = document.getElementById('textoTemplate').textContent; const ok = await copiarTexto(txt); toast(ok ? 'Modelo copiado.' : 'Falha ao copiar.', ok ? 'success' : 'error'); }
+    function marcarNitEnviado(btn) { state.nitEnviado = !state.nitEnviado; salvarEstado(); atualizarBadgeNit(); toast(state.nitEnviado ? 'NIT marcado como enviado!' : 'Marcação do NIT removida.', state.nitEnviado ? 'success' : 'info'); }
+    function atualizarBadgeNit() {
+      const b = document.getElementById('badgeNitStatus'); const btn = document.getElementById('btnMarcarNit'); if (!b) return;
+      if (state.nitEnviado) { b.className = 'badge bg-success rounded-pill px-3 py-2'; b.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Enviado ao NIT'; if (btn) btn.classList.add('d-none'); }
+      else { b.className = 'badge bg-danger rounded-pill px-3 py-2'; b.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>Pendente de envio'; if (btn) btn.classList.remove('d-none'); }
     }
 
-    function copiarEmailNit(btn) {
-      navigator.clipboard.writeText('nituniube@uniube.br').then(() => {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Copiado!';
-        setTimeout(() => { btn.innerHTML = orig; }, 1800);
-      });
-    }
-
-    function copiarTemplate(btn) {
-      const txt = document.getElementById('textoTemplate').innerText;
-      navigator.clipboard.writeText(txt).then(() => {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="bi bi-check2 me-1"></i> Modelo Copiado!';
-        setTimeout(() => { btn.innerHTML = orig; }, 1800);
-      });
-    }
-
-    function copiarCaminho(btn) {
-      const path = btn.dataset.path;
-      if (!path) return;
-      navigator.clipboard.writeText(path).then(() => {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="bi bi-check2"></i> Copiado!';
-        btn.classList.add('copiado');
-        setTimeout(() => {
-          btn.innerHTML = orig;
-          btn.classList.remove('copiado');
-        }, 1600);
-      }).catch(() => {
-        alert('Não foi possível copiar o caminho: ' + path);
-      });
-    }
-
-    function abrirImagem(path) {
-      if (path) window.open(path, '_blank');
-    }
-
-    function exportarProgresso() {
-      const blob = new Blob([JSON.stringify(estado, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'progresso_manual_simufab.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function importarProgresso(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const dados = JSON.parse(e.target.result);
-          if (dados && typeof dados === 'object') {
-            estado.checks = dados.checks || {};
-            estado.notas  = dados.notas || {};
-            salvarEstado();
-            renderizarSemanas();
-            alert('Progresso importado com sucesso!');
-          }
-        } catch (err) {
-          alert('Arquivo JSON inválido.');
-        }
+    /* ============================================================
+       KPIs
+       ============================================================ */
+    function atualizarKPIs() {
+      let totalGeral = 0, doneGeral = 0, totalDavi = 0, doneDavi = 0, totalSofia = 0, doneSofia = 0;
+      SEMANAS_DATA.forEach(sem => sem.tarefas.forEach(t => {
+        totalGeral++; if (state.checked[t.id]) doneGeral++;
+        if (t.responsavel === 'Davi') { totalDavi++; if (state.checked[t.id]) doneDavi++; }
+        else if (t.responsavel === 'Sofia') { totalSofia++; if (state.checked[t.id]) doneSofia++; }
+      }));
+      const setKPI = (idCount, idPct, idBar, done, total) => {
+        const pct = total ? Math.round(done / total * 100) : 0;
+        document.getElementById(idCount).textContent = `${done} / ${total} tarefas`;
+        document.getElementById(idPct).textContent = pct + '%';
+        const bar = document.getElementById(idBar); bar.style.width = pct + '%'; bar.setAttribute('aria-valuenow', pct);
       };
-      reader.readAsText(file);
+      setKPI('kpiGeralContagem', 'kpiGeralPct', 'barGeral', doneGeral, totalGeral);
+      setKPI('kpiDaviContagem', 'kpiDaviPct', 'barDavi', doneDavi, totalDavi);
+      setKPI('kpiSofiaContagem', 'kpiSofiaPct', 'barSofia', doneSofia, totalSofia);
+
+      document.querySelectorAll('.week-card').forEach(card => {
+        const id = Number(card.dataset.weekId); const sem = SEMANAS_DATA.find(s => s.id === id); if (!sem) return;
+        const totalSem = sem.tarefas.length; const doneSem = sem.tarefas.filter(t => state.checked[t.id]).length;
+        const pct = totalSem ? Math.round(doneSem / totalSem * 100) : 0;
+        const mini = card.querySelector('.week-progress-mini > div'); if (mini) mini.style.width = pct + '%';
+        card.querySelectorAll('.week-progress-mini').forEach(el => { el.title = `${doneSem}/${totalSem} tarefas`; });
+        const pill = card.querySelector('.week-header .mono'); if (pill) pill.textContent = pct + '%';
+        card.classList.toggle('week-completed', doneSem === totalSem && totalSem > 0);
+      });
     }
 
     /* ============================================================
-       EVENTOS / INICIALIZAÇÃO
+       AÇÕES EM LOTE
        ============================================================ */
+    function expandirOuRecolherTodas(expandir) {
+      document.querySelectorAll('.week-card').forEach(card => {
+        const id = Number(card.dataset.weekId); const body = document.getElementById('weekBody' + id); const header = card.querySelector('.week-header');
+        if (!body) return; const bs = bootstrap.Collapse.getOrCreateInstance(body, { toggle: false });
+        if (expandir) bs.show(); else bs.hide();
+        header.setAttribute('aria-expanded', String(expandir)); state.semanasAbertas[id] = expandir;
+      });
+      salvarEstado();
+    }
+    function irParaProximoPendente() {
+      const pendente = [...document.querySelectorAll('.task-item')].find(el => !el.classList.contains('done'));
+      if (!pendente) { toast('Tudo concluído! 🎉', 'success'); return; }
+      const card = pendente.closest('.week-card'); const body = card.querySelector('.collapse');
+      if (body && !body.classList.contains('show')) {
+        bootstrap.Collapse.getOrCreateInstance(body, { toggle: false }).show();
+        card.querySelector('.week-header').setAttribute('aria-expanded', 'true');
+      }
+      card.classList.add('week-highlight'); setTimeout(() => card.classList.remove('week-highlight'), 2500);
+      pendente.scrollIntoView({ behavior: 'smooth', block: 'center' }); pendente.focus({ preventScroll: true });
+    }
+    function resetarProgresso() {
+      if (!confirm('Tem certeza que deseja apagar TODAS as marcações e notas?')) return;
+      state.checked = {}; state.nitEnviado = false; salvarEstado(); renderizarSemanas(); toast('Marcações apagadas.', 'info');
+    }
+
+    /* ============================================================
+       EXPORTAR / IMPORTAR
+       ============================================================ */
+    function exportarProgresso() {
+      try {
+        const data = { versao: 2, exportadoEm: new Date().toISOString(), progresso: state.checked, nitEnviado: state.nitEnviado, semanasAbertas: state.semanasAbertas };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob); const a = document.createElement('a');
+        a.href = url; a.download = 'simufab_progresso_' + new Date().toISOString().slice(0, 10) + '.json'; a.click();
+        URL.revokeObjectURL(url); toast('Progresso exportado.', 'success');
+      } catch (e) { toast('Erro: ' + e.message, 'error'); }
+    }
+    function importarProgresso(event) {
+      const file = event.target.files?.[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          if (!data || typeof data !== 'object') throw new Error('Formato inválido.');
+          if (data.progresso) state.checked = data.progresso;
+          if (typeof data.nitEnviado === 'boolean') state.nitEnviado = data.nitEnviado;
+          if (data.semanasAbertas) state.semanasAbertas = data.semanasAbertas;
+          salvarEstado(); renderizarSemanas(); toast('Progresso importado!', 'success');
+        } catch (e) { toast('Arquivo inválido: ' + e.message, 'error'); }
+      };
+      reader.onerror = () => toast('Falha ao ler o arquivo.', 'error');
+      reader.readAsText(file); event.target.value = '';
+    }
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    function configurarEventos() {
+      document.querySelectorAll('#filtroPessoaGroup .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#filtroPessoaGroup .filter-btn').forEach(b => { b.classList.remove('active', 'btn-dark', 'btn-outline-info', 'btn-outline-primary', 'btn-outline-success'); });
+          document.querySelectorAll('#filtroPessoaGroup .filter-btn').forEach(b => {
+            if (b.dataset.person === 'Davi') b.classList.add('btn-outline-info');
+            else if (b.dataset.person === 'Sofia') b.classList.add('btn-outline-primary');
+            else if (b.dataset.person === 'Conjunto') b.classList.add('btn-outline-success');
+            else b.classList.add('btn-dark');
+          });
+          btn.classList.add('active'); btn.classList.remove('btn-outline-info', 'btn-outline-primary', 'btn-outline-success'); btn.classList.add('btn-dark');
+          state.filtroPessoa = btn.dataset.person; renderizarSemanas();
+        });
+      });
+      document.getElementById('filtroStatus').addEventListener('change', e => { state.filtroStatus = e.target.value; renderizarSemanas(); });
+      let debounce;
+      document.getElementById('campoBusca').addEventListener('input', e => {
+        clearTimeout(debounce); debounce = setTimeout(() => { state.busca = e.target.value; renderizarSemanas(); }, 200);
+      });
+      const baseInput = document.getElementById('basePathInput'); baseInput.value = state.basePath;
+      baseInput.addEventListener('change', e => { state.basePath = e.target.value.trim(); salvarEstado(); renderizarSemanas(); toast('Pasta-base atualizada.', 'info'); });
+      document.querySelectorAll('input[name="imgMode"]').forEach(radio => {
+        radio.checked = (radio.value === state.modoImagem);
+        radio.addEventListener('change', e => { state.modoImagem = e.target.value; salvarEstado(); renderizarSemanas(); });
+      });
+      document.getElementById('inputImportJson').addEventListener('change', importarProgresso);
+      document.addEventListener('keydown', e => {
+        if (e.target.matches('input, textarea, select')) return;
+        if (e.key === 'e' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); expandirOuRecolherTodas(true); }
+        if (e.key === 'r' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); expandirOuRecolherTodas(false); }
+        if (e.key === 'k' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); document.getElementById('campoBusca').focus(); }
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       carregarEstado();
+      configurarImagemExemplo();
+      configurarEventos();
       renderizarSemanas();
-
-      document.querySelectorAll('#filtroPessoaGroup .filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('#filtroPessoaGroup .filter-btn').forEach(b => b.classList.remove('active', 'btn-dark'));
-          this.classList.add('active');
-          renderizarSemanas();
-        });
-      });
-
-      document.getElementById('filtroStatus').addEventListener('change', renderizarSemanas);
-      document.getElementById('campoBusca').addEventListener('input', renderizarSemanas);
-
-      // Delegação de clique nas miniaturas das imagens
-      document.getElementById('listaSemanas').addEventListener('click', function(e) {
-        const thumb = e.target.closest('.image-thumb');
-        if (thumb && thumb.dataset.path && !thumb.classList.contains('img-error')) {
-          abrirImagem(thumb.dataset.path);
-        }
-      });
+      atualizarBadgeNit();
     });
   </script>
 </body>
+
 </html>
